@@ -2,4 +2,4 @@ spring:
   application:
     name: songInfo
 webclient:
-  token: Bearer patRalDRxD9eM1Uex.c9b4813e0d571e24e06dd7cb7805fa84f9ba83591b6ce36b0ec099fb3fbbac61
+  token: ${AIRTABLE_ENV}
