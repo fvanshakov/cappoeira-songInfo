@@ -1,5 +1,19 @@
 spring:
   application:
     name: songInfo
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${SONG_INFO_DB_NAME}
+    username: ${SONG_INFO_DB_USER}
+    password: ${SONG_INFO_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  sql:
+    init:
+      encoding: UTF-8
 webclient:
   token: ${AIRTABLE_ENV}

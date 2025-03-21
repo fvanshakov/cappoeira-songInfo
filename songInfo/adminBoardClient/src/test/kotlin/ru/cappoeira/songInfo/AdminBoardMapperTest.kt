@@ -1,7 +1,8 @@
+package ru.cappoeira.songInfo
+
 import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.mapper.AdminBoardFieldsMapper
-import ru.cappoeira.songInfo.loadJsonAsMap
 import kotlin.test.assertEquals
 
 class AdminBoardMapperTest {

@@ -6,4 +6,5 @@ dependencies {
     testImplementation("com.github.tomakehurst:wiremock-jre8:3.0.1")
 
     implementation(project(":utils"))
+    implementation(project(":songInfoDB"))
 }
