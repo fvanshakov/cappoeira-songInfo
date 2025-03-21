@@ -5,3 +5,4 @@ rootProject.name = "songInfo"
 include("adminBoardClient")
 include("app")
 include("utils")
+include("songInfoDB")
