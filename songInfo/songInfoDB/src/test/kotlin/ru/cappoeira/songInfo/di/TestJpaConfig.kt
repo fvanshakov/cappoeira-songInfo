@@ -1,5 +1,6 @@
 package ru.cappoeira.songInfo.di
 
+import com.opentable.db.postgres.embedded.EmbeddedPostgres
 import jakarta.persistence.EntityManagerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -11,6 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
+import java.sql.Connection
 import javax.sql.DataSource
 
 @Configuration
@@ -20,12 +22,33 @@ import javax.sql.DataSource
 open class TestJpaConfig {
 
     @Bean
-    open fun dataSource(): DataSource {
+    open fun embeddedPostgres(): EmbeddedPostgres {
+        return EmbeddedPostgres.builder().start()
+    }
+
+    @Bean
+    open fun dataSource(pg: EmbeddedPostgres): DataSource {
+        val dbName = "testdb"
+        val username = "testuser"
+        val password = "testpassword"
+
+        val connection: Connection = pg.postgresDatabase.connection
+
+        try {
+            connection.createStatement().use { stmt ->
+                stmt.executeUpdate("CREATE DATABASE $dbName;")
+                stmt.executeUpdate("CREATE USER $username WITH PASSWORD '$password';")
+                stmt.executeUpdate("GRANT ALL PRIVILEGES ON DATABASE $dbName TO $username;")
+            }
+        } finally {
+            connection.close()
+        }
+
         return DriverManagerDataSource().apply {
-            url = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL"
-            username = "testUser"
-            password = "testPassword"
-            setDriverClassName("org.h2.Driver")
+            setDriverClassName("org.postgresql.Driver")
+            url = "jdbc:postgresql://localhost:${pg.port}/$dbName"
+            this.username = username
+            this.password = password
         }
     }
 
@@ -35,12 +58,14 @@ open class TestJpaConfig {
         factoryBean.dataSource = dataSource
         factoryBean.setPackagesToScan("ru.cappoeira.songInfo.songInfoDB.entity")
         factoryBean.jpaVendorAdapter = HibernateJpaVendorAdapter()
-        factoryBean.setJpaPropertyMap(mapOf(
-            "hibernate.hbm2ddl.auto" to "create",
-            "hibernate.dialect" to "org.hibernate.dialect.H2Dialect",
-            "hibernate.show_sql" to "true",
-            "hibernate.format_sql" to "true"
-        ))
+        factoryBean.setJpaPropertyMap(
+            mapOf(
+                "hibernate.hbm2ddl.auto" to "create-drop",
+                "hibernate.dialect" to "org.hibernate.dialect.PostgreSQLDialect",
+                "hibernate.show_sql" to "true",
+                "hibernate.format_sql" to "true"
+            )
+        )
         factoryBean.afterPropertiesSet()
         return factoryBean.`object`!!
     }
