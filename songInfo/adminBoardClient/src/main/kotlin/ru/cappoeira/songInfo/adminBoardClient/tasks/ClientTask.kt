@@ -16,7 +16,7 @@ class ClientTask(
 
     private val logger = LoggerFactory.getLogger(ClientTask::class.java)
 
-    @Scheduled(cron = "0 0 2 * * *")
+    @Scheduled(cron = "0 57 20 * * *")
     fun updateSongInfo() {
         SongType.entries.forEach(::updateSongTypeInfo)
     }

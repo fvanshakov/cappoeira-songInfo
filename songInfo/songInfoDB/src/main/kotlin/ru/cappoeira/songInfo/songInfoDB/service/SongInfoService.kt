@@ -21,8 +21,12 @@ class SongInfoService(
         repo.saveAll(songs)
     }
 
-    fun getSongByName(name: String): SongInfoEntity? {
-        return repo.getReferenceById(name)
+    fun getSongById(id: String): SongInfoEntity? {
+        return try {
+            repo.getReferenceById(id)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun getSongsBySearchText(
@@ -30,6 +34,7 @@ class SongInfoService(
         page: Int,
         size: Int
     ): List<SongInfoEntity> {
+
         return fullTextRepo.getSongsBySearchText(
             searchText = searchText,
             page = page,
