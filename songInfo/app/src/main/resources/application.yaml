@@ -7,6 +7,14 @@ spring:
     password: ${SONG_INFO_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
+    properties:
+      hibernate:
+        search:
+          backend:
+            type: lucene
+            directory:
+              type: local-filesystem
+              root: ${SOND_DB_INDEX_STORAGE}
     hibernate:
       ddl-auto: update
     database: POSTGRESQL

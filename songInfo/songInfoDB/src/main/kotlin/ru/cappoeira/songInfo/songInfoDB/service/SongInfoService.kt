@@ -1,15 +1,21 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
-import org.springframework.beans.factory.annotation.Autowired
+import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
+import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
 @Service
-class SongInfoService {
+class SongInfoService(
+    private val repo: SongInfoRepo,
+    private val fullTextRepo: SongInfoFullTextRepo
+) {
 
-    @Autowired
-    private lateinit var repo: SongInfoRepo
+    @PostConstruct
+    fun rebuildIndex() {
+        fullTextRepo.forceIndex()
+    }
 
     fun saveSongs(songs: List<SongInfoEntity>) {
         repo.saveAll(songs)
@@ -17,5 +23,17 @@ class SongInfoService {
 
     fun getSongByName(name: String): SongInfoEntity? {
         return repo.getReferenceById(name)
+    }
+
+    fun getSongsBySearchText(
+        searchText: String,
+        page: Int,
+        size: Int
+    ): List<SongInfoEntity> {
+        return fullTextRepo.getSongsBySearchText(
+            searchText = searchText,
+            page = page,
+            size = size
+        )
     }
 }
