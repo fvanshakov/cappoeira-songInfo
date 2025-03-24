@@ -14,10 +14,18 @@ allprojects {
 	}
 }
 
+springBoot {
+	mainClass.set("ru.cappoeira.songInfo.SongInfoApplicationKt")
+}
+
 subprojects {
 	apply(plugin = "kotlin")
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "org.springframework.boot")
+
+	springBoot {
+		mainClass.set("ru.cappoeira.songInfo.SongInfoApplicationKt")
+	}
 
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter")
