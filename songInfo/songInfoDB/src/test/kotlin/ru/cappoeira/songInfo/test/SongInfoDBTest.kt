@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.ContextConfiguration
 import ru.cappoeira.songInfo.di.TestJpaConfig
+import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 
@@ -26,7 +27,7 @@ class SongInfoDBTest {
 
     @Test
     fun `should save and retrieve song`() {
-        val songInfoEntity = SongInfoEntity(id = "some song", name = "some song")
+        val songInfoEntity = SongInfoEntity(id = encodeToBase64("some song"), name = "some song")
         val savedSong = repo.save(songInfoEntity)
 
         assertNotNull(savedSong.id)
