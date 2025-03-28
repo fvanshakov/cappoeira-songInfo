@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class SongInfoByIdResponse(
     val id: String,
-    val songName: String
+    val songName: String,
+    val videoUrl: String?
 ): Serializable

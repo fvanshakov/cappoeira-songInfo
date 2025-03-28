@@ -9,7 +9,8 @@ object SongInfoEntityMapper {
     fun mapDtoToEntity(dto: AdminBoardSongInfoDto): SongInfoEntity {
         return SongInfoEntity(
             id = encodeToBase64(dto.songName),
-            name = dto.songName
+            name = dto.songName,
+            videoUrl = dto.videoUrl
         )
     }
 }

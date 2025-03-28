@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import ru.cappoeira.songInfo.adminBoardClient.mapper.AdminBoardFieldsMapper
 
 data class AdminBoardSongInfoDto(
-    val songName: String
+    val songName: String,
+    val videoUrl: String?
 ) {
 
     companion object {

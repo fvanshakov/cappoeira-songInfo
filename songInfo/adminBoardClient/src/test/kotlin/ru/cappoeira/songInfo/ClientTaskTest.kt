@@ -18,8 +18,8 @@ class ClientTaskTest {
 
     private val task = ClientTask(adminBoardClient, songInfoService)
 
-    private val corridoSong = AdminBoardSongInfoDto(songName = "corrido song")
-    private val ladainhaSong = AdminBoardSongInfoDto(songName = "ladainha song")
+    private val corridoSong = AdminBoardSongInfoDto(songName = "corrido song", null)
+    private val ladainhaSong = AdminBoardSongInfoDto(songName = "ladainha song", null)
 
     @BeforeEach
     fun setup() {

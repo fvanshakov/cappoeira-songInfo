@@ -15,7 +15,7 @@ class AdminBoardMapperTest {
         val result = (records?.get(0)?.get("fields") as? Map<String, Any>)
             ?.let(AdminBoardFieldsMapper::mapFieldsToDto)
 
-        val expectedResult = AdminBoardSongInfoDto("Первая песня")
+        val expectedResult = AdminBoardSongInfoDto("Первая песня", "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk")
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -26,6 +26,16 @@ class AdminBoardMapperTest {
             ?.let(AdminBoardFieldsMapper::mapFieldsToDto)
 
         val expectedResult = null
+
+        assertEquals(expected = expectedResult, actual =  result)
+    }
+
+    @Test
+    fun `test mapper returns right dto when there is no video url`() {
+        val result = (records?.get(2)?.get("fields") as? Map<String, Any>)
+            ?.let(AdminBoardFieldsMapper::mapFieldsToDto)
+
+        val expectedResult = AdminBoardSongInfoDto("Первая песня", null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }
