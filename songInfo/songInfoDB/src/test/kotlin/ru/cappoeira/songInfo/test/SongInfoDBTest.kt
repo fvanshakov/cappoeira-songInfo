@@ -27,7 +27,7 @@ class SongInfoDBTest {
 
     @Test
     fun `should save and retrieve song`() {
-        val songInfoEntity = SongInfoEntity(id = encodeToBase64("some song"), name = "some song")
+        val songInfoEntity = SongInfoEntity(id = encodeToBase64("some song"), name = "some song", videoUrl = "some url")
         val savedSong = repo.save(songInfoEntity)
 
         assertNotNull(savedSong.id)
@@ -36,6 +36,7 @@ class SongInfoDBTest {
         val foundSong = repo.findByName("some song")
         assertNotNull(foundSong)
         assertEquals(savedSong.id, foundSong?.id)
+        assertEquals(savedSong.videoUrl, foundSong?.videoUrl)
     }
 
     @Test

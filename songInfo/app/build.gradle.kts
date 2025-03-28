@@ -5,4 +5,6 @@ dependencies {
     implementation(project(":adminBoardClient"))
     implementation(project(":songInfoDB"))
     implementation(project(":utils"))
+
+    testImplementation(kotlin("test"))
 }

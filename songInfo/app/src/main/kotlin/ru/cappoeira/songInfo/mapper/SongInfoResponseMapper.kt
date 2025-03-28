@@ -10,7 +10,8 @@ object SongInfoResponseMapper {
     fun map(entity: SongInfoEntity): SongInfoByIdResponse {
         return SongInfoByIdResponse(
             id = entity.id,
-            songName = entity.name
+            songName = entity.name,
+            videoUrl = entity.videoUrl
         )
     }
 
@@ -20,7 +21,8 @@ object SongInfoResponseMapper {
             songs = entities.map {
                 SongInfo(
                     id = it.id,
-                    songName = it.name
+                    songName = it.name,
+                    videoUrl = it.videoUrl
                 )
             }
         )
