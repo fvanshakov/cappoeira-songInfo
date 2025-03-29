@@ -1,4 +1,7 @@
 spring:
+  logging:
+    pattern:
+      console: '{"time":"%d{yyyy-MM-dd HH:mm:ss}","level":"%p","logger":"%c","message":"%m"}%n'
   application:
     name: songInfo
   datasource:
