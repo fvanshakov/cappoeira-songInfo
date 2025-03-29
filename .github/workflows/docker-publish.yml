@@ -21,15 +21,15 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # 3️⃣ Собираем Docker-образ
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/song-info:latest ./songInfo
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/song-info:latest ./songInfo
       
       # 4️⃣ Пушим образ в реестр
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/song-info:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/song-info:latest
