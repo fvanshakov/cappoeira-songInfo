@@ -1,4 +1,15 @@
 spring:
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "prometheus"
+    metrics:
+      tags:
+        application: "song-info"
+  logging:
+    pattern:
+      console: '{"time":"%d{yyyy-MM-dd HH:mm:ss}","level":"%p","logger":"%c","message":"%m"}%n'
   application:
     name: songInfo
   datasource:
