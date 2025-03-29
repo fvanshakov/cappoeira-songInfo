@@ -46,6 +46,9 @@ jobs:
       # 7 Собираем Docker-образ
       - name: Build Docker image
         run: |
+          cd ./songInfo
+          ./gradlew build
+          cd ..
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/song-info:latest ./songInfo
       
       # 8 Пушим образ в реестр
