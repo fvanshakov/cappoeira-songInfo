@@ -3,6 +3,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
 
     // метрики эндпоинтов
+    implementation("io.micrometer:micrometer-core")
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
