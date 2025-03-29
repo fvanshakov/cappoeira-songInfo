@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Копируем JAR-файл в контейнер
-COPY your-app*.jar app.jar
+COPY app*.jar app.jar
 
 # Указываем команду для запуска приложения
 CMD ["java", "-jar", "app.jar"]
