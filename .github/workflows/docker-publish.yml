@@ -46,7 +46,7 @@ jobs:
       # 7 Собираем Docker-образ
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/song-info:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/song-info:latest ./songInfo
       
       # 8 Пушим образ в реестр
       - name: Push Docker image
