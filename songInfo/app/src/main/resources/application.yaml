@@ -1,15 +1,4 @@
 spring:
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "prometheus"
-    metrics:
-      tags:
-        application: "song-info"
-  logging:
-    pattern:
-      console: '{"time":"%d{yyyy-MM-dd HH:mm:ss}","level":"%p","logger":"%c","message":"%m"}%n'
   application:
     name: songInfo
   datasource:
@@ -36,3 +25,12 @@ spring:
       encoding: UTF-8
 webclient:
   token: ${AIRTABLE_ENV}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"  # Ensure that the Prometheus endpoint is exposed
+  metrics:
+    export:
+      prometheus:
+        enabled: true  # Enable Prometheus export
