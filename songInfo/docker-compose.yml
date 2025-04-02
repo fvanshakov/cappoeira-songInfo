@@ -1,0 +1,69 @@
+volumes:
+ postgresgata:
+   driver: local
+ logs:
+   driver: local
+
+networks:
+ song-info-network:
+
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+     - song-info-network
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+     - song-info-network
+  postgres:
+   image: postgres:latest
+   ports:
+     - "5432:5432"
+   container_name: songInfoPostgres
+   environment:
+     - POSTGRES_USER=${SONG_INFO_DB_USER}
+     - POSTGRES_PASSWORD=${SONG_INFO_DB_PASSWORD}
+     - POSTGRES_DB=${SONG_INFO_DB_NAME}
+     - PGDATA=/var/lib/postgresql/data/songInfo/
+   volumes:
+     - postgresgata:/var/lib/postgresql/data/songInfo/
+   networks:
+     - song-info-network
+   healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${SONG_INFO_DB_USER} -d ${SONG_INFO_DB_NAME}" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  song-info:
+    image: fvanshakov/song-info:latest
+    ports:
+      - "8080:8080"
+    container_name: songInfo
+    environment:
+      - JAVA_TOOL_OPTIONS="-XX:-UseContainerSupport"
+      - AIRTABLE_ENV=${AIRTABLE_ENV}
+      - SONG_INFO_DB_NAME=${SONG_INFO_DB_NAME}
+      - SONG_INFO_DB_USER=${SONG_INFO_DB_USER}
+      - SONG_INFO_DB_PASSWORD=${SONG_INFO_DB_PASSWORD}
+      - SOND_DB_INDEX_STORAGE=${SOND_DB_INDEX_STORAGE}
+    volumes:
+      - logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+     - song-info-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
