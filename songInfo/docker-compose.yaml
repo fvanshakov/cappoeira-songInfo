@@ -17,6 +17,8 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt/live/cappoeira.ru/fullchain.key:/etc/nginx/ssl/fullchain.crt
+      - /etc/letsencrypt/live/cappoeira.ru/privkey.key:/etc/nginx/ssl/privkey.key
     depends_on:
       - song-info
     networks:
