@@ -5,4 +5,4 @@ scrape_configs:
   - job_name: 'song-info'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['songInfo:8080']
+      - targets: ['song-info:8080']
