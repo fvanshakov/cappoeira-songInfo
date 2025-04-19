@@ -44,4 +44,15 @@ class SongInfoDBTest {
         val song = repo.findByName("some song")
         assertNull(song)
     }
+
+    @Test
+    fun `should change song url`() {
+        val songInfoEntity = SongInfoEntity(id = encodeToBase64("some song"), name = "some song", videoUrl = "some url")
+
+        repo.save(songInfoEntity)
+        repo.save(songInfoEntity.copy(videoUrl = "newUrl"))
+
+        val foundSong = repo.findByName("some song")
+        assertEquals(foundSong?.videoUrl, "newUrl")
+    }
 }
