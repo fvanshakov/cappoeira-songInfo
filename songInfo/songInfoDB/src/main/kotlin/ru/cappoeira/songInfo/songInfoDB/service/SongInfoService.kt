@@ -1,6 +1,8 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
 import jakarta.annotation.PostConstruct
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.repository.ListPagingAndSortingRepository
 import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
@@ -26,6 +28,19 @@ class SongInfoService(
             repo.getReferenceById(id)
         } catch (e: Exception) {
             null
+        }
+    }
+
+    fun getAllSongs(
+        page: Int,
+        size: Int
+    ): List<SongInfoEntity> {
+        return try {
+            (repo as? ListPagingAndSortingRepository<SongInfoEntity, String>)
+                ?.findAll(PageRequest.of(page, size))
+                ?.content ?: emptyList()
+        } catch (e: Exception) {
+            emptyList()
         }
     }
 
