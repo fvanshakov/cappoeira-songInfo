@@ -19,14 +19,8 @@ open class SongInfoFullTextRepoImpl(
     ): List<SongInfoEntity> {
         val searchSession = Search.session(entityManager)
         return searchSession.search(SongInfoEntity::class.java)
-            .where { f -> f.match().fields(SongInfoEntity.NAME).matching(searchText) }
+            .where { f -> f.match().fields(SongInfoEntity.NORMALIZED_NAME).matching(searchText) }
             .fetchHits(size * page, size)
             .filterIsInstance<SongInfoEntity>()
-    }
-
-    @Transactional
-    override fun forceIndex() {
-        val searchSession = Search.session(entityManager)
-        searchSession.massIndexer().startAndWait()
     }
 }

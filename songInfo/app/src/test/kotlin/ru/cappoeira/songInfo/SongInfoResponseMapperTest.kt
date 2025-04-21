@@ -16,6 +16,7 @@ class SongInfoResponseMapperTest {
         val input = SongInfoEntity(
             id = "some id",
             name = "some name",
+            normalizedName = "some name",
             videoUrl = "some url"
         )
         val expectedResult = SongInfoByIdResponse(
@@ -34,6 +35,7 @@ class SongInfoResponseMapperTest {
         val input = SongInfoEntity(
             id = "some id",
             name = "some name",
+            normalizedName = "some name",
             videoUrl = "some url"
         )
         val expectedResult = SongInfoAllSongsResponse(
@@ -57,6 +59,7 @@ class SongInfoResponseMapperTest {
         val input = SongInfoEntity(
             id = "some id",
             name = "some name",
+            normalizedName = "some name",
             videoUrl = "some url"
         )
         val expectedResult = SongInfoBySearchTextResponse(

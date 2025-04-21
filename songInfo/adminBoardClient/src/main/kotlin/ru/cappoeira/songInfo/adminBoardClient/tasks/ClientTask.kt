@@ -24,6 +24,7 @@ class ClientTask(
     private fun updateSongTypeInfo(songType: SongType) {
         val songsInfos = adminBoardClient.retrieveSongTypeInfoFromAdminBoard(songType)
         logger.info("songs of type:$songType have been retrieved from airtable, namely $songsInfos")
+        songInfoService.deleteAllSongs()
         songInfoService.saveSongs(songsInfos.map(SongInfoEntityMapper::mapDtoToEntity))
     }
 }

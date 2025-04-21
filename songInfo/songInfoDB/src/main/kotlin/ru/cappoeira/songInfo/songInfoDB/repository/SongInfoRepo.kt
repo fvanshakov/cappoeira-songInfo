@@ -4,5 +4,5 @@ import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 
 interface SongInfoRepo : JpaRepository<SongInfoEntity?, String> {
 
-    fun findByName(name: String): SongInfoEntity?
+    fun findByNormalizedName(normalizedName: String): SongInfoEntity?
 }

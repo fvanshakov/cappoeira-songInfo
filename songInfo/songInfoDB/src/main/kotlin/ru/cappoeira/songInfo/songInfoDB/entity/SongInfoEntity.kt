@@ -13,18 +13,21 @@ data class SongInfoEntity(
     @Id
     var id: String,
 
-    @FullTextField
     @Column(nullable = false, name = NAME)
     var name: String,
 
     @FullTextField
+    @Column(nullable = true, name = NORMALIZED_NAME)
+    var normalizedName: String,
+
     @Column(nullable = true, name = VIDEO_URL)
-    var videoUrl: String?
+    var videoUrl: String?,
 ) {
-    constructor(): this(emptyString(), emptyString(), null)
+    constructor(): this(emptyString(), emptyString(),  emptyString(), null)
 
     companion object {
         const val NAME = "name"
+        const val NORMALIZED_NAME = "normalizedName"
         const val VIDEO_URL = "videoUrl"
     }
 }

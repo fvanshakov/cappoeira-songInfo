@@ -1,9 +1,9 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
-import jakarta.annotation.PostConstruct
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.ListPagingAndSortingRepository
 import org.springframework.stereotype.Service
+import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
@@ -14,13 +14,12 @@ class SongInfoService(
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
 
-    @PostConstruct
-    fun rebuildIndex() {
-        fullTextRepo.forceIndex()
-    }
-
     fun saveSongs(songs: List<SongInfoEntity>) {
         repo.saveAll(songs)
+    }
+
+    fun deleteAllSongs() {
+        repo.deleteAll()
     }
 
     fun getSongById(id: String): SongInfoEntity? {
@@ -51,7 +50,7 @@ class SongInfoService(
     ): List<SongInfoEntity> {
 
         return fullTextRepo.getSongsBySearchText(
-            searchText = searchText,
+            searchText = normalizeString(searchText),
             page = page,
             size = size
         )

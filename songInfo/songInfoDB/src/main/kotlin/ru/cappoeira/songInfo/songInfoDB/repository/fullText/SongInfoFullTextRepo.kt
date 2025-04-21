@@ -9,6 +9,4 @@ interface SongInfoFullTextRepo {
         size: Int,
         page: Int
     ): List<SongInfoEntity>
-
-    fun forceIndex()
 }

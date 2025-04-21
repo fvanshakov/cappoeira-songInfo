@@ -48,6 +48,8 @@ services:
      - PGDATA=/var/lib/postgresql/data/songInfo/
    volumes:
      - postgresgata:/var/lib/postgresql/data/songInfo/
+   ports:
+     - "5432:5432"
    networks:
      - song-info-network
    healthcheck:
