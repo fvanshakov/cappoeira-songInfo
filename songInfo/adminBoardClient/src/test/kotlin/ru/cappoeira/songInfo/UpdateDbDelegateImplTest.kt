@@ -5,18 +5,18 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import ru.cappoeira.songInfo.adminBoardClient.UpdateDbDelegateImpl
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClient
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.mapper.SongInfoEntityMapper
-import ru.cappoeira.songInfo.adminBoardClient.tasks.ClientTask
 import ru.cappoeira.songInfo.songInfoDB.service.SongInfoService
 
-class ClientTaskTest {
+class UpdateDbDelegateImplTest {
 
     private val adminBoardClient = mockk<AdminBoardClient>()
     private val songInfoService = mockk<SongInfoService>()
 
-    private val task = ClientTask(adminBoardClient, songInfoService)
+    private val updateDbDelegateImpl = UpdateDbDelegateImpl(adminBoardClient, songInfoService)
 
     private val corridoSong = AdminBoardSongInfoDto(songName = "corrido song", null)
     private val ladainhaSong = AdminBoardSongInfoDto(songName = "ladainha song", null)
@@ -33,7 +33,7 @@ class ClientTaskTest {
 
     @Test
     fun `when task triggered both songs are retrieved and saved`() {
-        task.updateSongInfo()
+        updateDbDelegateImpl.update()
 
         val mappedCorridoSong = SongInfoEntityMapper.mapDtoToEntity(corridoSong)
         val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(ladainhaSong)
