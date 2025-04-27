@@ -65,6 +65,8 @@ services:
       - SONG_INFO_DB_USER=${SONG_INFO_DB_USER}
       - SONG_INFO_DB_PASSWORD=${SONG_INFO_DB_PASSWORD}
       - SOND_DB_INDEX_STORAGE=${SOND_DB_INDEX_STORAGE}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     volumes:
       - logs:/app/logs
     depends_on:

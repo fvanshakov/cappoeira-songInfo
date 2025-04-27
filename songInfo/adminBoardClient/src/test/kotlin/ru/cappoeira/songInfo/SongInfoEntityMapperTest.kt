@@ -12,6 +12,7 @@ class SongInfoEntityMapperTest {
     private val expectedResult = SongInfoEntity().apply {
         id = encodeToBase64("Первая песня")
         name = "Первая песня"
+        normalizedName = "Первая песня"
         videoUrl = "some url"
     }
 

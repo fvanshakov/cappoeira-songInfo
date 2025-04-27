@@ -18,6 +18,7 @@ class ClientTask(
 
     @Scheduled(cron = "0 57 20 * * *")
     fun updateSongInfo() {
+        songInfoService.deleteAllSongs()
         SongType.entries.forEach(::updateSongTypeInfo)
     }
 

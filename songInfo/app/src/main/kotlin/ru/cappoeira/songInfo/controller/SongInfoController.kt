@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 import ru.cappoeira.songInfo.decodeFromBase64
 import ru.cappoeira.songInfo.mapper.SongInfoResponseMapper
+import ru.cappoeira.songInfo.response.SongInfoAllSongsResponse
 import ru.cappoeira.songInfo.response.SongInfoByIdResponse
 import ru.cappoeira.songInfo.response.SongInfoBySearchTextResponse
 import ru.cappoeira.songInfo.songInfoDB.service.SongInfoService
@@ -23,7 +24,7 @@ class SongInfoController(
         @Parameter(description = "Закодированное в base64 название песни")
         @PathVariable id: String
     ): SongInfoByIdResponse? {
-        return service.getSongById(id)?.let { SongInfoResponseMapper.map(it) }
+        return service.getSongById(id)?.let { SongInfoResponseMapper.mapToSongInfoByIdResponse(it) }
     }
 
     @Operation(description = "Возвращает песни, подходящие под поисковый запрос", summary = "Песни подходящие под запрос")
@@ -40,7 +41,20 @@ class SongInfoController(
             searchText = decodeFromBase64(searchText),
             page = page,
             size = SIZE
-        ).let { SongInfoResponseMapper.map(it) }
+        ).let { SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it) }
+    }
+
+    @Operation(description = "Возвращает информацию по всем песням", summary = "Получение всех песен")
+    @GetMapping("/allSongs")
+    fun getAllSongsInfos(
+        @Parameter(description = "Страница, используемая при пагинации (размер страницы 10 песен)")
+        @RequestParam
+        page: Int
+    ): SongInfoAllSongsResponse {
+        return service.getAllSongs(
+            page = page,
+            size = SIZE
+        ).let (SongInfoResponseMapper::mapToSongInfoAllSongsResponse)
     }
 
     companion object {

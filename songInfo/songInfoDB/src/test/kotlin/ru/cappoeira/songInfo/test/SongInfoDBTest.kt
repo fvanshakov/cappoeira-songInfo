@@ -12,6 +12,9 @@ import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 
+/**
+ * Эти тесты нужно запускать с включенным докером
+ */
 @DataJpaTest
 @ContextConfiguration(classes = [TestJpaConfig::class])
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -27,21 +30,65 @@ class SongInfoDBTest {
 
     @Test
     fun `should save and retrieve song`() {
-        val songInfoEntity = SongInfoEntity(id = encodeToBase64("some song"), name = "some song", videoUrl = "some url")
+        val songInfoEntity = SongInfoEntity(
+            id = encodeToBase64("some song"),
+            name = "some song",
+            normalizedName = "some song",
+            videoUrl = "some url")
         val savedSong = repo.save(songInfoEntity)
 
         assertNotNull(savedSong.id)
         assertEquals("some song", savedSong.name)
 
-        val foundSong = repo.findByName("some song")
+        val foundSong = repo.findByNormalizedName("some song")
         assertNotNull(foundSong)
-        assertEquals(savedSong.id, foundSong?.id)
-        assertEquals(savedSong.videoUrl, foundSong?.videoUrl)
+        assertEquals(foundSong?.id, savedSong.id)
+        assertEquals(foundSong?.videoUrl, savedSong.videoUrl)
     }
 
     @Test
     fun `should return null when song not found`() {
-        val song = repo.findByName("some song")
+        val song = repo.findByNormalizedName("some song")
         assertNull(song)
+    }
+
+    @Test
+    fun `should change song url`() {
+        val songInfoEntity = SongInfoEntity(
+            id = encodeToBase64("some song"),
+            name = "some song",
+            normalizedName = "some song",
+            videoUrl = "some url"
+        )
+
+        repo.save(songInfoEntity)
+        repo.save(songInfoEntity.copy(videoUrl = "newUrl"))
+
+        val foundSong = repo.findByNormalizedName("some song")
+        assertEquals("newUrl", foundSong?.videoUrl)
+    }
+
+    @Test
+    fun `should return all songs`() {
+        val songInfoEntity = SongInfoEntity(
+            id = encodeToBase64("some song"),
+            name = "some song",
+            normalizedName = "some song",
+            videoUrl = "some url"
+        )
+        val otherInfoEntity = SongInfoEntity(
+            id = encodeToBase64("other song"),
+            name = "other song",
+            normalizedName = "some song",
+            videoUrl = "other url"
+        )
+
+        repo.save(songInfoEntity)
+        repo.save(otherInfoEntity)
+
+        val foundSongs = repo.findAll()
+        assertEquals(foundSongs.size, 2)
+        assertEquals(true, foundSongs.contains(songInfoEntity))
+        assertEquals(true, foundSongs.contains(otherInfoEntity))
     }
 }

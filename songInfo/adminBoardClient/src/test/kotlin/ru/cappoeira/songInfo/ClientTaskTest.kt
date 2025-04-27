@@ -28,6 +28,7 @@ class ClientTaskTest {
         every { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.LADAINHA) } returns
                 listOf(ladainhaSong)
         every { songInfoService.saveSongs(any()) } returns Unit
+        every { songInfoService.deleteAllSongs() } returns Unit
     }
 
     @Test
@@ -37,6 +38,7 @@ class ClientTaskTest {
         val mappedCorridoSong = SongInfoEntityMapper.mapDtoToEntity(corridoSong)
         val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(ladainhaSong)
 
+        verify(exactly = 1) { songInfoService.deleteAllSongs() }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.CORRIDO) }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.LADAINHA) }
         verify(exactly = 1) { songInfoService.saveSongs(listOf(mappedCorridoSong)) }
