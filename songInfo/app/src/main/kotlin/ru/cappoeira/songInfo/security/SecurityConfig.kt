@@ -23,7 +23,7 @@ open class SecurityConfig(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/admin/reindex").authenticated()
+                    .requestMatchers("/admin/**").authenticated()
                     .anyRequest().permitAll()
             }
             .httpBasic { }
