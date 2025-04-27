@@ -58,7 +58,7 @@ services:
       timeout: 10s
       retries: 5
   song-info:
-    image: fvanshakov/song-info:latest
+    image: song-info:local
     environment:
       - JAVA_TOOL_OPTIONS="-XX:-UseContainerSupport"
       - AIRTABLE_ENV=${AIRTABLE_ENV}
@@ -66,6 +66,8 @@ services:
       - SONG_INFO_DB_USER=${SONG_INFO_DB_USER}
       - SONG_INFO_DB_PASSWORD=${SONG_INFO_DB_PASSWORD}
       - SOND_DB_INDEX_STORAGE=${SOND_DB_INDEX_STORAGE}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     volumes:
       - logs:/app/logs
     depends_on:
