@@ -13,7 +13,8 @@ object SongInfoEntityMapper {
             id = encodeToBase64(dto.songName),
             name = dto.songName,
             videoUrl = dto.videoUrl,
-            normalizedName = normalizedName
+            normalizedName = normalizedName,
+            songType = dto.songType.toString()
         )
     }
 }

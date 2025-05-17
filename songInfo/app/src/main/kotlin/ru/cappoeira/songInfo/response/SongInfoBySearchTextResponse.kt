@@ -10,5 +10,6 @@ data class SongInfoBySearchTextResponse(
 data class SongInfo(
     val id: String,
     val songName: String,
-    val videoUrl: String?
+    val videoUrl: String?,
+    val songType: String
 ): Serializable

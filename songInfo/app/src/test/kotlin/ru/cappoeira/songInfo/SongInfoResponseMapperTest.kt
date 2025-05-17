@@ -17,12 +17,14 @@ class SongInfoResponseMapperTest {
             id = "some id",
             name = "some name",
             normalizedName = "some name",
-            videoUrl = "some url"
+            videoUrl = "some url",
+            songType = "LADAINHA"
         )
         val expectedResult = SongInfoByIdResponse(
             id = "some id",
             songName = "some name",
-            videoUrl = "some url"
+            videoUrl = "some url",
+            songType = "LADAINHA"
         )
 
         val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input)
@@ -36,7 +38,8 @@ class SongInfoResponseMapperTest {
             id = "some id",
             name = "some name",
             normalizedName = "some name",
-            videoUrl = "some url"
+            videoUrl = "some url",
+            songType = "LADAINHA"
         )
         val expectedResult = SongInfoAllSongsResponse(
             count = 1,
@@ -44,7 +47,8 @@ class SongInfoResponseMapperTest {
                 SongInfo(
                     id = "some id",
                     songName = "some name",
-                    videoUrl = "some url"
+                    videoUrl = "some url",
+                    songType = "LADAINHA"
                 )
             )
         )
@@ -60,7 +64,8 @@ class SongInfoResponseMapperTest {
             id = "some id",
             name = "some name",
             normalizedName = "some name",
-            videoUrl = "some url"
+            videoUrl = "some url",
+            songType = "LADAINHA"
         )
         val expectedResult = SongInfoBySearchTextResponse(
             count = 1,
@@ -68,7 +73,8 @@ class SongInfoResponseMapperTest {
                 SongInfo(
                     id = "some id",
                     songName = "some name",
-                    videoUrl = "some url"
+                    videoUrl = "some url",
+                    songType = "LADAINHA"
                 )
             )
         )

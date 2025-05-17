@@ -34,7 +34,9 @@ class SongInfoDBTest {
             id = encodeToBase64("some song"),
             name = "some song",
             normalizedName = "some song",
-            videoUrl = "some url")
+            videoUrl = "some url",
+            songType = "LADAINHA"
+        )
         val savedSong = repo.save(songInfoEntity)
 
         assertNotNull(savedSong.id)
@@ -58,7 +60,8 @@ class SongInfoDBTest {
             id = encodeToBase64("some song"),
             name = "some song",
             normalizedName = "some song",
-            videoUrl = "some url"
+            videoUrl = "some url",
+            songType = "LADAINHA"
         )
 
         repo.save(songInfoEntity)
@@ -74,13 +77,15 @@ class SongInfoDBTest {
             id = encodeToBase64("some song"),
             name = "some song",
             normalizedName = "some song",
-            videoUrl = "some url"
+            videoUrl = "some url",
+            songType = "LADAINHA"
         )
         val otherInfoEntity = SongInfoEntity(
             id = encodeToBase64("other song"),
             name = "other song",
             normalizedName = "some song",
-            videoUrl = "other url"
+            videoUrl = "other url",
+            songType = "LADAINHA"
         )
 
         repo.save(songInfoEntity)

@@ -15,7 +15,11 @@ class AdminBoardMapperTest {
         val result = (records?.get(0)?.get("fields") as? Map<String, Any>)
             ?.let(AdminBoardFieldsMapper::mapFieldsToDto)
 
-        val expectedResult = AdminBoardSongInfoDto("Первая песня", "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk")
+        val expectedResult = AdminBoardSongInfoDto(
+            songName = "Первая песня",
+            songType = AdminBoardSongInfoDto.SongType.CORRIDO,
+            videoUrl = "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk"
+        )
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -35,7 +39,11 @@ class AdminBoardMapperTest {
         val result = (records?.get(2)?.get("fields") as? Map<String, Any>)
             ?.let(AdminBoardFieldsMapper::mapFieldsToDto)
 
-        val expectedResult = AdminBoardSongInfoDto("Первая песня", null)
+        val expectedResult = AdminBoardSongInfoDto(
+            songName = "Первая песня",
+            songType = AdminBoardSongInfoDto.SongType.CORRIDO,
+            videoUrl = null
+        )
 
         assertEquals(expected = expectedResult, actual =  result)
     }

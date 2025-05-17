@@ -9,7 +9,8 @@ object AdminBoardFieldsMapper {
         val videoUrl = fields[VIDEO_URL] as? String?
         return AdminBoardSongInfoDto(
             songName = songName,
-            videoUrl = videoUrl
+            videoUrl = videoUrl,
+            songType = AdminBoardSongInfoDto.SongType.CORRIDO
         )
     }
 

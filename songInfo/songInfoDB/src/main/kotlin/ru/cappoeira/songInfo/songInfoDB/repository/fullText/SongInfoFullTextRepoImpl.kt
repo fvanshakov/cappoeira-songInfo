@@ -14,12 +14,18 @@ open class SongInfoFullTextRepoImpl(
     @Transactional
     override fun getSongsBySearchText(
         searchText: String,
+        songType: String,
         size: Int,
         page: Int
     ): List<SongInfoEntity> {
         val searchSession = Search.session(entityManager)
         return searchSession.search(SongInfoEntity::class.java)
-            .where { f -> f.match().fields(SongInfoEntity.NORMALIZED_NAME).matching(searchText) }
+            .where { f ->
+                f.bool { b ->
+                    b.must(f.match().fields(SongInfoEntity.NORMALIZED_NAME).matching(searchText))
+                    b.must(f.match().fields(SongInfoEntity.SONG_TYPE).matching(songType))
+                }
+            }
             .fetchHits(size * page, size)
             .filterIsInstance<SongInfoEntity>()
     }
