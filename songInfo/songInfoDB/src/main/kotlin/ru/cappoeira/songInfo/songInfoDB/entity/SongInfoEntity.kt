@@ -25,7 +25,7 @@ data class SongInfoEntity(
 
     @FullTextField
     @Column(nullable = false, name = SONG_TYPE)
-    var songType: String,
+    var songType: String = "CORRIDO",
 ) {
     constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString())
 
