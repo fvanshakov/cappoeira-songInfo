@@ -18,8 +18,8 @@ class UpdateDbDelegateImplTest {
 
     private val updateDbDelegateImpl = UpdateDbDelegateImpl(adminBoardClient, songInfoService)
 
-    private val corridoSong = AdminBoardSongInfoDto(songName = "corrido song", null)
-    private val ladainhaSong = AdminBoardSongInfoDto(songName = "ladainha song", null)
+    private val corridoSong = AdminBoardSongInfoDto(songName = "corrido song", null, AdminBoardSongInfoDto.SongType.CORRIDO)
+    private val ladainhaSong = AdminBoardSongInfoDto(songName = "ladainha song", null, AdminBoardSongInfoDto.SongType.LADAINHA)
 
     @BeforeEach
     fun setup() {

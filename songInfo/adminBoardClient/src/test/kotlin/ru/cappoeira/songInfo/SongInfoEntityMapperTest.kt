@@ -8,12 +8,17 @@ import kotlin.test.assertEquals
 
 class SongInfoEntityMapperTest {
 
-    private val dto = AdminBoardSongInfoDto("Первая песня", "some url")
+    private val dto = AdminBoardSongInfoDto(
+        songName = "Первая песня",
+        songType = AdminBoardSongInfoDto.SongType.LADAINHA,
+        videoUrl = "some url"
+    )
     private val expectedResult = SongInfoEntity().apply {
         id = encodeToBase64("Первая песня")
         name = "Первая песня"
         normalizedName = "Первая песня"
         videoUrl = "some url"
+        songType = "LADAINHA"
     }
 
     @Test

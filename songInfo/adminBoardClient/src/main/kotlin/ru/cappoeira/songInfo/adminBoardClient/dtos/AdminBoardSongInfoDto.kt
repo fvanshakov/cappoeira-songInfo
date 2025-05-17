@@ -6,8 +6,11 @@ import ru.cappoeira.songInfo.adminBoardClient.mapper.AdminBoardFieldsMapper
 
 data class AdminBoardSongInfoDto(
     val songName: String,
-    val videoUrl: String?
+    val videoUrl: String?,
+    val songType: SongType
 ) {
+
+    enum class SongType { CORRIDO, LADAINHA }
 
     companion object {
 

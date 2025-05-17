@@ -33,14 +33,18 @@ class SongInfoController(
         @Parameter(description = "Текст поискового запроса")
         @PathVariable
         searchText: String,
+        @Parameter(description = "Тип песни")
+        @RequestParam
+        songType: String,
         @Parameter(description = "Страница, используемая при пагинации (размер страницы 10 песен)")
         @RequestParam
-        page: Int
+        page: Int,
     ): SongInfoBySearchTextResponse {
         return service.getSongsBySearchText(
             searchText = decodeFromBase64(searchText),
+            songType = songType,
             page = page,
-            size = SIZE
+            size = SIZE,
         ).let { SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it) }
     }
 
@@ -49,9 +53,13 @@ class SongInfoController(
     fun getAllSongsInfos(
         @Parameter(description = "Страница, используемая при пагинации (размер страницы 10 песен)")
         @RequestParam
-        page: Int
+        page: Int,
+        @Parameter(description = "Тип песни")
+        @RequestParam
+        songType: String,
     ): SongInfoAllSongsResponse {
         return service.getAllSongs(
+            songType = songType,
             page = page,
             size = SIZE
         ).let (SongInfoResponseMapper::mapToSongInfoAllSongsResponse)

@@ -1,10 +1,12 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.ListPagingAndSortingRepository
 import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity.Companion.NORMALIZED_NAME
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
@@ -32,12 +34,13 @@ class SongInfoService(
 
     fun getAllSongs(
         page: Int,
-        size: Int
+        size: Int,
+        songType: String
     ): List<SongInfoEntity> {
         return try {
-            (repo as? ListPagingAndSortingRepository<SongInfoEntity, String>)
-                ?.findAll(PageRequest.of(page, size))
-                ?.content ?: emptyList()
+            repo
+                .findBySongType(songType, PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()))
+                .content
         } catch (e: Exception) {
             emptyList()
         }
@@ -46,11 +49,13 @@ class SongInfoService(
     fun getSongsBySearchText(
         searchText: String,
         page: Int,
-        size: Int
+        size: Int,
+        songType: String
     ): List<SongInfoEntity> {
 
         return fullTextRepo.getSongsBySearchText(
             searchText = normalizeString(searchText),
+            songType = songType,
             page = page,
             size = size
         )

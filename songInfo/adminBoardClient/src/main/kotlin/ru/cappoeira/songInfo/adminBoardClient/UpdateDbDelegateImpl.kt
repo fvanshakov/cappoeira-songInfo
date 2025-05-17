@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component
 import ru.cappoeira.songInfo.Response
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClient
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClient.SongType
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.mapper.SongInfoEntityMapper
 import ru.cappoeira.songInfo.safeCall
 import ru.cappoeira.songInfo.songInfoDB.service.SongInfoService
@@ -27,6 +28,13 @@ open class UpdateDbDelegateImpl(
     private fun updateSongTypeInfo(songType: SongType) {
         val songsInfos = adminBoardClient.retrieveSongTypeInfoFromAdminBoard(songType)
         logger.info("songs of type:$songType have been retrieved from airtable, namely $songsInfos")
-        songInfoService.saveSongs(songsInfos.map(SongInfoEntityMapper::mapDtoToEntity))
+        val songsInfosWithType = songsInfos.map {
+            val dtoSongType = when(songType) {
+                SongType.LADAINHA -> AdminBoardSongInfoDto.SongType.LADAINHA
+                SongType.CORRIDO -> AdminBoardSongInfoDto.SongType.CORRIDO
+            }
+            it.copy(songType = dtoSongType)
+        }
+        songInfoService.saveSongs(songsInfosWithType.map(SongInfoEntityMapper::mapDtoToEntity))
     }
 }

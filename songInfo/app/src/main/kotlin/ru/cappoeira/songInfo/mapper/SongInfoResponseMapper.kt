@@ -15,7 +15,8 @@ object SongInfoResponseMapper {
                 SongInfo(
                     id = it.id,
                     songName = it.name,
-                    videoUrl = it.videoUrl
+                    videoUrl = it.videoUrl,
+                    songType = it.songType
                 )
             }
         )
@@ -25,7 +26,8 @@ object SongInfoResponseMapper {
         return SongInfoByIdResponse(
             id = entity.id,
             songName = entity.name,
-            videoUrl = entity.videoUrl
+            videoUrl = entity.videoUrl,
+            songType = entity.songType
         )
     }
 
@@ -36,7 +38,8 @@ object SongInfoResponseMapper {
                 SongInfo(
                     id = it.id,
                     songName = it.name,
-                    videoUrl = it.videoUrl
+                    videoUrl = it.videoUrl,
+                    songType = it.songType
                 )
             }
         )
