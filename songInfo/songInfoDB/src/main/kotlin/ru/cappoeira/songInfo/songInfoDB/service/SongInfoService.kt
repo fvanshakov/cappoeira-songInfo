@@ -12,7 +12,7 @@ import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
 @Service
-class SongInfoService(
+open class SongInfoService(
     private val repo: SongInfoRepo,
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
