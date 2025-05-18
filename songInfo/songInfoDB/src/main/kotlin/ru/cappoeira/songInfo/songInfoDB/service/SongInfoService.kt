@@ -4,7 +4,6 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.repository.ListPagingAndSortingRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity.Companion.NORMALIZED_NAME
@@ -17,7 +16,6 @@ class SongInfoService(
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
 
-    @Transactional
     fun saveSongs(songs: List<SongInfoEntity>) {
         repo.saveAll(songs)
     }
