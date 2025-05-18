@@ -1,0 +1,9 @@
+ALTER TABLE songs
+ADD COLUMN songType VARCHAR(255);
+
+UPDATE songs
+SET songType = 'CORRIDO'
+WHERE songType IS NULL;
+
+ALTER TABLE songs
+ALTER COLUMN songType SET NOT NULL;

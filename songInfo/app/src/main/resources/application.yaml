@@ -6,6 +6,10 @@ spring:
     username: ${SONG_INFO_DB_USER}
     password: ${SONG_INFO_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   jpa:
     properties:
       hibernate:
@@ -23,6 +27,7 @@ spring:
   sql:
     init:
       encoding: UTF-8
+
 webclient:
   token: ${AIRTABLE_ENV}
 admin:
