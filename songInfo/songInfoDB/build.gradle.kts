@@ -5,9 +5,6 @@ dependencies {
     implementation("org.hibernate.search:hibernate-search-mapper-orm:7.2.0.Final")
     implementation("org.hibernate.search:hibernate-search-backend-lucene:7.2.0.Final")
 
-    implementation("org.flywaydb:flyway-core")
-    implementation("org.flywaydb:flyway-database-postgresql")
-
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
