@@ -2,7 +2,6 @@ package ru.cappoeira.songInfo.songInfoDB.service
 
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
-import org.springframework.data.repository.ListPagingAndSortingRepository
 import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
