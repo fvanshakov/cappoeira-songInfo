@@ -12,6 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
+import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer
 import java.sql.Connection
 import javax.sql.DataSource
 
@@ -24,6 +25,11 @@ open class TestJpaConfig {
     @Bean
     open fun embeddedPostgres(): EmbeddedPostgres {
         return EmbeddedPostgres.builder().start()
+    }
+
+    @Bean
+    open fun analyzer(): NgramLuceneAnalysisConfigurer {
+        return NgramLuceneAnalysisConfigurer()
     }
 
     @Bean
@@ -63,7 +69,12 @@ open class TestJpaConfig {
                 "hibernate.hbm2ddl.auto" to "create-drop",
                 "hibernate.dialect" to "org.hibernate.dialect.PostgreSQLDialect",
                 "hibernate.show_sql" to "true",
-                "hibernate.format_sql" to "true"
+                "hibernate.format_sql" to "true",
+                "hibernate.search.backend.type" to "lucene",
+                "hibernate.search.backend.directory.type" to "local-filesystem",
+                "hibernate.search.backend.directory.root" to "~/",
+                "hibernate.search.backend.analysis.configurer" to "ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer"
+
             )
         )
         factoryBean.afterPropertiesSet()
