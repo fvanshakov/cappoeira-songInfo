@@ -11,6 +11,8 @@ spring:
       hibernate:
         search:
           backend:
+            analysis:
+              configurer: ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer
             type: lucene
             directory:
               type: local-filesystem

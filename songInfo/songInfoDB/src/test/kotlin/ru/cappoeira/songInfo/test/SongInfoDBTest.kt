@@ -1,5 +1,7 @@
 package ru.cappoeira.songInfo.test
 
+import jakarta.persistence.EntityManager
+import org.hibernate.search.mapper.orm.Search
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
@@ -10,7 +12,9 @@ import org.springframework.test.context.ContextConfiguration
 import ru.cappoeira.songInfo.di.TestJpaConfig
 import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
+import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
+import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepoImpl
 
 /**
  * Эти тесты нужно запускать с включенным докером
@@ -22,6 +26,9 @@ class SongInfoDBTest {
 
     @Autowired
     lateinit var repo: SongInfoRepo
+
+    @Autowired
+    lateinit var entityManager: EntityManager
 
     @BeforeEach
     fun setup() {
