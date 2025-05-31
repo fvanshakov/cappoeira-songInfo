@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed
 import ru.cappoeira.songInfo.emptyString
+import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 
 
 @Entity
@@ -16,7 +17,7 @@ data class SongInfoEntity(
     @Column(nullable = false, name = NAME)
     var name: String,
 
-    @FullTextField
+    @FullTextField(analyzer = NGRAM_NAME)
     @Column(nullable = true, name = NORMALIZED_NAME)
     var normalizedName: String,
 

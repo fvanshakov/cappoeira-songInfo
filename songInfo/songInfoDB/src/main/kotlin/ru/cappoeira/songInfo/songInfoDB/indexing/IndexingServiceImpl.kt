@@ -15,7 +15,8 @@ open class IndexingServiceImpl(
         val session = entityManager.unwrap(org.hibernate.Session::class.java)
         val searchSession = Search.session(session)
 
-        searchSession.massIndexer()
+        searchSession
+            .massIndexer()
             .startAndWait()
     }
 }
