@@ -45,7 +45,7 @@ class SongInfoController(
             songType = songType,
             page = page,
             size = SIZE,
-        ).let { SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it) }
+        ).let { SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it, searchText) }
     }
 
     @Operation(description = "Возвращает информацию по всем песням", summary = "Получение всех песен")

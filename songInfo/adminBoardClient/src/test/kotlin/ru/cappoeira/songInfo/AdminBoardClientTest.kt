@@ -30,8 +30,8 @@ class AdminBoardClientTest {
         clientMock,
         webClientConfigService
     )
-    private val firstSong = AdminBoardSongInfoDto("first song", "some url", AdminBoardSongInfoDto.SongType.LADAINHA)
-    private val secondSong = AdminBoardSongInfoDto("second song", "some other url", AdminBoardSongInfoDto.SongType.LADAINHA)
+    private val firstSong = AdminBoardSongInfoDto("first song", "some url", AdminBoardSongInfoDto.SongType.LADAINHA, songLines = emptyList())
+    private val secondSong = AdminBoardSongInfoDto("second song", "some other url", AdminBoardSongInfoDto.SongType.LADAINHA, songLines = emptyList())
     private val offset = "offset"
 
     @BeforeEach
