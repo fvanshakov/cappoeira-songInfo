@@ -2,6 +2,7 @@ package ru.cappoeira.songInfo
 
 import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongLineDto
 import ru.cappoeira.songInfo.adminBoardClient.mapper.AdminBoardFieldsMapper
 import kotlin.test.assertEquals
 
@@ -18,7 +19,30 @@ class AdminBoardMapperTest {
         val expectedResult = AdminBoardSongInfoDto(
             songName = "Первая песня",
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
-            videoUrl = "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk"
+            videoUrl = "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk",
+            songLines = listOf(
+                AdminBoardSongLineDto(
+                    index = 0,
+                    text = "Ai meu joelho  ",
+                    isChoirPart = false,
+                    translation = "Ай, моё колено  ",
+                    transcription = "Ai meu joelho  "
+                ),
+                AdminBoardSongLineDto(
+                    index = 1,
+                    text = "Ai meu joelho dindinha  ",
+                    isChoirPart = false,
+                    translation = "Ай, моё колено, крёстная  ",
+                    transcription = "Ai meu joelho dindinha  "
+                ),
+                AdminBoardSongLineDto(
+                    index = 2,
+                    text = "Ai meu joelho  ",
+                    isChoirPart = true,
+                    translation = "Припев: Ай, моё колено  ",
+                    transcription = "Ai meu joelho  "
+                )
+            )
         )
 
         assertEquals(expected = expectedResult, actual =  result)
@@ -42,7 +66,30 @@ class AdminBoardMapperTest {
         val expectedResult = AdminBoardSongInfoDto(
             songName = "Первая песня",
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
-            videoUrl = null
+            videoUrl = null,
+            songLines = listOf(
+                AdminBoardSongLineDto(
+                    index = 0,
+                    text = "Ai meu joelho  ",
+                    isChoirPart = false,
+                    translation = "Ай, моё колено  ",
+                    transcription = "Ai meu joelho  "
+                ),
+                AdminBoardSongLineDto(
+                    index = 1,
+                    text = "Ai meu joelho dindinha  ",
+                    isChoirPart = false,
+                    translation = "Ай, моё колено, крёстная  ",
+                    transcription = "Ai meu joelho dindinha  "
+                ),
+                AdminBoardSongLineDto(
+                    index = 2,
+                    text = "Ai meu joelho  ",
+                    isChoirPart = true,
+                    translation = "Припев: Ай, моё колено  ",
+                    transcription = "Ai meu joelho  "
+                )
+            )
         )
 
         assertEquals(expected = expectedResult, actual =  result)

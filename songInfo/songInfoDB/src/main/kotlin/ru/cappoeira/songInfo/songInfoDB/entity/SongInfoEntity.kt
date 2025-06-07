@@ -1,9 +1,13 @@
 package ru.cappoeira.songInfo.songInfoDB.entity
 
 import jakarta.persistence.*
+import org.hibernate.search.engine.backend.types.ObjectStructure
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded
 import ru.cappoeira.songInfo.emptyString
+import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TEXT
+import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TRANSLATION
 import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 
 
@@ -27,8 +31,12 @@ data class SongInfoEntity(
     @FullTextField
     @Column(nullable = false, name = SONG_TYPE)
     var songType: String,
+
+    @IndexedEmbedded(includePaths = [TEXT, TRANSLATION], includeDepth = 1, structure = ObjectStructure.NESTED)
+    @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
+    var songLines: MutableList<SongLineEntity>
 ) {
-    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString())
+    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf())
 
     companion object {
         const val NAME = "name"

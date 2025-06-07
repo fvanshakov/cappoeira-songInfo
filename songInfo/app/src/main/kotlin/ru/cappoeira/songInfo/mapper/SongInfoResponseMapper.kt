@@ -1,10 +1,9 @@
 package ru.cappoeira.songInfo.mapper
 
-import ru.cappoeira.songInfo.response.SongInfo
-import ru.cappoeira.songInfo.response.SongInfoAllSongsResponse
-import ru.cappoeira.songInfo.response.SongInfoByIdResponse
-import ru.cappoeira.songInfo.response.SongInfoBySearchTextResponse
+import ru.cappoeira.songInfo.decodeFromBase64
+import ru.cappoeira.songInfo.response.*
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
 
 object SongInfoResponseMapper {
 
@@ -16,7 +15,8 @@ object SongInfoResponseMapper {
                     id = it.id,
                     songName = it.name,
                     videoUrl = it.videoUrl,
-                    songType = it.songType
+                    songType = it.songType,
+                    songLines = it.songLines.map(::mapSongLine)
                 )
             }
         )
@@ -27,19 +27,55 @@ object SongInfoResponseMapper {
             id = entity.id,
             songName = entity.name,
             videoUrl = entity.videoUrl,
-            songType = entity.songType
+            songType = entity.songType,
+            songLines = entity.songLines.map(::mapSongLine)
         )
     }
 
-    fun mapToSongInfoBySearchTextResponse(entities: List<SongInfoEntity>): SongInfoBySearchTextResponse {
+    private fun mapSongLine(entity: SongLineEntity): SongLine {
+        return with(entity) {
+            SongLine(
+                id = id,
+                index = index,
+                isChoirPart = isChoirPart,
+                text = text,
+                translation = translation,
+                transcription = transcription
+            )
+        }
+    }
+
+    fun mapToSongInfoBySearchTextResponse(
+        entities: List<SongInfoEntity>,
+        searchText: String
+    ): SongInfoBySearchTextResponse {
+
+        val decodedSearchText = decodeFromBase64(searchText)
+
+        fun isSongLineWithMatchingText(songLine: SongLineEntity): Boolean {
+            return songLine.text.contains(decodedSearchText) || songLine.translation.contains(decodedSearchText)
+        }
+
         return SongInfoBySearchTextResponse(
             count = entities.size,
-            songs = entities.map {
+            songs = entities.map { entity ->
+
+                val songLines = mutableListOf<SongLineEntity>()
+
+                val matchingLine = entity.songLines.find { line -> isSongLineWithMatchingText(line) }
+                matchingLine?.let {
+                    val previousLine = entity.songLines.getOrNull(matchingLine.index - 1)
+                    previousLine?.let { songLines.add(it) }
+                    songLines.add(matchingLine)
+                    val followingLine = entity.songLines.getOrNull(matchingLine.index + 1)
+                    followingLine?.let { songLines.add(it) }
+                }
                 SongInfo(
-                    id = it.id,
-                    songName = it.name,
-                    videoUrl = it.videoUrl,
-                    songType = it.songType
+                    id = entity.id,
+                    songName = entity.name,
+                    videoUrl = entity.videoUrl,
+                    songType = entity.songType,
+                    songLines = songLines.map(::mapSongLine)
                 )
             }
         )

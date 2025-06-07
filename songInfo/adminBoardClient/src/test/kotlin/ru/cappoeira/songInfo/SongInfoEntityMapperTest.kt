@@ -11,7 +11,8 @@ class SongInfoEntityMapperTest {
     private val dto = AdminBoardSongInfoDto(
         songName = "Первая песня",
         songType = AdminBoardSongInfoDto.SongType.LADAINHA,
-        videoUrl = "some url"
+        videoUrl = "some url",
+        songLines = emptyList()
     )
     private val expectedResult = SongInfoEntity().apply {
         id = encodeToBase64("Первая песня")
@@ -19,6 +20,7 @@ class SongInfoEntityMapperTest {
         normalizedName = "Первая песня"
         videoUrl = "some url"
         songType = "LADAINHA"
+        songLines = mutableListOf()
     }
 
     @Test

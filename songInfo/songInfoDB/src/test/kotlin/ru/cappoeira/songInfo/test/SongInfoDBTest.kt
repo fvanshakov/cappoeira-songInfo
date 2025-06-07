@@ -42,7 +42,8 @@ class SongInfoDBTest {
             name = "some song",
             normalizedName = "some song",
             videoUrl = "some url",
-            songType = "LADAINHA"
+            songType = "LADAINHA",
+            songLines = mutableListOf()
         )
         val savedSong = repo.save(songInfoEntity)
 
@@ -68,7 +69,8 @@ class SongInfoDBTest {
             name = "some song",
             normalizedName = "some song",
             videoUrl = "some url",
-            songType = "LADAINHA"
+            songType = "LADAINHA",
+            songLines = mutableListOf()
         )
 
         repo.save(songInfoEntity)
@@ -85,14 +87,16 @@ class SongInfoDBTest {
             name = "some song",
             normalizedName = "some song",
             videoUrl = "some url",
-            songType = "LADAINHA"
+            songType = "LADAINHA",
+            songLines = mutableListOf()
         )
         val otherInfoEntity = SongInfoEntity(
             id = encodeToBase64("other song"),
             name = "other song",
             normalizedName = "some song",
             videoUrl = "other url",
-            songType = "LADAINHA"
+            songType = "LADAINHA",
+            songLines = mutableListOf()
         )
 
         repo.save(songInfoEntity)

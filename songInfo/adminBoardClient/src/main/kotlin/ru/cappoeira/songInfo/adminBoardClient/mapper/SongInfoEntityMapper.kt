@@ -9,12 +9,16 @@ object SongInfoEntityMapper {
 
     fun mapDtoToEntity(dto: AdminBoardSongInfoDto): SongInfoEntity {
         val normalizedName = normalizeString(dto.songName)
-        return SongInfoEntity(
+        val songInfoEntity = SongInfoEntity(
             id = encodeToBase64(dto.songName),
             name = dto.songName,
             videoUrl = dto.videoUrl,
             normalizedName = normalizedName,
-            songType = dto.songType.toString()
+            songType = dto.songType.toString(),
+            songLines = mutableListOf()
         )
+        val songLines = dto.songLines.map { SongLineMapper.mapDtoToEntity(it, songInfoEntity) }
+        songInfoEntity.songLines.addAll(songLines)
+        return songInfoEntity
     }
 }
