@@ -6,17 +6,26 @@ import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity.Companion.NORMALIZED_NAME
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
+import ru.cappoeira.songInfo.songInfoDB.repository.SongTagsRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
 @Service
 class SongInfoService(
     private val repo: SongInfoRepo,
+    private val tagsRepo: SongTagsRepo,
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
 
-    fun saveSongs(songs: List<SongInfoEntity>) {
+    fun saveSongs(
+        songs: List<SongInfoEntity>
+    ) {
         repo.saveAll(songs)
+    }
+
+    fun saveTags(tags: List<SongTagEntity>) {
+        tagsRepo.saveAll(tags)
     }
 
     fun deleteAllSongs() {

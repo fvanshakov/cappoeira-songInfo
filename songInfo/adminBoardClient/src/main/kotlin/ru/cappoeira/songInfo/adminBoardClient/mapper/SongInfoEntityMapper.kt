@@ -4,12 +4,13 @@ import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 
 object SongInfoEntityMapper {
 
     fun mapDtoToEntity(
         dto: AdminBoardSongInfoDto,
-        isTagPluralMap: Map<String, Boolean>
+        tags: Map<String, SongTagEntity>
     ): SongInfoEntity {
         val normalizedName = normalizeString(dto.songName)
         val songInfoEntity = SongInfoEntity(
@@ -26,7 +27,7 @@ object SongInfoEntityMapper {
         val tagValues = SongTagEntityMapper.mapDtoToValueEntity(
             song = songInfoEntity,
             dto = dto.tags,
-            isTagPluralMap = isTagPluralMap
+            tags = tags
         )
         songInfoEntity.tagValues.addAll(tagValues)
         return songInfoEntity

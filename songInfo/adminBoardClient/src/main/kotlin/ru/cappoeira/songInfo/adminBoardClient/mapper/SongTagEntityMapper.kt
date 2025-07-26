@@ -5,29 +5,28 @@ import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity
+import java.util.*
 
 object SongTagEntityMapper {
 
     fun mapDtoToValueEntity(
         song: SongInfoEntity,
         dto: AdminBoardTagsDao,
-        isTagPluralMap: Map<String, Boolean>
+        tags: Map<String, SongTagEntity>
     ): List<SongTagValueEntity> {
-        val tags = mapDtoToEntity(
-            dto = dto,
-            isTagPluralMap = isTagPluralMap
-        )
         val tagValues = dto.tagsWithKeys.flatMap { (key, values) ->
             values.tagValues.map { value ->
-                SongTagValueEntity(
-                    tag = tags[key]!!,
+                val tag = tags[key]!!
+                val result = SongTagValueEntity(
+                    id = value + song.name,
+                    tag = tag,
+                    tagStringValues = tag.tag,
                     tagValue = value,
                     song = song
                 )
+                tag.tagValues.add(result)
+                result
             }
-        }
-        tagValues.forEach {
-            it.tag.tagValues.add(it)
         }
         return tagValues
     }
@@ -45,7 +44,7 @@ object SongTagEntityMapper {
         return isTagPluralMap
     }
 
-    private fun mapDtoToEntity(
+    fun mapDtoToEntity(
         dto: AdminBoardTagsDao,
         isTagPluralMap: Map<String, Boolean>
     ): Map<String, SongTagEntity> {

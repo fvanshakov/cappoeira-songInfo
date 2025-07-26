@@ -41,6 +41,14 @@ data class SongInfoEntity(
 ) {
     constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf())
 
+    override fun toString(): String {
+        return id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
     companion object {
         const val NAME = "name"
         const val NORMALIZED_NAME = "normalizedName"

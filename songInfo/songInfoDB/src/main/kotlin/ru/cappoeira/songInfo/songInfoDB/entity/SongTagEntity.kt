@@ -17,6 +17,14 @@ data class SongTagEntity(
     var tagValues: MutableList<SongTagValueEntity>
 ) {
 
+    override fun toString(): String {
+        return tag
+    }
+
+    override fun hashCode(): Int {
+        return tag.hashCode()
+    }
+
     constructor(): this(emptyString(), false, mutableListOf())
 
     companion object {
@@ -28,22 +36,37 @@ data class SongTagEntity(
 @Entity
 @Table(name = "songs_tag_values")
 data class SongTagValueEntity(
+
     @Id
+    var id: String,
+
     @Column(nullable = false, name = TAG_VALUE)
     var tagValue: String,
 
+    @Column(nullable = false, name = TAG_STRING_VALUE)
+    var tagStringValues: String,
+
     @ManyToOne
     @JoinColumn(name = "tag_id")
-    var tag: SongTagEntity,
+    internal var tag: SongTagEntity,
 
     @ManyToOne
     @JoinColumn(name = "song_id")
-    var song: SongInfoEntity
+    internal var song: SongInfoEntity
 ) {
 
-    constructor(): this(emptyString(), SongTagEntity(), SongInfoEntity())
+    override fun toString(): String {
+        return tagValue + tagStringValues
+    }
+
+    override fun hashCode(): Int {
+        return tagValue.hashCode() * 42 + tagStringValues.hashCode()
+    }
+
+    constructor(): this(emptyString(),  emptyString(), emptyString(), SongTagEntity(), SongInfoEntity())
 
     companion object {
         const val TAG_VALUE = "tag_value"
+        const val TAG_STRING_VALUE = "tag_string_value"
     }
 }

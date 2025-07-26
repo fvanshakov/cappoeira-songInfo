@@ -4,6 +4,7 @@ import ru.cappoeira.songInfo.decodeFromBase64
 import ru.cappoeira.songInfo.response.*
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity
 
 object SongInfoResponseMapper {
 
@@ -16,7 +17,8 @@ object SongInfoResponseMapper {
                     songName = it.name,
                     videoUrl = it.videoUrl,
                     songType = it.songType,
-                    songLines = it.songLines.map(::mapSongLine)
+                    songLines = it.songLines.map(::mapSongLine),
+                    songTags = it.tagValues.let(::mapSongTag)
                 )
             }
         )
@@ -28,7 +30,8 @@ object SongInfoResponseMapper {
             songName = entity.name,
             videoUrl = entity.videoUrl,
             songType = entity.songType,
-            songLines = entity.songLines.map(::mapSongLine)
+            songLines = entity.songLines.map(::mapSongLine),
+            songTags = entity.tagValues.let(::mapSongTag)
         )
     }
 
@@ -43,6 +46,17 @@ object SongInfoResponseMapper {
                 transcription = transcription
             )
         }
+    }
+
+    private fun mapSongTag(entities: MutableList<SongTagValueEntity>): SongTags {
+        val finalMap = mutableMapOf<String, MutableList<String>>()
+        entities.map {
+            val key = it.tagStringValues
+            val initialValue = finalMap[key] ?: mutableListOf()
+            initialValue.add(it.tagValue)
+            finalMap[key] = initialValue
+        }
+        return SongTags(finalMap)
     }
 
     fun mapToSongInfoBySearchTextResponse(
@@ -75,7 +89,8 @@ object SongInfoResponseMapper {
                     songName = entity.name,
                     videoUrl = entity.videoUrl,
                     songType = entity.songType,
-                    songLines = songLines.map(::mapSongLine)
+                    songLines = songLines.map(::mapSongLine),
+                    songTags = entity.tagValues.let(::mapSongTag)
                 )
             }
         )

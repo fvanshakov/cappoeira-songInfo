@@ -12,5 +12,6 @@ data class SongInfo(
     val songName: String,
     val videoUrl: String?,
     val songType: String,
-    val songLines: List<SongLine>
+    val songLines: List<SongLine>,
+    val songTags: SongTags
 ): Serializable
