@@ -7,6 +7,7 @@ import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClient
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClient.SongType
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.mapper.SongInfoEntityMapper
+import ru.cappoeira.songInfo.adminBoardClient.mapper.SongTagEntityMapper
 import ru.cappoeira.songInfo.safeCall
 import ru.cappoeira.songInfo.songInfoDB.service.SongInfoService
 
@@ -35,6 +36,11 @@ open class UpdateDbDelegateImpl(
             }
             it.copy(songType = dtoSongType)
         }
-        songInfoService.saveSongs(songsInfosWithType.map(SongInfoEntityMapper::mapDtoToEntity))
+        val isTagPluralMap = SongTagEntityMapper.mapTagPluralityMap(songsInfos)
+        songInfoService.saveSongs(
+            songsInfosWithType.map {
+                SongInfoEntityMapper.mapDtoToEntity(it, isTagPluralMap)
+            }
+        )
     }
 }

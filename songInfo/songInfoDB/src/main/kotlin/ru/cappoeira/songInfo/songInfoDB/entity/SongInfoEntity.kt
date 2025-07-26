@@ -34,9 +34,12 @@ data class SongInfoEntity(
 
     @IndexedEmbedded(includePaths = [TEXT, TRANSLATION], includeDepth = 1, structure = ObjectStructure.NESTED)
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
-    var songLines: MutableList<SongLineEntity>
+    var songLines: MutableList<SongLineEntity>,
+
+    @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
+    var tagValues: MutableList<SongTagValueEntity>
 ) {
-    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf())
+    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf())
 
     companion object {
         const val NAME = "name"
