@@ -2,6 +2,8 @@ package ru.cappoeira.songInfo.adminBoardClient.mapper
 
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongLineDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagDao
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
 
 object AdminBoardFieldsMapper {
 
@@ -36,11 +38,33 @@ object AdminBoardFieldsMapper {
                 transcription = refinedTranscriptionLine
             )
         }
+        val tagsWithValues = mutableMapOf<String, MutableList<String>>()
+        TAGS.forEach { tagKey ->
+            val singleValue = (fields[tagKey] as? String)?.let { mutableListOf(it) }
+            val multipleValues = (fields[tagKey] as? List<String>)?.toMutableList()
+            var existingValues: MutableList<String>? = tagsWithValues[tagKey]
+            val newValues: MutableList<String> = singleValue ?: multipleValues ?: mutableListOf()
+            if (existingValues == null) {
+                existingValues = newValues
+            } else {
+                existingValues.addAll(newValues)
+            }
+            tagsWithValues[tagKey] = existingValues
+        }
+        val tags = tagsWithValues.map { (key, values) ->
+            key to AdminBoardTagDao(
+                tagValues = values,
+                isPlural = values.size > 1
+            )
+        }.toMap()
         return AdminBoardSongInfoDto(
             songName = songName,
             videoUrl = videoUrl,
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
-            songLines = songLines
+            songLines = songLines,
+            tags = AdminBoardTagsDao(
+                tags
+            )
         )
     }
 
@@ -49,4 +73,11 @@ object AdminBoardFieldsMapper {
     private const val TEXT = "Текст"
     private const val TRANSLATION = "Перевод"
     private const val TRANSCRIPTION = "Транскрипция"
+    private val TAGS = listOf(
+        "Гармония",
+        "Скорость",
+        "Сложность солисту",
+        "Сложность хора",
+        "Темы текста"
+    )
 }
