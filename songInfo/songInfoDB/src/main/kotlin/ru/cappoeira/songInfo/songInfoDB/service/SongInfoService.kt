@@ -57,6 +57,7 @@ class SongInfoService(
     fun getSongsBySearchText(
         searchText: String,
         page: Int,
+        tags: List<String>,
         size: Int,
         songType: String
     ): List<SongInfoEntity> {
@@ -65,6 +66,7 @@ class SongInfoService(
             searchText = normalizeString(searchText),
             songType = songType,
             page = page,
+            tags = tags,
             size = size
         )
     }

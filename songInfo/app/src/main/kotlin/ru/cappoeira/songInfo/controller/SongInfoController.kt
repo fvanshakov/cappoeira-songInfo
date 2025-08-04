@@ -1,5 +1,6 @@
 package ru.cappoeira.songInfo.controller
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -36,6 +37,9 @@ class SongInfoController(
         @Parameter(description = "Тип песни")
         @RequestParam
         songType: String,
+        @Parameter(description = "Тэги для песни")
+        @RequestParam
+        tags: String,
         @Parameter(description = "Страница, используемая при пагинации (размер страницы 10 песен)")
         @RequestParam
         page: Int,
@@ -43,6 +47,7 @@ class SongInfoController(
         return service.getSongsBySearchText(
             searchText = decodeFromBase64(searchText),
             songType = songType,
+            tags = jacksonObjectMapper().readValue(decodeFromBase64(tags), List::class.java) as List<String>,
             page = page,
             size = SIZE,
         ).let { SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it, searchText) }

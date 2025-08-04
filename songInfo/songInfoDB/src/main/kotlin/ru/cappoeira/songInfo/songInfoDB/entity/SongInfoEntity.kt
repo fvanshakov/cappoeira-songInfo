@@ -8,6 +8,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmb
 import ru.cappoeira.songInfo.emptyString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TEXT
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TRANSLATION
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity.Companion.TAG_VALUE
 import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 
 
@@ -36,6 +37,7 @@ data class SongInfoEntity(
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
     var songLines: MutableList<SongLineEntity>,
 
+    @IndexedEmbedded(includePaths = [TAG_VALUE], includeDepth = 1, structure = ObjectStructure.NESTED)
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
     var tagValues: MutableList<SongTagValueEntity>
 ) {

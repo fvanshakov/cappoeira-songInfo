@@ -3,6 +3,7 @@ package ru.cappoeira.songInfo
 import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongLineDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
 import ru.cappoeira.songInfo.adminBoardClient.mapper.AdminBoardFieldsMapper
 import kotlin.test.assertEquals
 
@@ -20,6 +21,9 @@ class AdminBoardMapperTest {
             songName = "Первая песня",
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
             videoUrl = "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk",
+            tags = AdminBoardTagsDao(
+                tagsWithKeys = emptyMap()
+            ),
             songLines = listOf(
                 AdminBoardSongLineDto(
                     index = 0,
@@ -67,6 +71,9 @@ class AdminBoardMapperTest {
             songName = "Первая песня",
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
             videoUrl = null,
+            tags = AdminBoardTagsDao(
+                tagsWithKeys = emptyMap()
+            ),
             songLines = listOf(
                 AdminBoardSongLineDto(
                     index = 0,

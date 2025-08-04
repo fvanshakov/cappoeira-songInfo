@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.adminBoardClient.UpdateDbDelegateImpl
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClient
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
 import ru.cappoeira.songInfo.adminBoardClient.mapper.SongInfoEntityMapper
 import ru.cappoeira.songInfo.songInfoDB.service.SongInfoService
 
@@ -18,8 +19,24 @@ class UpdateDbDelegateImplTest {
 
     private val updateDbDelegateImpl = UpdateDbDelegateImpl(adminBoardClient, songInfoService)
 
-    private val corridoSong = AdminBoardSongInfoDto(songName = "corrido song", null, AdminBoardSongInfoDto.SongType.CORRIDO, songLines = emptyList())
-    private val ladainhaSong = AdminBoardSongInfoDto(songName = "ladainha song", null, AdminBoardSongInfoDto.SongType.LADAINHA, songLines = emptyList())
+    private val corridoSong = AdminBoardSongInfoDto(
+        songName = "corrido song",
+        videoUrl = null,
+        songType = AdminBoardSongInfoDto.SongType.CORRIDO,
+        songLines = emptyList(),
+        tags = AdminBoardTagsDao(
+            tagsWithKeys = emptyMap()
+        )
+    )
+    private val ladainhaSong = AdminBoardSongInfoDto(
+        songName = "ladainha song",
+        videoUrl = null,
+        songType = AdminBoardSongInfoDto.SongType.LADAINHA,
+        songLines = emptyList(),
+        tags = AdminBoardTagsDao(
+            tagsWithKeys = emptyMap()
+        )
+    )
 
     @BeforeEach
     fun setup() {
@@ -35,8 +52,14 @@ class UpdateDbDelegateImplTest {
     fun `when task triggered both songs are retrieved and saved`() {
         updateDbDelegateImpl.update()
 
-        val mappedCorridoSong = SongInfoEntityMapper.mapDtoToEntity(corridoSong)
-        val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(ladainhaSong)
+        val mappedCorridoSong = SongInfoEntityMapper.mapDtoToEntity(
+            dto = corridoSong,
+            tags = emptyMap()
+        )
+        val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(
+            dto = ladainhaSong,
+            tags = emptyMap()
+        )
 
         verify(exactly = 1) { songInfoService.deleteAllSongs() }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.CORRIDO) }

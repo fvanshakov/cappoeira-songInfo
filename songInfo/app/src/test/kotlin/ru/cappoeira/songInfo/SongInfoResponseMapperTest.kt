@@ -17,14 +17,18 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         val expectedResult = SongInfoByIdResponse(
             id = "some id",
             songName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = emptyList()
+            songLines = emptyList(),
+            songTags = SongTags(
+                tagsWithValues = emptyMap()
+            )
         )
 
         val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input)
@@ -40,7 +44,8 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         val expectedResult = SongInfoAllSongsResponse(
             count = 1,
@@ -50,7 +55,10 @@ class SongInfoResponseMapperTest {
                     songName = "some name",
                     videoUrl = "some url",
                     songType = "LADAINHA",
-                    songLines = emptyList()
+                    songLines = emptyList(),
+                    songTags = SongTags(
+                        tagsWithValues = emptyMap()
+                    )
                 )
             )
         )
@@ -68,7 +76,8 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         val expectedResult = SongInfoBySearchTextResponse(
             count = 1,
@@ -78,7 +87,10 @@ class SongInfoResponseMapperTest {
                     songName = "some name",
                     videoUrl = "some url",
                     songType = "LADAINHA",
-                    songLines = emptyList()
+                    songLines = emptyList(),
+                    songTags = SongTags(
+                        tagsWithValues = emptyMap()
+                    )
                 )
             )
         )
@@ -96,7 +108,8 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         input.apply {
             songLines.addAll(
@@ -157,6 +170,9 @@ class SongInfoResponseMapperTest {
                     songName = "some name",
                     videoUrl = "some url",
                     songType = "LADAINHA",
+                    songTags = SongTags(
+                        tagsWithValues = emptyMap()
+                    ),
                     songLines = listOf(
                         SongLine(
                             id = "song name 2",
@@ -200,7 +216,8 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         input.apply {
             songLines.addAll(
@@ -261,6 +278,9 @@ class SongInfoResponseMapperTest {
                     songName = "some name",
                     videoUrl = "some url",
                     songType = "LADAINHA",
+                    songTags = SongTags(
+                        tagsWithValues = emptyMap()
+                    ),
                     songLines = listOf(
                         SongLine(
                             id = "song name 2",
@@ -304,7 +324,8 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         input.apply {
             songLines.addAll(
@@ -365,7 +386,10 @@ class SongInfoResponseMapperTest {
                     songName = "some name",
                     videoUrl = "some url",
                     songType = "LADAINHA",
-                    songLines = emptyList()
+                    songLines = emptyList(),
+                    songTags = SongTags(
+                        tagsWithValues = emptyMap()
+                    )
                 )
             )
         )
@@ -383,7 +407,8 @@ class SongInfoResponseMapperTest {
             normalizedName = "some name",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         input.apply {
             songLines.addAll(
@@ -444,6 +469,9 @@ class SongInfoResponseMapperTest {
                     songName = "some name",
                     videoUrl = "some url",
                     songType = "LADAINHA",
+                    songTags = SongTags(
+                        tagsWithValues = emptyMap()
+                    ),
                     songLines = listOf(
                         SongLine(
                             id = "song name 4",

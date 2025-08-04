@@ -1,6 +1,7 @@
 package ru.cappoeira.songInfo.songInfoDB.entity
 
 import jakarta.persistence.*
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField
 import ru.cappoeira.songInfo.emptyString
 
 @Entity
@@ -40,6 +41,7 @@ data class SongTagValueEntity(
     @Id
     var id: String,
 
+    @FullTextField
     @Column(nullable = false, name = TAG_VALUE)
     var tagValue: String,
 
@@ -66,7 +68,7 @@ data class SongTagValueEntity(
     constructor(): this(emptyString(),  emptyString(), emptyString(), SongTagEntity(), SongInfoEntity())
 
     companion object {
-        const val TAG_VALUE = "tag_value"
+        const val TAG_VALUE = "tagValue"
         const val TAG_STRING_VALUE = "tag_string_value"
     }
 }
