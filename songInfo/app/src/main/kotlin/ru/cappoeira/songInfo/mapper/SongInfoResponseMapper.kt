@@ -4,9 +4,22 @@ import ru.cappoeira.songInfo.decodeFromBase64
 import ru.cappoeira.songInfo.response.*
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity
 
 object SongInfoResponseMapper {
+
+    fun mapSongTagsResponse(
+        tags: List<SongTagEntity>
+    ): SongTagsResponse {
+        val tagsMap = mutableMapOf<String, List<String>>()
+        tags.map { tag ->
+            tagsMap[tag.tag] = tag.tagValues.map { it.tagValue }.distinct()
+        }
+        return SongTagsResponse(
+            tags = tagsMap
+        )
+    }
 
     fun mapToSongInfoAllSongsResponse(entities: List<SongInfoEntity?>): SongInfoAllSongsResponse {
         return SongInfoAllSongsResponse(

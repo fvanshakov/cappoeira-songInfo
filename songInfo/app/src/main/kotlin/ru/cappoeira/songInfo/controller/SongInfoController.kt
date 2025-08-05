@@ -10,6 +10,7 @@ import ru.cappoeira.songInfo.mapper.SongInfoResponseMapper
 import ru.cappoeira.songInfo.response.SongInfoAllSongsResponse
 import ru.cappoeira.songInfo.response.SongInfoByIdResponse
 import ru.cappoeira.songInfo.response.SongInfoBySearchTextResponse
+import ru.cappoeira.songInfo.response.SongTagsResponse
 import ru.cappoeira.songInfo.songInfoDB.service.SongInfoService
 
 @Tag(name = "songInfo", description = "API для получения информации по песням")
@@ -68,6 +69,12 @@ class SongInfoController(
             page = page,
             size = SIZE
         ).let (SongInfoResponseMapper::mapToSongInfoAllSongsResponse)
+    }
+
+    @Operation(description = "Возвращает информацию по возможным тэгам", summary = "Получение всех вариантов тэгов")
+    @GetMapping("/tags")
+    fun getTags(): SongTagsResponse {
+        return service.getTags().let(SongInfoResponseMapper::mapSongTagsResponse)
     }
 
     companion object {

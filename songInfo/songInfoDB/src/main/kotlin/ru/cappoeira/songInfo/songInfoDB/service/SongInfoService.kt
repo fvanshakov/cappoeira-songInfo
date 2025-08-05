@@ -8,6 +8,7 @@ import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity.Companion.NORMALIZED_NAME
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
+import ru.cappoeira.songInfo.songInfoDB.repository.SongTagValueRepository
 import ru.cappoeira.songInfo.songInfoDB.repository.SongTagsRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
@@ -15,6 +16,7 @@ import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 class SongInfoService(
     private val repo: SongInfoRepo,
     private val tagsRepo: SongTagsRepo,
+    private val tagsValueRepo: SongTagValueRepository,
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
 
@@ -69,5 +71,14 @@ class SongInfoService(
             tags = tags,
             size = size
         )
+    }
+
+    fun getTags(): List<SongTagEntity> {
+        return try {
+            tagsValueRepo
+                .findAllWithTags()
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }

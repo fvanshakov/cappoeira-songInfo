@@ -46,6 +46,7 @@ class UpdateDbDelegateImplTest {
                 listOf(ladainhaSong)
         every { songInfoService.saveSongs(any()) } returns Unit
         every { songInfoService.deleteAllSongs() } returns Unit
+        every { songInfoService.saveTags(any()) } returns Unit
     }
 
     @Test
