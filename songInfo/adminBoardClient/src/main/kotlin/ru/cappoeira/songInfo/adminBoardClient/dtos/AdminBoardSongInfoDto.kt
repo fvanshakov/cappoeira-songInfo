@@ -8,7 +8,8 @@ data class AdminBoardSongInfoDto(
     val songName: String,
     val videoUrl: String?,
     val songType: SongType,
-    val songLines: List<AdminBoardSongLineDto>
+    val songLines: List<AdminBoardSongLineDto>,
+    val tags: AdminBoardTagsDao
 ) {
 
     enum class SongType { CORRIDO, LADAINHA }

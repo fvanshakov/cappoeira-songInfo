@@ -17,6 +17,7 @@ open class SongInfoFullTextRepoImpl(
     override fun getSongsBySearchText(
         searchText: String,
         songType: String,
+        tags: List<String>,
         size: Int,
         page: Int
     ): List<SongInfoEntity> {
@@ -42,6 +43,19 @@ open class SongInfoFullTextRepoImpl(
                         }
                     )
                     b.must(f.match().fields(SongInfoEntity.SONG_TYPE).matching(songType))
+                    if (tags.isNotEmpty()) {
+                        tags.forEach { tag ->
+                            b.must(
+                                f.nested()
+                                    .objectField("tagValues")
+                                    .nest(
+                                        f.phrase()
+                                            .field("tagValues.tagValue")
+                                            .matching(tag)
+                                    )
+                            )
+                        }
+                    }
                 }
             }
             .fetchHits(size * page, size)

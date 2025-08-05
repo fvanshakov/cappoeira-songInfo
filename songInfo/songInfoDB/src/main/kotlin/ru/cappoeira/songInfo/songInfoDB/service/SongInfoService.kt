@@ -6,17 +6,28 @@ import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.normalizeString
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity.Companion.NORMALIZED_NAME
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
+import ru.cappoeira.songInfo.songInfoDB.repository.SongTagValueRepository
+import ru.cappoeira.songInfo.songInfoDB.repository.SongTagsRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
 @Service
 class SongInfoService(
     private val repo: SongInfoRepo,
+    private val tagsRepo: SongTagsRepo,
+    private val tagsValueRepo: SongTagValueRepository,
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
 
-    fun saveSongs(songs: List<SongInfoEntity>) {
+    fun saveSongs(
+        songs: List<SongInfoEntity>
+    ) {
         repo.saveAll(songs)
+    }
+
+    fun saveTags(tags: List<SongTagEntity>) {
+        tagsRepo.saveAll(tags)
     }
 
     fun deleteAllSongs() {
@@ -48,6 +59,7 @@ class SongInfoService(
     fun getSongsBySearchText(
         searchText: String,
         page: Int,
+        tags: List<String>,
         size: Int,
         songType: String
     ): List<SongInfoEntity> {
@@ -56,7 +68,17 @@ class SongInfoService(
             searchText = normalizeString(searchText),
             songType = songType,
             page = page,
+            tags = tags,
             size = size
         )
+    }
+
+    fun getTags(): List<SongTagEntity> {
+        return try {
+            tagsValueRepo
+                .findAllWithTags()
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }

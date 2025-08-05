@@ -3,6 +3,8 @@ package ru.cappoeira.songInfo
 import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongLineDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagDao
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
 import ru.cappoeira.songInfo.adminBoardClient.mapper.AdminBoardFieldsMapper
 import kotlin.test.assertEquals
 
@@ -20,6 +22,30 @@ class AdminBoardMapperTest {
             songName = "Первая песня",
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
             videoUrl = "https://youtu.be/VHPVlgFINGs?si=_3SeGiWYN2PQ6VXk",
+            tags = AdminBoardTagsDao(
+                tagsWithKeys = mapOf(
+                    "Гармония" to AdminBoardTagDao(
+                        tagValues = listOf("Мажор"),
+                        isPlural = false,
+                    ),
+                    "Скорость" to AdminBoardTagDao(
+                        tagValues = listOf("Медленный темп", "Средний темп"),
+                        isPlural = true
+                    ),
+                    "Сложность солисту" to AdminBoardTagDao(
+                        tagValues = listOf("Средне для солиста"),
+                        isPlural = false
+                    ),
+                    "Сложность хора" to AdminBoardTagDao(
+                        tagValues = emptyList(),
+                        isPlural = false,
+                    ),
+                    "Темы текста" to AdminBoardTagDao(
+                        tagValues = emptyList(),
+                        isPlural = false,
+                    )
+                )
+            ),
             songLines = listOf(
                 AdminBoardSongLineDto(
                     index = 0,
@@ -67,6 +93,30 @@ class AdminBoardMapperTest {
             songName = "Первая песня",
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
             videoUrl = null,
+            tags = AdminBoardTagsDao(
+                tagsWithKeys = mapOf(
+                    "Гармония" to AdminBoardTagDao(
+                        tagValues = listOf("Мажор"),
+                        isPlural = false,
+                    ),
+                    "Скорость" to AdminBoardTagDao(
+                        tagValues = listOf("Медленный темп", "Средний темп"),
+                        isPlural = true
+                    ),
+                    "Сложность солисту" to AdminBoardTagDao(
+                        tagValues = listOf("Средне для солиста"),
+                        isPlural = false
+                    ),
+                    "Сложность хора" to AdminBoardTagDao(
+                        tagValues = listOf("Сложно для хора"),
+                        isPlural = false,
+                    ),
+                    "Темы текста" to AdminBoardTagDao(
+                        tagValues = emptyList(),
+                        isPlural = false,
+                    )
+                )
+            ),
             songLines = listOf(
                 AdminBoardSongLineDto(
                     index = 0,

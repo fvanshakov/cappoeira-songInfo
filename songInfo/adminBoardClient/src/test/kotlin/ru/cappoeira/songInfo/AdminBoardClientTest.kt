@@ -15,6 +15,7 @@ import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClientImpl.Compan
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClientImpl.Companion.CORRIDOS_TABLE_ID
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClientImpl.Companion.OFFSET_QUERY
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardWebCallResultDto
 import kotlin.test.DefaultAsserter.assertEquals
 
@@ -30,8 +31,24 @@ class AdminBoardClientTest {
         clientMock,
         webClientConfigService
     )
-    private val firstSong = AdminBoardSongInfoDto("first song", "some url", AdminBoardSongInfoDto.SongType.LADAINHA, songLines = emptyList())
-    private val secondSong = AdminBoardSongInfoDto("second song", "some other url", AdminBoardSongInfoDto.SongType.LADAINHA, songLines = emptyList())
+    private val firstSong = AdminBoardSongInfoDto(
+        songName = "first song",
+        videoUrl = "some url",
+        songType = AdminBoardSongInfoDto.SongType.LADAINHA,
+        songLines = emptyList(),
+        tags = AdminBoardTagsDao(
+            tagsWithKeys = emptyMap()
+        )
+    )
+    private val secondSong = AdminBoardSongInfoDto(
+        "second song",
+        "some other url",
+        AdminBoardSongInfoDto.SongType.LADAINHA,
+        songLines = emptyList(),
+        tags = AdminBoardTagsDao(
+            tagsWithKeys = emptyMap()
+        )
+    )
     private val offset = "offset"
 
     @BeforeEach

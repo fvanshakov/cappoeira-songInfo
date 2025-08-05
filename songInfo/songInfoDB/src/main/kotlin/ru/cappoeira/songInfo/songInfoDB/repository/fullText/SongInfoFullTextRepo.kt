@@ -7,6 +7,7 @@ interface SongInfoFullTextRepo {
     fun getSongsBySearchText(
         searchText: String,
         songType: String,
+        tags: List<String>,
         size: Int,
         page: Int
     ): List<SongInfoEntity>

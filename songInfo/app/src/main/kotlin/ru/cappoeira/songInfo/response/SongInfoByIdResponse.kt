@@ -7,7 +7,8 @@ data class SongInfoByIdResponse(
     val songName: String,
     val videoUrl: String?,
     val songType: String,
-    val songLines: List<SongLine>
+    val songLines: List<SongLine>,
+    val songTags: SongTags
 ): Serializable
 
 data class SongLine(
@@ -17,4 +18,8 @@ data class SongLine(
     val translation: String,
     val transcription: String,
     val isChoirPart: Boolean
+): Serializable
+
+data class SongTags(
+    val tagsWithValues: Map<String, List<String>>
 ): Serializable

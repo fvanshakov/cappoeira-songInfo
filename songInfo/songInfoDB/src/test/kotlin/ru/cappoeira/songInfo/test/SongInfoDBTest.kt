@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration
 import ru.cappoeira.songInfo.di.TestJpaConfig
 import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity
 import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepoImpl
@@ -43,7 +44,8 @@ class SongInfoDBTest {
             normalizedName = "some song",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         val savedSong = repo.save(songInfoEntity)
 
@@ -70,7 +72,8 @@ class SongInfoDBTest {
             normalizedName = "some song",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
 
         repo.save(songInfoEntity)
@@ -88,7 +91,8 @@ class SongInfoDBTest {
             normalizedName = "some song",
             videoUrl = "some url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
         val otherInfoEntity = SongInfoEntity(
             id = encodeToBase64("other song"),
@@ -96,7 +100,8 @@ class SongInfoDBTest {
             normalizedName = "some song",
             videoUrl = "other url",
             songType = "LADAINHA",
-            songLines = mutableListOf()
+            songLines = mutableListOf(),
+            tagValues = mutableListOf()
         )
 
         repo.save(songInfoEntity)
