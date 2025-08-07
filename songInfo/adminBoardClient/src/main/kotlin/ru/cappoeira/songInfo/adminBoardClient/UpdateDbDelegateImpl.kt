@@ -37,9 +37,13 @@ open class UpdateDbDelegateImpl(
             it.copy(songType = dtoSongType)
         }
         val isTagPluralMap = SongTagEntityMapper.mapTagPluralityMap(songsInfos)
+        val type = when(songType) {
+            SongType.LADAINHA -> "LADAINHA"
+            SongType.CORRIDO -> "CORRIDO"
+        }
         songInfoService.saveSongs(
             songsInfosWithType.map {
-                val tags = SongTagEntityMapper.mapDtoToEntity(it.tags, isTagPluralMap)
+                val tags = SongTagEntityMapper.mapDtoToEntity(it.tags, isTagPluralMap, type)
 
                 songInfoService.saveTags(tags.map { it.value })
 
