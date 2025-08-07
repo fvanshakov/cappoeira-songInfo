@@ -8,11 +8,16 @@ import ru.cappoeira.songInfo.emptyString
 @Table(name = "songs_tags")
 data class SongTagEntity(
     @Id
+    var id: String,
+
     @Column(nullable = false, name = TAG)
     var tag: String,
 
     @Column(nullable = false, name = IS_PLURAL)
     var isPlural: Boolean,
+
+    @Column(nullable = false, name = TYPE)
+    var type: String,
 
     @OneToMany(mappedBy = "tag", cascade = [CascadeType.ALL])
     var tagValues: MutableList<SongTagValueEntity>
@@ -26,11 +31,12 @@ data class SongTagEntity(
         return tag.hashCode()
     }
 
-    constructor(): this(emptyString(), false, mutableListOf())
+    constructor(): this(emptyString(), emptyString(), false, emptyString(), mutableListOf())
 
     companion object {
         const val TAG = "tag"
         const val IS_PLURAL = "is_plural"
+        const val TYPE = "type"
     }
 }
 

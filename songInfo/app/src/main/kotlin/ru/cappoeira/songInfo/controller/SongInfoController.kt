@@ -73,8 +73,12 @@ class SongInfoController(
 
     @Operation(description = "Возвращает информацию по возможным тэгам", summary = "Получение всех вариантов тэгов")
     @GetMapping("/tags")
-    fun getTags(): SongTagsResponse {
-        return service.getTags().let(SongInfoResponseMapper::mapSongTagsResponse)
+    fun getTags(
+        @Parameter(description = "Тип песни по которому ищем тэги")
+        @RequestParam
+        filterType: String,
+    ): SongTagsResponse {
+        return service.getTags(filterType).let(SongInfoResponseMapper::mapSongTagsResponse)
     }
 
     companion object {

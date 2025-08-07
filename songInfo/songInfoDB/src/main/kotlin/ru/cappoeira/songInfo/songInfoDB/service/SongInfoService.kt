@@ -73,10 +73,10 @@ class SongInfoService(
         )
     }
 
-    fun getTags(): List<SongTagEntity> {
+    fun getTags(filterType: String): List<SongTagEntity> {
         return try {
             tagsValueRepo
-                .findAllWithTags()
+                .findAllWithTags(filterType)
         } catch (e: Exception) {
             emptyList()
         }

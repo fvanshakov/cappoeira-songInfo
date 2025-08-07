@@ -45,13 +45,16 @@ object SongTagEntityMapper {
 
     fun mapDtoToEntity(
         dto: AdminBoardTagsDao,
-        isTagPluralMap: Map<String, Boolean>
+        isTagPluralMap: Map<String, Boolean>,
+        type: String
     ): Map<String, SongTagEntity> {
         return dto.tagsWithKeys.map { (key, _) ->
             key to SongTagEntity(
+                id = key + type,
                 tag = key,
                 isPlural = isTagPluralMap[key] ?: false,
-                tagValues = mutableListOf()
+                tagValues = mutableListOf(),
+                type = type
             )
         }.toMap()
     }

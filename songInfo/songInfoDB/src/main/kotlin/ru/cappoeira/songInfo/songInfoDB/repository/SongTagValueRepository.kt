@@ -2,6 +2,7 @@ package ru.cappoeira.songInfo.songInfoDB.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 
@@ -11,7 +12,8 @@ interface SongTagValueRepository : JpaRepository<SongTagEntity, String> {
     @Query("""
         SELECT DISTINCT t FROM SongTagEntity t
         LEFT JOIN FETCH t.tagValues
+        WHERE t.type = :filterType
         ORDER BY t.tag
     """)
-    fun findAllWithTags(): List<SongTagEntity>
+    fun findAllWithTags(@Param("filterType") filterType: String): List<SongTagEntity>
 }

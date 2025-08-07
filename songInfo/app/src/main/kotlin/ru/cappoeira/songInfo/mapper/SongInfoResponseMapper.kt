@@ -12,9 +12,12 @@ object SongInfoResponseMapper {
     fun mapSongTagsResponse(
         tags: List<SongTagEntity>
     ): SongTagsResponse {
-        val tagsMap = mutableMapOf<String, List<String>>()
+        val tagsMap = mutableMapOf<String, SongTag>()
         tags.map { tag ->
-            tagsMap[tag.tag] = tag.tagValues.map { it.tagValue }.distinct()
+            tagsMap[tag.tag] = SongTag(
+                values = tag.tagValues.map { it.tagValue }.distinct(),
+                isPlural = tag.isPlural
+            )
         }
         return SongTagsResponse(
             tags = tagsMap
