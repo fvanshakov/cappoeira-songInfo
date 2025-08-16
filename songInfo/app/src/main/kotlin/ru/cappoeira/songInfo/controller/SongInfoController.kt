@@ -40,7 +40,7 @@ class SongInfoController(
         songType: String,
         @Parameter(description = "Тэги для песни")
         @RequestParam
-        tags: String,
+        tags: String?,
         @Parameter(description = "Страница, используемая при пагинации (размер страницы 10 песен)")
         @RequestParam
         page: Int,
@@ -48,7 +48,7 @@ class SongInfoController(
         return service.getSongsBySearchText(
             searchText = decodeFromBase64(searchText),
             songType = songType,
-            tags = jacksonObjectMapper().readValue(decodeFromBase64(tags), List::class.java) as List<String>,
+            tags = tags?.let { jacksonObjectMapper().readValue(decodeFromBase64(it), List::class.java) as List<String> } ?: emptyList(),
             page = page,
             size = SIZE,
         ).let { SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it, searchText) }
