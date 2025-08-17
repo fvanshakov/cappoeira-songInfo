@@ -45,12 +45,23 @@ class SongInfoService(
     fun getAllSongs(
         page: Int,
         size: Int,
-        songType: String
+        songType: String,
+        tags: List<String>
     ): List<SongInfoEntity> {
         return try {
-            repo
-                .findBySongType(songType, PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()))
-                .content
+            if (tags.isEmpty()) {
+                repo
+                    .findBySongType(songType, PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()))
+                    .content
+            } else {
+                repo
+                    .findBySongTypeAndAllTags(
+                        songType = songType,
+                        pageable = PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()),
+                        tagValues = tags.toSet(),
+                    )
+                    .content
+            }
         } catch (e: Exception) {
             emptyList()
         }
