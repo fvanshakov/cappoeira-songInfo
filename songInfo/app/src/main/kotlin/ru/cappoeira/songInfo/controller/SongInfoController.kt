@@ -63,11 +63,15 @@ class SongInfoController(
         @Parameter(description = "Тип песни")
         @RequestParam
         songType: String,
+        @Parameter(description = "Тэги для песни")
+        @RequestParam
+        tags: String?,
     ): SongInfoAllSongsResponse {
         return service.getAllSongs(
             songType = songType,
             page = page,
-            size = SIZE
+            size = SIZE,
+            tags = tags?.let { jacksonObjectMapper().readValue(decodeFromBase64(it), List::class.java) as List<String> } ?: emptyList(),
         ).let (SongInfoResponseMapper::mapToSongInfoAllSongsResponse)
     }
 
