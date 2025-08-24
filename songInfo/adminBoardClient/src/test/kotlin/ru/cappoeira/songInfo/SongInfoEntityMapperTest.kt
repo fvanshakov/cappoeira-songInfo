@@ -16,7 +16,8 @@ class SongInfoEntityMapperTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        songLines = emptyList()
+        songLines = emptyList(),
+        optimalTransitions = emptyList()
     )
     private val expectedResult = SongInfoEntity().apply {
         id = encodeToBase64("Первая песня")

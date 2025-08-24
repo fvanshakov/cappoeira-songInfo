@@ -52,23 +52,24 @@ class AdminBoardMapperTest {
                     text = "Ai meu joelho  ",
                     isChoirPart = false,
                     translation = "Ай, моё колено  ",
-                    transcription = "Ai meu joelho  "
+                    transcription = "Ai meu joelho  ",
                 ),
                 AdminBoardSongLineDto(
                     index = 1,
                     text = "Ai meu joelho dindinha  ",
                     isChoirPart = false,
                     translation = "Ай, моё колено, крёстная  ",
-                    transcription = "Ai meu joelho dindinha  "
+                    transcription = "Ai meu joelho dindinha  ",
                 ),
                 AdminBoardSongLineDto(
                     index = 2,
                     text = "Ai meu joelho  ",
                     isChoirPart = true,
                     translation = "Припев: Ай, моё колено  ",
-                    transcription = "Ai meu joelho  "
+                    transcription = "Ai meu joelho  ",
                 )
-            )
+            ),
+            optimalTransitions = emptyList()
         )
 
         assertEquals(expected = expectedResult, actual =  result)
@@ -123,23 +124,24 @@ class AdminBoardMapperTest {
                     text = "Ai meu joelho  ",
                     isChoirPart = false,
                     translation = "Ай, моё колено  ",
-                    transcription = "Ai meu joelho  "
+                    transcription = "Ai meu joelho  ",
                 ),
                 AdminBoardSongLineDto(
                     index = 1,
                     text = "Ai meu joelho dindinha  ",
                     isChoirPart = false,
                     translation = "Ай, моё колено, крёстная  ",
-                    transcription = "Ai meu joelho dindinha  "
+                    transcription = "Ai meu joelho dindinha  ",
                 ),
                 AdminBoardSongLineDto(
                     index = 2,
                     text = "Ai meu joelho  ",
                     isChoirPart = true,
                     translation = "Припев: Ай, моё колено  ",
-                    transcription = "Ai meu joelho  "
+                    transcription = "Ai meu joelho  ",
                 )
-            )
+            ),
+            optimalTransitions = emptyList()
         )
 
         assertEquals(expected = expectedResult, actual =  result)

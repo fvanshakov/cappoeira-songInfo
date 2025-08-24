@@ -37,11 +37,16 @@ data class SongInfoEntity(
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
     var songLines: MutableList<SongLineEntity>,
 
+    @ElementCollection
+    @CollectionTable(name = "optimal_transitions", joinColumns = [JoinColumn(name = "id")])
+    @Column(name = "transition")
+    var optimalTransitions: List<String>,
+
     @IndexedEmbedded(includePaths = [TAG_VALUE], includeDepth = 1, structure = ObjectStructure.NESTED)
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
     var tagValues: MutableList<SongTagValueEntity>
 ) {
-    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf())
+    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf(), mutableListOf())
 
     override fun toString(): String {
         return id

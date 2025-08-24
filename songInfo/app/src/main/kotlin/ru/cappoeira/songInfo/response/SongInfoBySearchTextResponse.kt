@@ -13,5 +13,11 @@ data class SongInfo(
     val videoUrl: String?,
     val songType: String,
     val songLines: List<SongLine>,
-    val songTags: SongTags
+    val songTags: SongTags,
+    val optimalTransitions: List<Transition>
 ): Serializable
+
+data class Transition(
+    val songName: String,
+    val songId: String
+)

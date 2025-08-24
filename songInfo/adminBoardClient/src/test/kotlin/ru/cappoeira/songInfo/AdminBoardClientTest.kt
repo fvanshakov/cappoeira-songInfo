@@ -38,7 +38,8 @@ class AdminBoardClientTest {
         songLines = emptyList(),
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
-        )
+        ),
+        optimalTransitions = emptyList()
     )
     private val secondSong = AdminBoardSongInfoDto(
         "second song",
@@ -47,7 +48,8 @@ class AdminBoardClientTest {
         songLines = emptyList(),
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
-        )
+        ),
+        optimalTransitions = emptyList()
     )
     private val offset = "offset"
 

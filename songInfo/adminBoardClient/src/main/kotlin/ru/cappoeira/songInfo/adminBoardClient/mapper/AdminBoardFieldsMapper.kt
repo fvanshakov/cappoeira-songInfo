@@ -23,19 +23,24 @@ object AdminBoardFieldsMapper {
         val rawTranslation = fields[TRANSLATION] as? String?
         val translationLines = mapLines(rawTranslation)
         val rawTranscription = fields[TRANSCRIPTION] as? String
+        val optimalTransitionsRaw = fields[OPTIMAL_FOLLOWINGS]
+        val optimalTransitions = optimalTransitionsRaw?.let {
+            (it as? String)?.split(',')?.toList()
+        } ?: emptyList()
         val transcriptionLines = mapLines(rawTranscription)
         val songLines = textLines.mapIndexed { index, textLine ->
             val isChoirPart = textLine.contains('*')
             val refinedTextLine = textLine.replace("*", "")
             val translationLine = translationLines.getOrNull(index).orEmpty()
+            val refinedTranslationLine = translationLine.replace("*", "")
             val transcriptionLine = transcriptionLines.getOrNull(index).orEmpty()
             val refinedTranscriptionLine = transcriptionLine.replace("*", "")
             AdminBoardSongLineDto(
                 index = index,
                 isChoirPart = isChoirPart,
                 text = refinedTextLine,
-                translation = translationLine,
-                transcription = refinedTranscriptionLine
+                translation = refinedTranslationLine,
+                transcription = refinedTranscriptionLine,
             )
         }
         val tagsWithValues = mutableMapOf<String, MutableList<String>>()
@@ -64,7 +69,8 @@ object AdminBoardFieldsMapper {
             songLines = songLines,
             tags = AdminBoardTagsDao(
                 tags
-            )
+            ),
+            optimalTransitions = optimalTransitions
         )
     }
 
@@ -73,6 +79,7 @@ object AdminBoardFieldsMapper {
     private const val TEXT = "Текст"
     private const val TRANSLATION = "Перевод"
     private const val TRANSCRIPTION = "Транскрипция"
+    private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
     private val TAGS = listOf(
         "Гармония",
         "Скорость",
