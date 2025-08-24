@@ -1,6 +1,7 @@
 package ru.cappoeira.songInfo.mapper
 
 import ru.cappoeira.songInfo.decodeFromBase64
+import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.response.*
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
@@ -34,7 +35,13 @@ object SongInfoResponseMapper {
                     videoUrl = it.videoUrl,
                     songType = it.songType,
                     songLines = it.songLines.map(::mapSongLine),
-                    songTags = it.tagValues.let(::mapSongTag)
+                    songTags = it.tagValues.let(::mapSongTag),
+                    optimalTransitions = it.optimalTransitions.map { songName ->
+                        Transition(
+                            songName = songName,
+                            songId = encodeToBase64(songName)
+                        )
+                    }
                 )
             }
         )
@@ -106,7 +113,13 @@ object SongInfoResponseMapper {
                     videoUrl = entity.videoUrl,
                     songType = entity.songType,
                     songLines = songLines.map(::mapSongLine),
-                    songTags = entity.tagValues.let(::mapSongTag)
+                    songTags = entity.tagValues.let(::mapSongTag),
+                    optimalTransitions = entity.optimalTransitions.map { songName ->
+                        Transition(
+                            songName = songName,
+                            songId = encodeToBase64(songName)
+                        )
+                    }
                 )
             }
         )

@@ -18,7 +18,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         val expectedResult = SongInfoByIdResponse(
             id = "some id",
@@ -45,7 +46,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         val expectedResult = SongInfoAllSongsResponse(
             count = 1,
@@ -58,7 +60,8 @@ class SongInfoResponseMapperTest {
                     songLines = emptyList(),
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
-                    )
+                    ),
+                    optimalTransitions = emptyList()
                 )
             )
         )
@@ -77,7 +80,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         val expectedResult = SongInfoBySearchTextResponse(
             count = 1,
@@ -90,7 +94,8 @@ class SongInfoResponseMapperTest {
                     songLines = emptyList(),
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
-                    )
+                    ),
+                    optimalTransitions = emptyList()
                 )
             )
         )
@@ -109,7 +114,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         input.apply {
             songLines.addAll(
@@ -198,7 +204,8 @@ class SongInfoResponseMapperTest {
                             translation = "translation 4",
                             transcription = emptyString(),
                         )
-                    )
+                    ),
+                    optimalTransitions = emptyList()
                 )
             )
         )
@@ -217,7 +224,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         input.apply {
             songLines.addAll(
@@ -281,6 +289,7 @@ class SongInfoResponseMapperTest {
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
                     ),
+                    optimalTransitions = emptyList(),
                     songLines = listOf(
                         SongLine(
                             id = "song name 2",
@@ -325,7 +334,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         input.apply {
             songLines.addAll(
@@ -389,7 +399,8 @@ class SongInfoResponseMapperTest {
                     songLines = emptyList(),
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
-                    )
+                    ),
+                    optimalTransitions = emptyList()
                 )
             )
         )
@@ -408,7 +419,8 @@ class SongInfoResponseMapperTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         input.apply {
             songLines.addAll(
@@ -472,6 +484,7 @@ class SongInfoResponseMapperTest {
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
                     ),
+                    optimalTransitions = emptyList(),
                     songLines = listOf(
                         SongLine(
                             id = "song name 4",

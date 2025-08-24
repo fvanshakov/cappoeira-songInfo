@@ -45,7 +45,8 @@ class SongInfoDBTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         val savedSong = repo.save(songInfoEntity)
 
@@ -73,7 +74,8 @@ class SongInfoDBTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
 
         repo.save(songInfoEntity)
@@ -92,7 +94,8 @@ class SongInfoDBTest {
             videoUrl = "some url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
         val otherInfoEntity = SongInfoEntity(
             id = encodeToBase64("other song"),
@@ -101,7 +104,8 @@ class SongInfoDBTest {
             videoUrl = "other url",
             songType = "LADAINHA",
             songLines = mutableListOf(),
-            tagValues = mutableListOf()
+            tagValues = mutableListOf(),
+            optimalTransitions = emptyList()
         )
 
         repo.save(songInfoEntity)

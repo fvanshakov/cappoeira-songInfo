@@ -5,5 +5,5 @@ data class AdminBoardSongLineDto(
     val text: String,
     val translation: String,
     val transcription: String,
-    val isChoirPart: Boolean
+    val isChoirPart: Boolean,
 )
