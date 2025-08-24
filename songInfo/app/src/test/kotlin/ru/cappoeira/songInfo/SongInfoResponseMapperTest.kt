@@ -29,7 +29,8 @@ class SongInfoResponseMapperTest {
             songLines = emptyList(),
             songTags = SongTags(
                 tagsWithValues = emptyMap()
-            )
+            ),
+            optimalTransitions = emptyList()
         )
 
         val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input)
