@@ -8,7 +8,8 @@ data class SongInfoByIdResponse(
     val videoUrl: String?,
     val songType: String,
     val songLines: List<SongLine>,
-    val songTags: SongTags
+    val songTags: SongTags,
+    val optimalTransitions: List<Transition>
 ): Serializable
 
 data class SongLine(

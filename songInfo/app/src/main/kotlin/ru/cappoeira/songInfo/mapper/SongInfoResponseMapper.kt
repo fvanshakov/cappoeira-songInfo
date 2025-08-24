@@ -54,7 +54,13 @@ object SongInfoResponseMapper {
             videoUrl = entity.videoUrl,
             songType = entity.songType,
             songLines = entity.songLines.map(::mapSongLine),
-            songTags = entity.tagValues.let(::mapSongTag)
+            songTags = entity.tagValues.let(::mapSongTag),
+            optimalTransitions = entity.optimalTransitions.map { songName ->
+                Transition(
+                    songName = songName,
+                    songId = encodeToBase64(songName)
+                )
+            }
         )
     }
 
