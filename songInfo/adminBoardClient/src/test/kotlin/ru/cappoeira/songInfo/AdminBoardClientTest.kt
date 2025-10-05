@@ -16,7 +16,7 @@ import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClientImpl.Compan
 import ru.cappoeira.songInfo.adminBoardClient.domain.AdminBoardClientImpl.Companion.OFFSET_QUERY
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardTagsDao
-import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardWebCallResultDto
+import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongsWebCallResultDto
 import kotlin.test.DefaultAsserter.assertEquals
 
 class AdminBoardClientTest {
@@ -62,8 +62,8 @@ class AdminBoardClientTest {
         every { requestMock.uri(AIRTABLE_URL + CORRIDOS_TABLE_ID + OFFSET_QUERY + offset) } returns requestMockWithoutOffset
         every { requestMockWithoutOffset.retrieve() } returns responseMockWithoutOffset
         every { requestMock.retrieve() } returns responseMock
-        every { responseMockWithoutOffset.bodyToMono(AdminBoardWebCallResultDto::class.java) } returns Mono.just(
-            AdminBoardWebCallResultDto(
+        every { responseMockWithoutOffset.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) } returns Mono.just(
+            AdminBoardSongsWebCallResultDto(
                 offset = null,
                 records = listOf(
                     secondSong
@@ -77,8 +77,8 @@ class AdminBoardClientTest {
         val expectedResult = listOf(
             firstSong
         )
-        every { responseMock.bodyToMono(AdminBoardWebCallResultDto::class.java) } returns Mono.just(
-            AdminBoardWebCallResultDto(
+        every { responseMock.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) } returns Mono.just(
+            AdminBoardSongsWebCallResultDto(
                 offset = null,
                 records = listOf(
                     firstSong
@@ -93,7 +93,7 @@ class AdminBoardClientTest {
         verify(exactly = 1) { clientMock.get() }
         verify(exactly = 1) { requestMock.uri(any<String>()) }
         verify(exactly = 1) { requestMock.retrieve() }
-        verify(exactly = 1) { responseMock.bodyToMono(AdminBoardWebCallResultDto::class.java) }
+        verify(exactly = 1) { responseMock.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) }
     }
 
     @Test
@@ -101,8 +101,8 @@ class AdminBoardClientTest {
         val expectedResult = listOf(
             firstSong, secondSong
         )
-        every { responseMock.bodyToMono(AdminBoardWebCallResultDto::class.java) } returns Mono.just(
-            AdminBoardWebCallResultDto(
+        every { responseMock.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) } returns Mono.just(
+            AdminBoardSongsWebCallResultDto(
                 offset = offset,
                 records = listOf(
                     firstSong
@@ -117,16 +117,16 @@ class AdminBoardClientTest {
         verify(exactly = 2) { clientMock.get() }
         verify(exactly = 2) { requestMock.uri(any<String>()) }
         verify(exactly = 1) { requestMock.retrieve() }
-        verify(exactly = 1) { responseMock.bodyToMono(AdminBoardWebCallResultDto::class.java) }
+        verify(exactly = 1) { responseMock.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) }
         verify(exactly = 1) { requestMockWithoutOffset.retrieve() }
-        verify(exactly = 1) { responseMockWithoutOffset.bodyToMono(AdminBoardWebCallResultDto::class.java) }
+        verify(exactly = 1) { responseMockWithoutOffset.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) }
     }
 
     @Test
     fun `when result is successful and empty and offset is empty return empty result without additional call`() {
-        val expectedResult = emptyList<AdminBoardWebCallResultDto>()
-        every { responseMock.bodyToMono(AdminBoardWebCallResultDto::class.java) } returns Mono.just(
-            AdminBoardWebCallResultDto(
+        val expectedResult = emptyList<AdminBoardSongsWebCallResultDto>()
+        every { responseMock.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) } returns Mono.just(
+            AdminBoardSongsWebCallResultDto(
                 offset = null,
                 records = emptyList()
             )
@@ -139,6 +139,6 @@ class AdminBoardClientTest {
         verify(exactly = 1) { clientMock.get() }
         verify(exactly = 1) { requestMock.uri(any<String>()) }
         verify(exactly = 1) { requestMock.retrieve() }
-        verify(exactly = 1) { responseMock.bodyToMono(AdminBoardWebCallResultDto::class.java) }
+        verify(exactly = 1) { responseMock.bodyToMono(AdminBoardSongsWebCallResultDto::class.java) }
     }
 }

@@ -46,6 +46,8 @@ class UpdateDbDelegateImplTest {
                 listOf(corridoSong)
         every { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.LADAINHA) } returns
                 listOf(ladainhaSong)
+        every { adminBoardClient.retrieveDefinitions() } returns
+                emptyList()
         every { songInfoService.saveSongs(any()) } returns Unit
         every { songInfoService.deleteAllSongs() } returns Unit
         every { songInfoService.saveTags(any()) } returns Unit
@@ -57,14 +59,17 @@ class UpdateDbDelegateImplTest {
 
         val mappedCorridoSong = SongInfoEntityMapper.mapDtoToEntity(
             dto = corridoSong,
-            tags = emptyMap()
+            tags = emptyMap(),
+            definitions = emptyMap()
         )
         val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(
             dto = ladainhaSong,
-            tags = emptyMap()
+            tags = emptyMap(),
+            definitions = emptyMap()
         )
 
         verify(exactly = 1) { songInfoService.deleteAllSongs() }
+        verify(exactly = 1) { adminBoardClient.retrieveDefinitions() }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.CORRIDO) }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.LADAINHA) }
         verify(exactly = 1) { songInfoService.saveSongs(listOf(mappedCorridoSong)) }

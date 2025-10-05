@@ -32,7 +32,8 @@ class SongInfoEntityMapperTest {
     fun `test mapper returns right entity`() {
         val actualResult = SongInfoEntityMapper.mapDtoToEntity(
             dto = dto,
-            tags = emptyMap()
+            tags = emptyMap(),
+            definitions = emptyMap()
         )
 
         assertEquals(expectedResult, actualResult)

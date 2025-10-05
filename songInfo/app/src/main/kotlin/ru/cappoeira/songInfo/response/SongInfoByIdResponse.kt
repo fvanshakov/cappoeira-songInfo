@@ -16,10 +16,15 @@ data class SongLine(
     val id: String,
     val index: Int,
     val text: String,
-    val translation: String,
+    val translation: List<SongLinesChunks>,
     val transcription: String,
     val isChoirPart: Boolean
 ): Serializable
+
+data class SongLinesChunks(
+    val text: String,
+    val definition: String?
+)
 
 data class SongTags(
     val tagsWithValues: Map<String, List<String>>
