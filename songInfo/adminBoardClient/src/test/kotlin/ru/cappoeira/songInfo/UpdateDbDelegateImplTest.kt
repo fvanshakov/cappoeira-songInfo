@@ -27,7 +27,8 @@ class UpdateDbDelegateImplTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        optimalTransitions = emptyList()
+        optimalTransitions = emptyList(),
+        isVisible = true
     )
     private val ladainhaSong = AdminBoardSongInfoDto(
         songName = "ladainha song",
@@ -37,7 +38,8 @@ class UpdateDbDelegateImplTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        optimalTransitions = emptyList()
+        optimalTransitions = emptyList(),
+        isVisible = true
     )
 
     @BeforeEach

@@ -70,7 +70,8 @@ object AdminBoardFieldsMapper {
             tags = AdminBoardTagsDao(
                 tags
             ),
-            optimalTransitions = optimalTransitions
+            optimalTransitions = optimalTransitions,
+            isVisible = fields[VISIBILITY] == true
         )
     }
 
@@ -80,6 +81,7 @@ object AdminBoardFieldsMapper {
     private const val TRANSLATION = "Перевод"
     private const val TRANSCRIPTION = "Транскрипция"
     private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
+    private const val VISIBILITY = "Видимость в приложении"
     private val TAGS = listOf(
         "Гармония",
         "Скорость",
