@@ -3,6 +3,7 @@ package ru.cappoeira.songInfo
 import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.mapper.SongInfoResponseMapper
 import ru.cappoeira.songInfo.response.*
+import ru.cappoeira.songInfo.songInfoDB.entity.SongChunkEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
 import kotlin.test.assertEquals
@@ -128,6 +129,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 1",
                         translation = "translation 1",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -137,6 +139,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 2",
                         translation = "translation 2",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -146,6 +149,7 @@ class SongInfoResponseMapperTest {
                         text = "right text",
                         translation = "translation 3",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -155,6 +159,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 4",
                         translation = "translation 4",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -163,6 +168,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 5",
                         translation = "translation 5",
+                        translationChunks = mutableListOf(),
                         transcription = emptyString(),
                         song = input
                     )
@@ -186,7 +192,7 @@ class SongInfoResponseMapperTest {
                             index = 1,
                             isChoirPart = true,
                             text = "not-matching text 2",
-                            translation = "translation 2",
+                            translation = listOf(),
                             transcription = emptyString(),
                         ),
                         SongLine(
@@ -194,7 +200,7 @@ class SongInfoResponseMapperTest {
                             index = 2,
                             isChoirPart = false,
                             text = "right text",
-                            translation = "translation 3",
+                            translation = listOf(),
                             transcription = emptyString(),
                         ),
                         SongLine(
@@ -202,7 +208,7 @@ class SongInfoResponseMapperTest {
                             index = 3,
                             isChoirPart = false,
                             text = "not-matching text 4",
-                            translation = "translation 4",
+                            translation = listOf(),
                             transcription = emptyString(),
                         )
                     ),
@@ -238,6 +244,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 1",
                         translation = "translation 1",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -247,6 +254,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 2",
                         translation = "translation 2",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -256,6 +264,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text",
                         translation = "right translation 3",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -265,6 +274,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 4",
                         translation = "translation 4",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -274,6 +284,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 5",
                         translation = "translation 5",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     )
                 )
@@ -297,7 +308,7 @@ class SongInfoResponseMapperTest {
                             index = 1,
                             isChoirPart = true,
                             text = "not-matching text 2",
-                            translation = "translation 2",
+                            translation = emptyList(),
                             transcription = emptyString(),
                         ),
                         SongLine(
@@ -305,7 +316,7 @@ class SongInfoResponseMapperTest {
                             index = 2,
                             isChoirPart = false,
                             text = "not-matching text",
-                            translation = "right translation 3",
+                            translation = emptyList(),
                             transcription = emptyString(),
                         ),
                         SongLine(
@@ -313,7 +324,7 @@ class SongInfoResponseMapperTest {
                             index = 3,
                             isChoirPart = false,
                             text = "not-matching text 4",
-                            translation = "translation 4",
+                            translation = emptyList(),
                             transcription = emptyString(),
                         )
                     )
@@ -348,6 +359,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 1",
                         translation = "translation 1",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -357,6 +369,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 2",
                         translation = "translation 2",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -366,6 +379,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text",
                         translation = "translation 3",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -375,6 +389,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 4",
                         translation = "translation 4",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -384,6 +399,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 5",
                         translation = "translation 5",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     )
                 )
@@ -433,6 +449,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 1",
                         translation = "translation 1",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -442,6 +459,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 2",
                         translation = "translation 2",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -451,6 +469,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text",
                         translation = "translation 3",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -460,6 +479,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 4",
                         translation = "translation 4",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     ),
                     SongLineEntity(
@@ -469,6 +489,7 @@ class SongInfoResponseMapperTest {
                         text = "right text 5",
                         translation = "translation 5",
                         transcription = emptyString(),
+                        translationChunks = mutableListOf(),
                         song = input
                     )
                 )
@@ -492,7 +513,7 @@ class SongInfoResponseMapperTest {
                             index = 3,
                             isChoirPart = false,
                             text = "not-matching text 4",
-                            translation = "translation 4",
+                            translation = emptyList(),
                             transcription = emptyString(),
                         ),
                         SongLine(
@@ -500,7 +521,7 @@ class SongInfoResponseMapperTest {
                             index = 4,
                             isChoirPart = false,
                             text = "right text 5",
-                            translation = "translation 5",
+                            translation = emptyList(),
                             transcription = emptyString(),
                         )
                     )

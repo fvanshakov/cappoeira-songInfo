@@ -22,11 +22,15 @@ open class UpdateDbDelegateImpl(
     override fun update(): Response {
         return safeCall {
             songInfoService.deleteAllSongs()
-            SongType.entries.forEach(::updateSongTypeInfo)
+            val definitions = adminBoardClient.retrieveDefinitions()
+                .filter { it.clientId != null && it.definition != null }
+                .associate { it.clientId as String to it.definition as String }
+            SongType.entries.forEach { updateSongTypeInfo(it, definitions) }
         }
     }
 
-    private fun updateSongTypeInfo(songType: SongType) {
+    private fun updateSongTypeInfo(songType: SongType, definitions: Map<String, String>) {
+
         val songsInfos = adminBoardClient.retrieveSongTypeInfoFromAdminBoard(songType)
         logger.info("songs of type:$songType have been retrieved from airtable, namely $songsInfos")
         val songsInfosWithType = songsInfos.map {
@@ -49,7 +53,8 @@ open class UpdateDbDelegateImpl(
 
                 SongInfoEntityMapper.mapDtoToEntity(
                     dto = it,
-                    tags = tags
+                    tags = tags,
+                    definitions = definitions
                 )
             }
         )

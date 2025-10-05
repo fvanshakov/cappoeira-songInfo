@@ -20,6 +20,9 @@ data class SongLineEntity(
     @Column(nullable = false, name = TEXT, length = 1000)
     var text: String,
 
+    @OneToMany(mappedBy = "songLine", cascade = [CascadeType.ALL])
+    var translationChunks: MutableList<SongChunkEntity>,
+
     @FullTextField(analyzer = NGRAM_NAME)
     @Column(nullable = false, name = TRANSLATION, length = 1000)
     var translation: String,
@@ -35,7 +38,7 @@ data class SongLineEntity(
     internal var song: SongInfoEntity
 ) {
 
-    constructor(): this(emptyString(), 0,  emptyString(),  emptyString(), emptyString(), false, SongInfoEntity())
+    constructor(): this(emptyString(), 0,  emptyString(), mutableListOf(),  emptyString(), emptyString(), false, SongInfoEntity())
 
     companion object {
         const val INDEX = "index"

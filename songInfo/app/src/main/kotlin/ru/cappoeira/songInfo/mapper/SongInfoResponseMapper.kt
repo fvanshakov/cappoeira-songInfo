@@ -71,7 +71,12 @@ object SongInfoResponseMapper {
                 index = index,
                 isChoirPart = isChoirPart,
                 text = text,
-                translation = translation,
+                translation = translationChunks.map {
+                    SongLinesChunks(
+                        text = it.text,
+                        definition = it.definition
+                    )
+                },
                 transcription = transcription
             )
         }

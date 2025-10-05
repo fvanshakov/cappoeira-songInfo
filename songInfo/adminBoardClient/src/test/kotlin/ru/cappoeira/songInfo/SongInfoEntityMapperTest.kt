@@ -17,7 +17,8 @@ class SongInfoEntityMapperTest {
             tagsWithKeys = emptyMap()
         ),
         songLines = emptyList(),
-        optimalTransitions = emptyList()
+        optimalTransitions = emptyList(),
+        isVisible = true
     )
     private val expectedResult = SongInfoEntity().apply {
         id = encodeToBase64("Первая песня")
@@ -32,7 +33,8 @@ class SongInfoEntityMapperTest {
     fun `test mapper returns right entity`() {
         val actualResult = SongInfoEntityMapper.mapDtoToEntity(
             dto = dto,
-            tags = emptyMap()
+            tags = emptyMap(),
+            definitions = emptyMap()
         )
 
         assertEquals(expectedResult, actualResult)

@@ -10,7 +10,8 @@ object SongInfoEntityMapper {
 
     fun mapDtoToEntity(
         dto: AdminBoardSongInfoDto,
-        tags: Map<String, SongTagEntity>
+        tags: Map<String, SongTagEntity>,
+        definitions: Map<String, String>
     ): SongInfoEntity {
         val normalizedName = normalizeString(dto.songName)
         val songInfoEntity = SongInfoEntity(
@@ -23,7 +24,7 @@ object SongInfoEntityMapper {
             tagValues = mutableListOf(),
             optimalTransitions = dto.optimalTransitions
         )
-        val songLines = dto.songLines.map { SongLineMapper.mapDtoToEntity(it, songInfoEntity) }
+        val songLines = dto.songLines.map { SongLineMapper.mapDtoToEntity(it, songInfoEntity, definitions) }
         songInfoEntity.songLines.addAll(songLines)
         val tagValues = SongTagEntityMapper.mapDtoToValueEntity(
             song = songInfoEntity,

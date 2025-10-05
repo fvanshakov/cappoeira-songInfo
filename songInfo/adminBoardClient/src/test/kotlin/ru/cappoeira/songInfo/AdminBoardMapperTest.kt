@@ -69,7 +69,8 @@ class AdminBoardMapperTest {
                     transcription = "Ai meu joelho  ",
                 )
             ),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = false
         )
 
         assertEquals(expected = expectedResult, actual =  result)
@@ -141,7 +142,8 @@ class AdminBoardMapperTest {
                     transcription = "Ai meu joelho  ",
                 )
             ),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = false
         )
 
         assertEquals(expected = expectedResult, actual =  result)
