@@ -77,7 +77,12 @@ object SongInfoResponseMapper {
                         definition = it.definition
                     )
                 },
-                transcription = transcription
+                transcription = transcriptionChunks.map {
+                    SongLinesChunks(
+                        text = it.transcription,
+                        definition = it.definition
+                    )
+                }
             )
         }
     }

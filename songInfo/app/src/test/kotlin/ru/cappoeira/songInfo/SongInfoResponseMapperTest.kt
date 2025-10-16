@@ -133,7 +133,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 1",
                         translation = "translation 1",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -143,7 +143,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = true,
                         text = "not-matching text 2",
                         translation = "translation 2",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -153,7 +153,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "right text",
                         translation = "translation 3",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -163,7 +163,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 4",
                         translation = "translation 4",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -174,7 +174,7 @@ class SongInfoResponseMapperTest {
                         text = "not-matching text 5",
                         translation = "translation 5",
                         translationChunks = mutableListOf(),
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         song = input
                     )
                 )
@@ -198,7 +198,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = true,
                             text = "not-matching text 2",
                             translation = listOf(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         ),
                         SongLine(
                             id = "song name 3",
@@ -206,7 +206,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = false,
                             text = "right text",
                             translation = listOf(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         ),
                         SongLine(
                             id = "song name 4",
@@ -214,7 +214,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = false,
                             text = "not-matching text 4",
                             translation = listOf(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         )
                     ),
                     optimalTransitions = emptyList()
@@ -249,7 +249,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 1",
                         translation = "translation 1",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -259,7 +259,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = true,
                         text = "not-matching text 2",
                         translation = "translation 2",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -269,7 +269,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text",
                         translation = "right translation 3",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -279,7 +279,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 4",
                         translation = "translation 4",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -289,7 +289,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 5",
                         translation = "translation 5",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     )
@@ -315,7 +315,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = true,
                             text = "not-matching text 2",
                             translation = emptyList(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         ),
                         SongLine(
                             id = "song name 3",
@@ -323,7 +323,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = false,
                             text = "not-matching text",
                             translation = emptyList(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         ),
                         SongLine(
                             id = "song name 4",
@@ -331,7 +331,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = false,
                             text = "not-matching text 4",
                             translation = emptyList(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         )
                     )
                 )
@@ -365,7 +365,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 1",
                         translation = "translation 1",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -375,7 +375,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = true,
                         text = "not-matching text 2",
                         translation = "translation 2",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -385,7 +385,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text",
                         translation = "translation 3",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -395,7 +395,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 4",
                         translation = "translation 4",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -405,7 +405,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 5",
                         translation = "translation 5",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     )
@@ -456,7 +456,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 1",
                         translation = "translation 1",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -466,7 +466,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = true,
                         text = "not-matching text 2",
                         translation = "translation 2",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -476,7 +476,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text",
                         translation = "translation 3",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -486,7 +486,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "not-matching text 4",
                         translation = "translation 4",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     ),
@@ -496,7 +496,7 @@ class SongInfoResponseMapperTest {
                         isChoirPart = false,
                         text = "right text 5",
                         translation = "translation 5",
-                        transcription = emptyString(),
+                        transcriptionChunks = mutableListOf(),
                         translationChunks = mutableListOf(),
                         song = input
                     )
@@ -522,7 +522,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = false,
                             text = "not-matching text 4",
                             translation = emptyList(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         ),
                         SongLine(
                             id = "song name 5",
@@ -530,7 +530,7 @@ class SongInfoResponseMapperTest {
                             isChoirPart = false,
                             text = "right text 5",
                             translation = emptyList(),
-                            transcription = emptyString(),
+                            transcription = emptyList(),
                         )
                     )
                 )
