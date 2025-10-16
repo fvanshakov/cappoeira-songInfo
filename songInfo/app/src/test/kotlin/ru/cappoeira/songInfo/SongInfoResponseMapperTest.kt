@@ -3,7 +3,6 @@ package ru.cappoeira.songInfo
 import org.junit.jupiter.api.Test
 import ru.cappoeira.songInfo.mapper.SongInfoResponseMapper
 import ru.cappoeira.songInfo.response.*
-import ru.cappoeira.songInfo.songInfoDB.entity.SongChunkEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
 import kotlin.test.assertEquals
@@ -20,7 +19,9 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
+
         )
         val expectedResult = SongInfoByIdResponse(
             id = "some id",
@@ -49,7 +50,9 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
+
         )
         val expectedResult = SongInfoAllSongsResponse(
             count = 1,
@@ -83,7 +86,8 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
         )
         val expectedResult = SongInfoBySearchTextResponse(
             count = 1,
@@ -117,7 +121,8 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
         )
         input.apply {
             songLines.addAll(
@@ -232,7 +237,8 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
         )
         input.apply {
             songLines.addAll(
@@ -347,7 +353,8 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
         )
         input.apply {
             songLines.addAll(
@@ -437,7 +444,8 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isVisible = true
         )
         input.apply {
             songLines.addAll(
