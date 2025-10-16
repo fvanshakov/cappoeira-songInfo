@@ -27,8 +27,8 @@ data class SongLineEntity(
     @Column(nullable = false, name = TRANSLATION, length = 1000)
     var translation: String,
 
-    @Column(nullable = false, name = TRANSCRIPTION, length = 1000)
-    var transcription: String,
+    @OneToMany(mappedBy = "transcriptionLine", cascade = [CascadeType.ALL])
+    var transcriptionChunks: MutableList<SongTranscriptionsChunkEntity>,
 
     @Column(nullable = false, name = IS_CHOIR_PART)
     var isChoirPart: Boolean,
@@ -38,7 +38,7 @@ data class SongLineEntity(
     internal var song: SongInfoEntity
 ) {
 
-    constructor(): this(emptyString(), 0,  emptyString(), mutableListOf(),  emptyString(), emptyString(), false, SongInfoEntity())
+    constructor(): this(emptyString(), 0,  emptyString(), mutableListOf(),  emptyString(), mutableListOf(), false, SongInfoEntity())
 
     companion object {
         const val INDEX = "index"

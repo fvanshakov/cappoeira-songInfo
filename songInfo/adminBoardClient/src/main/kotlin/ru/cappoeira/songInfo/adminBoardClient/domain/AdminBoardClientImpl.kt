@@ -43,7 +43,7 @@ internal class AdminBoardClientImpl(
             offset = result.offset
             songInfos.addAll(result.records)
         } while (offset != null)
-        return songInfos.filter { it.isVisible }
+        return songInfos
     }
 
     override fun retrieveDefinitions(): List<AdminBoardDefinitionsDto> {

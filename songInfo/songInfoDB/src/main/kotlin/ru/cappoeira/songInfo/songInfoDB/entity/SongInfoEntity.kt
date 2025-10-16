@@ -3,6 +3,7 @@ package ru.cappoeira.songInfo.songInfoDB.entity
 import jakarta.persistence.*
 import org.hibernate.search.engine.backend.types.ObjectStructure
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded
 import ru.cappoeira.songInfo.emptyString
@@ -42,11 +43,15 @@ data class SongInfoEntity(
     @Column(name = "transition")
     var optimalTransitions: List<String>,
 
+    @GenericField
+    @Column(nullable = false, name = IS_VISIBLE)
+    var isVisible: Boolean,
+
     @IndexedEmbedded(includePaths = [TAG_VALUE], includeDepth = 1, structure = ObjectStructure.NESTED)
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
     var tagValues: MutableList<SongTagValueEntity>
 ) {
-    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf(), mutableListOf())
+    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf(), true, mutableListOf())
 
     override fun toString(): String {
         return id
@@ -61,5 +66,6 @@ data class SongInfoEntity(
         const val NORMALIZED_NAME = "normalizedName"
         const val VIDEO_URL = "videoUrl"
         const val SONG_TYPE = "songType"
+        const val IS_VISIBLE = "isVisible"
     }
 }

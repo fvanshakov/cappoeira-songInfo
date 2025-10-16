@@ -17,7 +17,7 @@ data class SongLine(
     val index: Int,
     val text: String,
     val translation: List<SongLinesChunks>,
-    val transcription: String,
+    val transcription: List<SongLinesChunks>,
     val isChoirPart: Boolean
 ): Serializable
 

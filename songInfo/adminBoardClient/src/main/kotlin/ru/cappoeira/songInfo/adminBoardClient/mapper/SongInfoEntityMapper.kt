@@ -22,7 +22,8 @@ object SongInfoEntityMapper {
             songType = dto.songType.toString(),
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = dto.optimalTransitions
+            optimalTransitions = dto.optimalTransitions,
+            isVisible = dto.isVisible
         )
         val songLines = dto.songLines.map { SongLineMapper.mapDtoToEntity(it, songInfoEntity, definitions) }
         songInfoEntity.songLines.addAll(songLines)

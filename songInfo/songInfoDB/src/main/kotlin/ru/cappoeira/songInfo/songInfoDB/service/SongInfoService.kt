@@ -51,7 +51,7 @@ class SongInfoService(
         return try {
             if (tags.isEmpty()) {
                 repo
-                    .findBySongType(songType, PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()))
+                    .findBySongTypeAndIsVisible(songType, PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()))
                     .content
             } else {
                 repo

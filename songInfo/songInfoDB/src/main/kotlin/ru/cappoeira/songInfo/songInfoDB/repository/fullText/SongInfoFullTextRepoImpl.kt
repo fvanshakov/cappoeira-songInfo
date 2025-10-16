@@ -56,6 +56,7 @@ open class SongInfoFullTextRepoImpl(
                             )
                         }
                     }
+                    b.must(f.match().field("isVisible").matching(true))
                 }
             }
             .fetchHits(size * page, size)
