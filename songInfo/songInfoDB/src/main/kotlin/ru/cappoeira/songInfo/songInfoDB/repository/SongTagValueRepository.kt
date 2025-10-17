@@ -11,8 +11,10 @@ interface SongTagValueRepository : JpaRepository<SongTagEntity, String> {
 
     @Query("""
         SELECT DISTINCT t FROM SongTagEntity t
-        LEFT JOIN FETCH t.tagValues
-        WHERE t.type = :filterType
+        LEFT JOIN FETCH t.tagValues tv
+        JOIN tv.song s
+        WHERE t.type = :filterType 
+        AND s.isVisible = true
         ORDER BY t.tag
     """)
     fun findAllWithTags(@Param("filterType") filterType: String): List<SongTagEntity>
