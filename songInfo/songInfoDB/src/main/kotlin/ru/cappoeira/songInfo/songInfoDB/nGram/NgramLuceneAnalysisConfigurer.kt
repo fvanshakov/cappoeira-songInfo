@@ -1,7 +1,7 @@
 package ru.cappoeira.songInfo.songInfoDB.nGram
 
 import org.apache.lucene.analysis.core.LowerCaseFilterFactory
-import org.apache.lucene.analysis.ngram.NGramFilterFactory
+import org.apache.lucene.analysis.ngram.EdgeNGramFilterFactory
 import org.apache.lucene.analysis.standard.StandardTokenizerFactory
 import org.hibernate.search.backend.lucene.analysis.LuceneAnalysisConfigurationContext
 import org.hibernate.search.backend.lucene.analysis.LuceneAnalysisConfigurer
@@ -13,12 +13,12 @@ open class NgramLuceneAnalysisConfigurer : LuceneAnalysisConfigurer {
         context.analyzer(NGRAM_NAME).custom()
             .tokenizer(StandardTokenizerFactory::class.java)
             .tokenFilter(LowerCaseFilterFactory::class.java)
-            .tokenFilter(NGramFilterFactory::class.java)
+            .tokenFilter(EdgeNGramFilterFactory::class.java)
             .param("minGramSize", "3")
             .param("maxGramSize", "7")
     }
 
     companion object {
-        const val NGRAM_NAME = "custom_ngram"
+        const val NGRAM_NAME = "edge_ngram"
     }
 }
