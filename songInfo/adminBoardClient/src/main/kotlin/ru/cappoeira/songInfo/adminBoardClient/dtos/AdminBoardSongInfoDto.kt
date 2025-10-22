@@ -20,7 +20,7 @@ data class AdminBoardSongInfoDto(
 
         @JsonCreator
         @JvmStatic
-        fun create(@JsonProperty("fields") fields: Map<String, Any>): AdminBoardSongInfoDto? {
+        fun create(@JsonProperty("fields") fields: Map<String, Any>): AdminBoardSongInfoDto {
             return AdminBoardFieldsMapper.mapFieldsToDto(fields)
         }
     }

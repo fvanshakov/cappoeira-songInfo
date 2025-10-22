@@ -15,8 +15,8 @@ object AdminBoardFieldsMapper {
             ?: emptyList()
     }
 
-    fun mapFieldsToDto(fields: Map<String, Any>): AdminBoardSongInfoDto? {
-        val songName = fields[NAME] as? String ?: return null
+    fun mapFieldsToDto(fields: Map<String, Any>): AdminBoardSongInfoDto {
+        val songName = fields[NAME] as? String ?: ""
         val videoUrl = fields[VIDEO_URL] as? String?
         val rawText = fields[TEXT] as? String?
         val textLines = mapLines(rawText)
