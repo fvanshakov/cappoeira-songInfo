@@ -69,15 +69,15 @@ object SongLineMapper {
                 if (beforeText.isNotBlank()) {
                     chunks.add(
                         SongChunkEntity().apply {
-                            text = beforeText.trim()
+                            text = beforeText
                             definition = null
                         }
                     )
                 }
             }
 
-            val word = match.groupValues[1].trim()
-            val definitionId = match.groupValues[2].trim()
+            val word = match.groupValues[1]
+            val definitionId = match.groupValues[2]
 
             chunks.add(
                 SongChunkEntity().apply {
@@ -94,7 +94,7 @@ object SongLineMapper {
             if (remaining.isNotBlank()) {
                 chunks.add(
                     SongChunkEntity().apply {
-                        text = remaining.trim()
+                        text = remaining
                         definition = null
                     }
                 )
@@ -124,15 +124,15 @@ object SongLineMapper {
                 if (beforeText.isNotBlank()) {
                     chunks.add(
                         SongTranscriptionsChunkEntity().apply {
-                            transcription = beforeText.trim()
+                            transcription = beforeText
                             definition = null
                         }
                     )
                 }
             }
 
-            val word = match.groupValues[1].trim()
-            val definitionId = match.groupValues[2].trim()
+            val word = match.groupValues[1]
+            val definitionId = match.groupValues[2]
 
             chunks.add(
                 SongTranscriptionsChunkEntity().apply {
@@ -149,7 +149,7 @@ object SongLineMapper {
             if (remaining.isNotBlank()) {
                 chunks.add(
                     SongTranscriptionsChunkEntity().apply {
-                        transcription = remaining.trim()
+                        transcription = remaining
                         definition = null
                     }
                 )
