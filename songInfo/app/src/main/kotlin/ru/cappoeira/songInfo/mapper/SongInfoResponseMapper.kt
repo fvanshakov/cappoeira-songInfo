@@ -20,6 +20,18 @@ object SongInfoResponseMapper {
                 isPlural = tag.isPlural
             )
         }
+        tagsMap["Темы текста"]?.apply {
+            val sortedTags = this.values.toMutableList()
+            sortedTags.apply {
+                remove("Для начинающих")
+                remove("Особая ситуация")
+                remove("Золотой фонд")
+                add(0, "Для начинающих")
+                add(1, "Особая ситуация")
+                add(2, "Золотой Фонд")
+            }
+            tagsMap["Темы текста"] = this.copy(sortedTags)
+        }
         return SongTagsResponse(
             tags = tagsMap
         )
