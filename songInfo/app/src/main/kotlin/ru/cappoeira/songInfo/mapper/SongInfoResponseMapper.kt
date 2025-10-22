@@ -106,7 +106,7 @@ object SongInfoResponseMapper {
         val decodedSearchText = decodeFromBase64(searchText)
 
         fun isSongLineWithMatchingText(songLine: SongLineEntity): Boolean {
-            return songLine.text.contains(decodedSearchText) || songLine.translation.contains(decodedSearchText)
+            return songLine.text.lowercase().contains(decodedSearchText.lowercase()) || songLine.translation.contains(decodedSearchText.lowercase())
         }
 
         return SongInfoBySearchTextResponse(
