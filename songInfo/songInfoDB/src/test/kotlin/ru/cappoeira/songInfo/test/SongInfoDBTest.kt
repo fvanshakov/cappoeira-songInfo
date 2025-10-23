@@ -47,7 +47,8 @@ class SongInfoDBTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         val savedSong = repo.save(songInfoEntity)
 
@@ -77,7 +78,8 @@ class SongInfoDBTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
 
         repo.save(songInfoEntity)
@@ -98,7 +100,8 @@ class SongInfoDBTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         val otherInfoEntity = SongInfoEntity(
             id = encodeToBase64("other song"),
@@ -109,7 +112,8 @@ class SongInfoDBTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
 
         repo.save(songInfoEntity)

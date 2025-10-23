@@ -71,7 +71,8 @@ object AdminBoardFieldsMapper {
                 tags
             ),
             optimalTransitions = optimalTransitions,
-            isVisible = fields[VISIBILITY] == true
+            isVisible = fields[VISIBILITY] == true,
+            isWithAlerts = fields[WITH_ALERTS] == true
         )
     }
 
@@ -80,6 +81,7 @@ object AdminBoardFieldsMapper {
     private const val TEXT = "Текст"
     private const val TRANSLATION = "Перевод"
     private const val TRANSCRIPTION = "Транскрипция"
+    private const val WITH_ALERTS = "С алертингом"
     private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
     private const val VISIBILITY = "Видимость в приложении"
     private val TAGS = listOf(

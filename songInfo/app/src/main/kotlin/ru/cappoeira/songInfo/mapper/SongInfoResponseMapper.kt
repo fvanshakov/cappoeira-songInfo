@@ -53,7 +53,8 @@ object SongInfoResponseMapper {
                             songName = songName,
                             songId = encodeToBase64(songName)
                         )
-                    }
+                    },
+                    isWithAlerts = it.isWithAlerts
                 )
             }
         )
@@ -72,7 +73,8 @@ object SongInfoResponseMapper {
                     songName = songName,
                     songId = encodeToBase64(songName)
                 )
-            }
+            },
+            isWithAlert = entity.isWithAlerts
         )
     }
 
@@ -147,7 +149,8 @@ object SongInfoResponseMapper {
                             songName = songName,
                             songId = encodeToBase64(songName)
                         )
-                    }
+                    },
+                    isWithAlerts = entity.isWithAlerts
                 )
             }
         )
