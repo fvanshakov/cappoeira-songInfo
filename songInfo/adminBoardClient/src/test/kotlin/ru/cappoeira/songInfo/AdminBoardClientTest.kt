@@ -40,7 +40,8 @@ class AdminBoardClientTest {
             tagsWithKeys = emptyMap()
         ),
         optimalTransitions = emptyList(),
-        isVisible = true
+        isVisible = true,
+        isWithAlerts = false
     )
     private val secondSong = AdminBoardSongInfoDto(
         "second song",
@@ -51,7 +52,9 @@ class AdminBoardClientTest {
             tagsWithKeys = emptyMap()
         ),
         optimalTransitions = emptyList(),
-        isVisible = true
+        isVisible = true,
+        isWithAlerts = false
+
     )
     private val offset = "offset"
 

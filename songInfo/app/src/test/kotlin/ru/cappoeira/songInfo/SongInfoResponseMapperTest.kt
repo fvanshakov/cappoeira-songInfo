@@ -20,8 +20,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
-
+            isVisible = true,
+            isWithAlerts = false
         )
         val expectedResult = SongInfoByIdResponse(
             id = "some id",
@@ -32,7 +32,8 @@ class SongInfoResponseMapperTest {
             songTags = SongTags(
                 tagsWithValues = emptyMap()
             ),
-            optimalTransitions = emptyList()
+            optimalTransitions = emptyList(),
+            isWithAlert = false
         )
 
         val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input)
@@ -51,7 +52,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
 
         )
         val expectedResult = SongInfoAllSongsResponse(
@@ -66,7 +68,8 @@ class SongInfoResponseMapperTest {
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
                     ),
-                    optimalTransitions = emptyList()
+                    optimalTransitions = emptyList(),
+                    isWithAlerts = false
                 )
             )
         )
@@ -87,7 +90,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         val expectedResult = SongInfoBySearchTextResponse(
             count = 1,
@@ -101,7 +105,8 @@ class SongInfoResponseMapperTest {
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
                     ),
-                    optimalTransitions = emptyList()
+                    optimalTransitions = emptyList(),
+                    isWithAlerts = false
                 )
             )
         )
@@ -122,7 +127,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         input.apply {
             songLines.addAll(
@@ -217,7 +223,8 @@ class SongInfoResponseMapperTest {
                             transcription = emptyList(),
                         )
                     ),
-                    optimalTransitions = emptyList()
+                    optimalTransitions = emptyList(),
+                    isWithAlerts = false
                 )
             )
         )
@@ -238,7 +245,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         input.apply {
             songLines.addAll(
@@ -333,7 +341,8 @@ class SongInfoResponseMapperTest {
                             translation = emptyList(),
                             transcription = emptyList(),
                         )
-                    )
+                    ),
+                    isWithAlerts = false
                 )
             )
         )
@@ -354,7 +363,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         input.apply {
             songLines.addAll(
@@ -424,7 +434,8 @@ class SongInfoResponseMapperTest {
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
                     ),
-                    optimalTransitions = emptyList()
+                    optimalTransitions = emptyList(),
+                    isWithAlerts = false
                 )
             )
         )
@@ -445,7 +456,8 @@ class SongInfoResponseMapperTest {
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
-            isVisible = true
+            isVisible = true,
+            isWithAlerts = false
         )
         input.apply {
             songLines.addAll(
@@ -532,7 +544,8 @@ class SongInfoResponseMapperTest {
                             translation = emptyList(),
                             transcription = emptyList(),
                         )
-                    )
+                    ),
+                    isWithAlerts = false
                 )
             )
         )
