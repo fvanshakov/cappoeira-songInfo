@@ -21,7 +21,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         val expectedResult = SongInfoByIdResponse(
             id = "some id",
@@ -33,7 +33,7 @@ class SongInfoResponseMapperTest {
                 tagsWithValues = emptyMap()
             ),
             optimalTransitions = emptyList(),
-            isWithAlert = false
+            warning = null
         )
 
         val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input)
@@ -53,7 +53,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
 
         )
         val expectedResult = SongInfoAllSongsResponse(
@@ -69,7 +69,7 @@ class SongInfoResponseMapperTest {
                         tagsWithValues = emptyMap()
                     ),
                     optimalTransitions = emptyList(),
-                    isWithAlerts = false
+                    warning = null
                 )
             )
         )
@@ -91,7 +91,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         val expectedResult = SongInfoBySearchTextResponse(
             count = 1,
@@ -106,7 +106,7 @@ class SongInfoResponseMapperTest {
                         tagsWithValues = emptyMap()
                     ),
                     optimalTransitions = emptyList(),
-                    isWithAlerts = false
+                    warning = null
                 )
             )
         )
@@ -128,7 +128,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         input.apply {
             songLines.addAll(
@@ -224,7 +224,7 @@ class SongInfoResponseMapperTest {
                         )
                     ),
                     optimalTransitions = emptyList(),
-                    isWithAlerts = false
+                    warning = null
                 )
             )
         )
@@ -246,7 +246,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         input.apply {
             songLines.addAll(
@@ -342,7 +342,7 @@ class SongInfoResponseMapperTest {
                             transcription = emptyList(),
                         )
                     ),
-                    isWithAlerts = false
+                    warning = null
                 )
             )
         )
@@ -364,7 +364,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         input.apply {
             songLines.addAll(
@@ -435,7 +435,7 @@ class SongInfoResponseMapperTest {
                         tagsWithValues = emptyMap()
                     ),
                     optimalTransitions = emptyList(),
-                    isWithAlerts = false
+                    warning = null
                 )
             )
         )
@@ -457,7 +457,7 @@ class SongInfoResponseMapperTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         input.apply {
             songLines.addAll(
@@ -545,7 +545,7 @@ class SongInfoResponseMapperTest {
                             transcription = emptyList(),
                         )
                     ),
-                    isWithAlerts = false
+                    warning = null
                 )
             )
         )

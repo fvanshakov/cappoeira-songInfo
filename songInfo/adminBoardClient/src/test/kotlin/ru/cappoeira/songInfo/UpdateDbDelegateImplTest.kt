@@ -29,7 +29,7 @@ class UpdateDbDelegateImplTest {
         ),
         optimalTransitions = emptyList(),
         isVisible = true,
-        isWithAlerts = false
+        warning = null
     )
     private val ladainhaSong = AdminBoardSongInfoDto(
         songName = "ladainha song",
@@ -41,7 +41,7 @@ class UpdateDbDelegateImplTest {
         ),
         optimalTransitions = emptyList(),
         isVisible = true,
-        isWithAlerts = false
+        warning = null
     )
 
     @BeforeEach

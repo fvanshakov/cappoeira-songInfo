@@ -1,7 +1,6 @@
 package ru.cappoeira.songInfo.test
 
 import jakarta.persistence.EntityManager
-import org.hibernate.search.mapper.orm.Search
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
@@ -12,10 +11,7 @@ import org.springframework.test.context.ContextConfiguration
 import ru.cappoeira.songInfo.di.TestJpaConfig
 import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
-import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity
-import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
-import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepoImpl
 
 /**
  * Эти тесты нужно запускать с включенным докером
@@ -48,7 +44,7 @@ class SongInfoDBTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         val savedSong = repo.save(songInfoEntity)
 
@@ -79,7 +75,7 @@ class SongInfoDBTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
 
         repo.save(songInfoEntity)
@@ -101,7 +97,7 @@ class SongInfoDBTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
         val otherInfoEntity = SongInfoEntity(
             id = encodeToBase64("other song"),
@@ -113,7 +109,7 @@ class SongInfoDBTest {
             tagValues = mutableListOf(),
             optimalTransitions = emptyList(),
             isVisible = true,
-            isWithAlerts = false
+            warning = null
         )
 
         repo.save(songInfoEntity)

@@ -19,7 +19,7 @@ class SongInfoEntityMapperTest {
         songLines = emptyList(),
         optimalTransitions = emptyList(),
         isVisible = true,
-        isWithAlerts = false
+        warning = null
     )
     private val expectedResult = SongInfoEntity().apply {
         id = encodeToBase64("Первая песня")
