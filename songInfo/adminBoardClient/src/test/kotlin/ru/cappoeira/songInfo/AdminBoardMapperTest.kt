@@ -71,7 +71,7 @@ class AdminBoardMapperTest {
             ),
             optimalTransitions = emptyList(),
             isVisible = false,
-            isWithAlerts = false
+            warning = null
         )
 
         assertEquals(expected = expectedResult, actual =  result)
@@ -135,7 +135,7 @@ class AdminBoardMapperTest {
             ),
             optimalTransitions = emptyList(),
             isVisible = false,
-            isWithAlerts = false
+            warning = null
         )
 
         assertEquals(expected = expectedResult, actual =  result)

@@ -48,14 +48,14 @@ data class SongInfoEntity(
     var isVisible: Boolean,
 
     @GenericField
-    @Column(nullable = false, name = IS_WITH_ALERTS)
-    var isWithAlerts: Boolean,
+    @Column(nullable = true, name = WARNING)
+    var warning: String?,
 
     @IndexedEmbedded(includePaths = [TAG_VALUE], includeDepth = 1, structure = ObjectStructure.NESTED)
     @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
     var tagValues: MutableList<SongTagValueEntity>
 ) {
-    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf(), true, false, mutableListOf())
+    constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf(), true, null, mutableListOf())
 
     override fun toString(): String {
         return id
@@ -71,6 +71,6 @@ data class SongInfoEntity(
         const val VIDEO_URL = "videoUrl"
         const val SONG_TYPE = "songType"
         const val IS_VISIBLE = "isVisible"
-        const val IS_WITH_ALERTS = "isWithAlerts"
+        const val WARNING = "warning"
     }
 }
