@@ -122,12 +122,15 @@ object SongLineMapper {
             if (start > lastIndex) {
                 val beforeText = line.substring(lastIndex, start)
                 if (beforeText.isNotBlank()) {
-                    chunks.add(
-                        SongTranscriptionsChunkEntity().apply {
-                            transcription = beforeText
-                            definition = null
-                        }
-                    )
+                    val results = beforeText.split("(?<= )".toRegex())
+                    results.forEach {
+                        chunks.add(
+                            SongTranscriptionsChunkEntity().apply {
+                                transcription = it
+                                definition = null
+                            }
+                        )
+                    }
                 }
             }
 
@@ -147,12 +150,15 @@ object SongLineMapper {
         if (lastIndex < line.length) {
             val remaining = line.substring(lastIndex)
             if (remaining.isNotBlank()) {
-                chunks.add(
-                    SongTranscriptionsChunkEntity().apply {
-                        transcription = remaining
-                        definition = null
-                    }
-                )
+                val results = remaining.split("(?<= )".toRegex())
+                results.forEach {
+                    chunks.add(
+                        SongTranscriptionsChunkEntity().apply {
+                            transcription = it
+                            definition = null
+                        }
+                    )
+                }
             }
         }
 
