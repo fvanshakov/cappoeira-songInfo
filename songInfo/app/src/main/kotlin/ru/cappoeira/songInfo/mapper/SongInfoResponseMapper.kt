@@ -25,7 +25,7 @@ object SongInfoResponseMapper {
             sortedTags.apply {
                 remove("Для начинающих")
                 remove("Особая ситуация")
-                remove("Золотой фонд")
+                remove("Золотой Фонд")
                 add(0, "Для начинающих")
                 add(1, "Особая ситуация")
                 add(2, "Золотой Фонд")
