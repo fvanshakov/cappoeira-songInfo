@@ -45,18 +45,22 @@ open class UpdateDbDelegateImpl(
             SongType.LADAINHA -> "LADAINHA"
             SongType.CORRIDO -> "CORRIDO"
         }
-        songInfoService.saveSongs(
-            songsInfosWithType.map {
-                val tags = SongTagEntityMapper.mapDtoToEntity(it.tags, isTagPluralMap, type)
+        try {
+            songInfoService.saveSongs(
+                songsInfosWithType.map {
+                    val tags = SongTagEntityMapper.mapDtoToEntity(it.tags, isTagPluralMap, type)
 
-                songInfoService.saveTags(tags.map { it.value })
+                    songInfoService.saveTags(tags.map { it.value })
 
-                SongInfoEntityMapper.mapDtoToEntity(
-                    dto = it,
-                    tags = tags,
-                    definitions = definitions
-                )
-            }
-        )
+                    SongInfoEntityMapper.mapDtoToEntity(
+                        dto = it,
+                        tags = tags,
+                        definitions = definitions
+                    )
+                }
+            )
+        } catch (e: Exception) {
+            logger.info(e.toString())
+        }
     }
 }
