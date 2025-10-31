@@ -20,14 +20,14 @@ data class SongInfoEntity(
     @Id
     var id: String,
 
-    @Column(nullable = false, name = NAME)
+    @Column(nullable = false, name = NAME, length = 1000)
     var name: String,
 
     @FullTextField(analyzer = NGRAM_NAME)
-    @Column(nullable = true, name = NORMALIZED_NAME)
+    @Column(nullable = true, name = NORMALIZED_NAME, length = 1000)
     var normalizedName: String,
 
-    @Column(nullable = true, name = VIDEO_URL)
+    @Column(nullable = true, name = VIDEO_URL, length = 1000)
     var videoUrl: String?,
 
     @FullTextField
@@ -48,7 +48,7 @@ data class SongInfoEntity(
     var isVisible: Boolean,
 
     @GenericField
-    @Column(nullable = true, name = WARNING)
+    @Column(nullable = true, name = WARNING, length = 1000)
     var warning: String?,
 
     @IndexedEmbedded(includePaths = [TAG_VALUE], includeDepth = 1, structure = ObjectStructure.NESTED)
