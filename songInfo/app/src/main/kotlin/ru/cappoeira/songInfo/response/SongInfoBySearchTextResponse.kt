@@ -15,7 +15,8 @@ data class SongInfo(
     val songLines: List<SongLine>,
     val songTags: SongTags,
     val optimalTransitions: List<Transition>,
-    val warning: String?
+    val warning: String?,
+    val isFavourite: Boolean?
 ): Serializable
 
 data class Transition(

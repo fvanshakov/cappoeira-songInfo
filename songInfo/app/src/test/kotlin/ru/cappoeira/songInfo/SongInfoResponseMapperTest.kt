@@ -69,12 +69,13 @@ class SongInfoResponseMapperTest {
                         tagsWithValues = emptyMap()
                     ),
                     optimalTransitions = emptyList(),
-                    warning = null
+                    warning = null,
+                    isFavourite = null
                 )
             )
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoAllSongsResponse(listOf(input))
+        val result = SongInfoResponseMapper.mapToSongInfoAllSongsResponse(listOf(input), null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -106,12 +107,13 @@ class SongInfoResponseMapperTest {
                         tagsWithValues = emptyMap()
                     ),
                     optimalTransitions = emptyList(),
-                    warning = null
+                    warning = null,
+                    isFavourite = null
                 )
             )
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "dGV4dA==")
+        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "dGV4dA==", null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -224,12 +226,13 @@ class SongInfoResponseMapperTest {
                         )
                     ),
                     optimalTransitions = emptyList(),
-                    warning = null
+                    warning = null,
+                    isFavourite = null
                 )
             )
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=")
+        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=", null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -342,12 +345,13 @@ class SongInfoResponseMapperTest {
                             transcription = emptyList(),
                         )
                     ),
-                    warning = null
+                    warning = null,
+                    isFavourite = null
                 )
             )
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=")
+        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=", null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -435,12 +439,13 @@ class SongInfoResponseMapperTest {
                         tagsWithValues = emptyMap()
                     ),
                     optimalTransitions = emptyList(),
-                    warning = null
+                    warning = null,
+                    isFavourite = null
                 )
             )
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=")
+        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=", null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }
@@ -545,12 +550,13 @@ class SongInfoResponseMapperTest {
                             transcription = emptyList(),
                         )
                     ),
-                    warning = null
+                    warning = null,
+                    isFavourite = null
                 )
             )
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=")
+        val result = SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(listOf(input), "cmlnaHQ=", null)
 
         assertEquals(expected = expectedResult, actual =  result)
     }

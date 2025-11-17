@@ -37,7 +37,10 @@ object SongInfoResponseMapper {
         )
     }
 
-    fun mapToSongInfoAllSongsResponse(entities: List<SongInfoEntity?>): SongInfoAllSongsResponse {
+    fun mapToSongInfoAllSongsResponse(
+        entities: List<SongInfoEntity?>,
+        favouriteSongsIds: Set<String>?
+    ): SongInfoAllSongsResponse {
         return SongInfoAllSongsResponse(
             count = entities.size,
             songs = entities.filterNotNull().map {
@@ -54,7 +57,8 @@ object SongInfoResponseMapper {
                             songId = encodeToBase64(songName)
                         )
                     },
-                    warning = it.warning
+                    warning = it.warning,
+                    isFavourite = favouriteSongsIds?.contains(it.id)
                 )
             }
         )
@@ -114,7 +118,8 @@ object SongInfoResponseMapper {
 
     fun mapToSongInfoBySearchTextResponse(
         entities: List<SongInfoEntity>,
-        searchText: String
+        searchText: String,
+        favouriteSongsIds: Set<String>?
     ): SongInfoBySearchTextResponse {
 
         val decodedSearchText = decodeFromBase64(searchText)
@@ -150,7 +155,8 @@ object SongInfoResponseMapper {
                             songId = encodeToBase64(songName)
                         )
                     },
-                    warning = entity.warning
+                    warning = entity.warning,
+                    isFavourite = favouriteSongsIds?.contains(entity.id)
                 )
             }
         )
