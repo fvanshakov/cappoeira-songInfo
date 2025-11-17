@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TEXT
+import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TRANSLATION
 import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 
 @Component
@@ -36,6 +37,16 @@ open class SongInfoFullTextRepoImpl(
                                     .nest(
                                         f.phrase()
                                             .field("songLines.$TEXT")
+                                            .matching(searchText)
+                                            .analyzer(NGRAM_NAME)
+                                    )
+                            )
+                            b1.should(
+                                f.nested()
+                                    .objectField("songLines")
+                                    .nest(
+                                        f.phrase()
+                                            .field("songLines.$TRANSLATION")
                                             .matching(searchText)
                                             .analyzer(NGRAM_NAME)
                                     )
