@@ -1,5 +1,5 @@
 # Используем официальный образ с OpenJDK 17
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 
 # Создаем рабочую директорию в контейнере
 WORKDIR /app

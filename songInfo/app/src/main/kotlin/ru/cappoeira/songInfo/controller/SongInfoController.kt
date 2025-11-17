@@ -68,6 +68,37 @@ class SongInfoController(
         }
     }
 
+    @Operation(description = "Возвращает песни, подходящие под поисковый запрос", summary = "Песни подходящие под запрос")
+    @GetMapping("/searchText")
+    fun getSongsBySearchText2(
+        @Parameter(description = "Текст поискового запроса")
+        @RequestParam
+        searchText: String,
+        @Parameter(description = "Тип песни")
+        @RequestParam
+        songType: String,
+        @Parameter(description = "Тэги для песни")
+        @RequestParam
+        tags: String?,
+        @Parameter(description = "Страница, используемая при пагинации (размер страницы 10 песен)")
+        @RequestParam
+        page: Int,
+        @Parameter(description = "Id пользователя")
+        @RequestParam(required = false)
+        userId: String?
+    ): SongInfoBySearchTextResponse {
+        return songInfoService.getSongsBySearchText(
+            searchText = decodeFromBase64(searchText),
+            songType = songType,
+            tags = tags?.let { jacksonObjectMapper().readValue(decodeFromBase64(it), List::class.java) as List<String> } ?: emptyList(),
+            page = page,
+            size = SIZE,
+        ).let {
+            val favouriteSongs = userId?.let(favoriteSongService::getFavoriteSongIds)
+            SongInfoResponseMapper.mapToSongInfoBySearchTextResponse(it, searchText, favouriteSongs)
+        }
+    }
+
     @Operation(description = "Возвращает информацию по всем песням", summary = "Получение всех песен")
     @GetMapping("/allSongs")
     fun getAllSongsInfos(
