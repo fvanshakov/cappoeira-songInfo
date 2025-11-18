@@ -1,5 +1,8 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.songInfoDB.entity.FavoriteSongEntity
 import ru.cappoeira.songInfo.songInfoDB.repository.FavoriteSongRepo
@@ -43,5 +46,22 @@ class FavoriteSongService(
 
     fun isFavorite(userId: String, songId: String): Boolean {
         return repo.existsByUserIdAndSongId(userId, songId)
+    }
+
+    fun getFavoriteSongs(
+        userId: String,
+        page: Int,
+        size: Int,
+        sortType: String
+    ): Page<FavoriteSongEntity> {
+
+        val sort = when (sortType) {
+            "oldest" -> Sort.by("addedAt").ascending()
+            else -> Sort.by("addedAt").descending()
+        }
+
+        val pageable = PageRequest.of(page, size, sort)
+
+        return repo.findAllByUserId(userId, pageable)
     }
 }
