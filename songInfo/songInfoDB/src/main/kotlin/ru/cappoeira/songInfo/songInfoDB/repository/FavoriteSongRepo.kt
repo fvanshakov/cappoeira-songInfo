@@ -1,5 +1,7 @@
 package ru.cappoeira.songInfo.songInfoDB.repository
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import ru.cappoeira.songInfo.songInfoDB.entity.FavoriteSongEntity
 
@@ -10,4 +12,6 @@ interface FavoriteSongRepo : JpaRepository<FavoriteSongEntity, String> {
     fun findAllByUserId(userId: String): List<FavoriteSongEntity>
 
     fun deleteByUserIdAndSongId(userId: String, songId: String)
+
+    fun findAllByUserId(userId: String, pageable: Pageable): Page<FavoriteSongEntity>
 }

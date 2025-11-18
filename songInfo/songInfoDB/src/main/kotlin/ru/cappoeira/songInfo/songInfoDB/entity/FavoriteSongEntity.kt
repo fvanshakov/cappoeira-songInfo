@@ -12,7 +12,10 @@ data class FavoriteSongEntity(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "song_id", nullable = false)
-    var song: SongInfoEntity
+    var song: SongInfoEntity,
+
+    @Column(nullable = false)
+    var addedAt: Long = System.currentTimeMillis()
 ) {
     constructor(): this(emptyString(), SongInfoEntity())
 }
