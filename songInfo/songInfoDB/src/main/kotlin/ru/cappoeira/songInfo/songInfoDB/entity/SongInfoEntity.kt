@@ -40,7 +40,7 @@ data class SongInfoEntity(
 
     @ElementCollection
     @CollectionTable(name = "optimal_transitions", joinColumns = [JoinColumn(name = "id")])
-    @Column(name = "transition")
+    @Column(name = "transition", length = 1000)
     var optimalTransitions: List<String>,
 
     @GenericField
