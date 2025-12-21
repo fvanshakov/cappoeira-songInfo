@@ -4,14 +4,26 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import ru.cappoeira.songInfo.songInfoDB.entity.FavoriteSongEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.FavoriteSongId
 
-interface FavoriteSongRepo : JpaRepository<FavoriteSongEntity, String> {
+interface FavoriteSongRepo : JpaRepository<FavoriteSongEntity, FavoriteSongId> {
 
-    fun existsByUserIdAndSongId(userId: String, songId: String): Boolean
+    fun existsByIdUserIdAndIdSongId(
+        userId: String,
+        songId: String
+    ): Boolean
 
-    fun findAllByUserId(userId: String): List<FavoriteSongEntity>
+    fun findAllByIdUserId(
+        userId: String
+    ): List<FavoriteSongEntity>
 
-    fun deleteByUserIdAndSongId(userId: String, songId: String)
+    fun deleteByIdUserIdAndIdSongId(
+        userId: String,
+        songId: String
+    )
 
-    fun findAllByUserId(userId: String, pageable: Pageable): Page<FavoriteSongEntity>
+    fun findAllByIdUserId(
+        userId: String,
+        pageable: Pageable
+    ): Page<FavoriteSongEntity>
 }

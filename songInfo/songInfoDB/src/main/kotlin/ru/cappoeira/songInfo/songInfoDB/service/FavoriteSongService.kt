@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.cappoeira.songInfo.songInfoDB.entity.FavoriteSongEntity
+import ru.cappoeira.songInfo.songInfoDB.entity.FavoriteSongId
 import ru.cappoeira.songInfo.songInfoDB.repository.FavoriteSongRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 
@@ -17,12 +18,15 @@ class FavoriteSongService(
     fun addToFavorite(userId: String, songId: String): Boolean {
         val song = songRepo.findById(songId).orElse(null) ?: return false
 
-        val exists = repo.existsByUserIdAndSongId(userId, songId)
+        val exists = repo.existsByIdUserIdAndIdSongId(userId, songId)
         if (exists) return true
 
         repo.save(
             FavoriteSongEntity(
-                userId = userId,
+                id = FavoriteSongId(
+                    userId = userId,
+                    songId = song.id
+                ),
                 song = song
             )
         )
@@ -31,21 +35,21 @@ class FavoriteSongService(
     }
 
     fun getFavoriteSongIds(userId: String): Set<String> {
-        return repo.findAllByUserId(userId)
+        return repo.findAllByIdUserId(userId)
             .map { it.song.id }
             .toSet()
     }
 
     fun removeFromFavorite(userId: String, songId: String): Boolean {
-        val exists = repo.existsByUserIdAndSongId(userId, songId)
+        val exists = repo.existsByIdUserIdAndIdSongId(userId, songId)
         if (!exists) return false
 
-        repo.deleteByUserIdAndSongId(userId, songId)
+        repo.deleteByIdUserIdAndIdSongId(userId, songId)
         return true
     }
 
     fun isFavorite(userId: String, songId: String): Boolean {
-        return repo.existsByUserIdAndSongId(userId, songId)
+        return repo.existsByIdUserIdAndIdSongId(userId, songId)
     }
 
     fun getFavoriteSongs(
@@ -62,6 +66,6 @@ class FavoriteSongService(
 
         val pageable = PageRequest.of(page, size, sort)
 
-        return repo.findAllByUserId(userId, pageable)
+        return repo.findAllByIdUserId(userId, pageable)
     }
 }
