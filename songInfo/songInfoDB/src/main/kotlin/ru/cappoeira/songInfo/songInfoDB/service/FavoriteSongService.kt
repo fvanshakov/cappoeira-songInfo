@@ -1,5 +1,6 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
+import jakarta.transaction.Transactional
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -10,12 +11,13 @@ import ru.cappoeira.songInfo.songInfoDB.repository.FavoriteSongRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 
 @Service
-class FavoriteSongService(
+open class FavoriteSongService(
     private val repo: FavoriteSongRepo,
     private val songRepo: SongInfoRepo
 ) {
 
-    fun addToFavorite(userId: String, songId: String): Boolean {
+    @Transactional
+    open fun addToFavorite(userId: String, songId: String): Boolean {
         val song = songRepo.findById(songId).orElse(null) ?: return false
 
         val exists = repo.existsByIdUserIdAndIdSongId(userId, songId)
@@ -34,13 +36,14 @@ class FavoriteSongService(
         return true
     }
 
-    fun getFavoriteSongIds(userId: String): Set<String> {
+    open fun getFavoriteSongIds(userId: String): Set<String> {
         return repo.findAllByIdUserId(userId)
             .map { it.song.id }
             .toSet()
     }
 
-    fun removeFromFavorite(userId: String, songId: String): Boolean {
+    @Transactional
+    open fun removeFromFavorite(userId: String, songId: String): Boolean {
         val exists = repo.existsByIdUserIdAndIdSongId(userId, songId)
         if (!exists) return false
 
@@ -48,11 +51,11 @@ class FavoriteSongService(
         return true
     }
 
-    fun isFavorite(userId: String, songId: String): Boolean {
+    open fun isFavorite(userId: String, songId: String): Boolean {
         return repo.existsByIdUserIdAndIdSongId(userId, songId)
     }
 
-    fun getFavoriteSongs(
+    open fun getFavoriteSongs(
         userId: String,
         page: Int,
         size: Int,
