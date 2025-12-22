@@ -1,5 +1,6 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
+import jakarta.transaction.Transactional
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -10,12 +11,13 @@ import ru.cappoeira.songInfo.songInfoDB.repository.FavoriteSongRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.SongInfoRepo
 
 @Service
-class FavoriteSongService(
+open class FavoriteSongService(
     private val repo: FavoriteSongRepo,
     private val songRepo: SongInfoRepo
 ) {
 
-    fun addToFavorite(userId: String, songId: String): Boolean {
+    @Transactional
+    open fun addToFavorite(userId: String, songId: String): Boolean {
         val song = songRepo.findById(songId).orElse(null) ?: return false
 
         val exists = repo.existsByIdUserIdAndIdSongId(userId, songId)
@@ -40,7 +42,8 @@ class FavoriteSongService(
             .toSet()
     }
 
-    fun removeFromFavorite(userId: String, songId: String): Boolean {
+    @Transactional
+    open fun removeFromFavorite(userId: String, songId: String): Boolean {
         val exists = repo.existsByIdUserIdAndIdSongId(userId, songId)
         if (!exists) return false
 
