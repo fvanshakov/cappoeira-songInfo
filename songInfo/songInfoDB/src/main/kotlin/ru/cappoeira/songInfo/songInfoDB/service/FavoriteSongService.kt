@@ -36,7 +36,7 @@ open class FavoriteSongService(
         return true
     }
 
-    fun getFavoriteSongIds(userId: String): Set<String> {
+    open fun getFavoriteSongIds(userId: String): Set<String> {
         return repo.findAllByIdUserId(userId)
             .map { it.song.id }
             .toSet()
@@ -51,11 +51,11 @@ open class FavoriteSongService(
         return true
     }
 
-    fun isFavorite(userId: String, songId: String): Boolean {
+    open fun isFavorite(userId: String, songId: String): Boolean {
         return repo.existsByIdUserIdAndIdSongId(userId, songId)
     }
 
-    fun getFavoriteSongs(
+    open fun getFavoriteSongs(
         userId: String,
         page: Int,
         size: Int,
