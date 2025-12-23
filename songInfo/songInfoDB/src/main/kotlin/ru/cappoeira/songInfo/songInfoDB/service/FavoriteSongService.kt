@@ -63,6 +63,8 @@ open class FavoriteSongService(
     ): Page<FavoriteSongEntity> {
 
         val sort = when (sortType) {
+            "alphabetic" ->
+                Sort.by(Sort.Order.asc("song.normalizedName"))
             "oldest" -> Sort.by("addedAt").ascending()
             else -> Sort.by("addedAt").descending()
         }
