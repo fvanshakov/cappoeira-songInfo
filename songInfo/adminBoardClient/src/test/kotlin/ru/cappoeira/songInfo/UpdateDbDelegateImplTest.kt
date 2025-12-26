@@ -27,7 +27,7 @@ class UpdateDbDelegateImplTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        optimalTransitions = emptyList(),
+        optimalTransitions = mutableListOf(),
         isVisible = true,
         warning = null
     )
@@ -39,7 +39,7 @@ class UpdateDbDelegateImplTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        optimalTransitions = emptyList(),
+        optimalTransitions = mutableListOf(),
         isVisible = true,
         warning = null
     )

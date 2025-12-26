@@ -31,7 +31,7 @@ class SongInfoService(
     }
 
     fun deleteAllSongs() {
-        repo.deleteAll()
+        repo.deleteAll(repo.findAll())
     }
 
     fun getSongById(id: String): SongInfoEntity? {

@@ -44,7 +44,7 @@ data class SongInfoEntity(
     @CollectionTable(name = "optimal_transitions", joinColumns = [JoinColumn(name = "id")])
     @Column(name = "transition", length = 1000)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    var optimalTransitions: List<String>,
+    var optimalTransitions: MutableList<String>,
 
     @GenericField
     @Column(nullable = false, name = IS_VISIBLE)

@@ -17,7 +17,7 @@ class SongInfoEntityMapperTest {
             tagsWithKeys = emptyMap()
         ),
         songLines = emptyList(),
-        optimalTransitions = emptyList(),
+        optimalTransitions = mutableListOf(),
         isVisible = true,
         warning = null
     )

@@ -10,7 +10,7 @@ data class AdminBoardSongInfoDto(
     val songType: SongType,
     val songLines: List<AdminBoardSongLineDto>,
     val tags: AdminBoardTagsDao,
-    val optimalTransitions: List<String>,
+    val optimalTransitions: MutableList<String>,
     val isVisible: Boolean,
     val warning: String?
 ) {
