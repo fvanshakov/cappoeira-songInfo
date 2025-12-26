@@ -1,6 +1,8 @@
 package ru.cappoeira.songInfo.songInfoDB.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import org.hibernate.search.engine.backend.types.ObjectStructure
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField
@@ -41,6 +43,7 @@ data class SongInfoEntity(
     @ElementCollection
     @CollectionTable(name = "optimal_transitions", joinColumns = [JoinColumn(name = "id")])
     @Column(name = "transition", length = 1000)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     var optimalTransitions: List<String>,
 
     @GenericField
