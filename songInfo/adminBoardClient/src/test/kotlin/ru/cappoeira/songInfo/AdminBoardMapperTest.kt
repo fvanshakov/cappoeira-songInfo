@@ -69,7 +69,7 @@ class AdminBoardMapperTest {
                     transcription = "Ai meu joelho  ",
                 )
             ),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = false,
             warning = null
         )
@@ -133,7 +133,7 @@ class AdminBoardMapperTest {
                     transcription = "Ai meu joelho  ",
                 )
             ),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = false,
             warning = null
         )

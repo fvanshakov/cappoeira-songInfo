@@ -19,7 +19,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -51,7 +51,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
 
@@ -90,7 +90,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -128,7 +128,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -247,7 +247,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -366,7 +366,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -460,7 +460,7 @@ class SongInfoResponseMapperTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -531,7 +531,7 @@ class SongInfoResponseMapperTest {
                     songTags = SongTags(
                         tagsWithValues = emptyMap()
                     ),
-                    optimalTransitions = emptyList(),
+                    optimalTransitions = mutableListOf(),
                     songLines = listOf(
                         SongLine(
                             id = "song name 4",

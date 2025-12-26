@@ -42,7 +42,7 @@ class SongInfoDBTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -73,7 +73,7 @@ class SongInfoDBTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -95,7 +95,7 @@ class SongInfoDBTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )
@@ -107,7 +107,7 @@ class SongInfoDBTest {
             songType = "LADAINHA",
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = emptyList(),
+            optimalTransitions = mutableListOf(),
             isVisible = true,
             warning = null
         )

@@ -39,7 +39,7 @@ class AdminBoardClientTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        optimalTransitions = emptyList(),
+        optimalTransitions = mutableListOf(),
         isVisible = true,
         warning = null
     )
@@ -51,7 +51,7 @@ class AdminBoardClientTest {
         tags = AdminBoardTagsDao(
             tagsWithKeys = emptyMap()
         ),
-        optimalTransitions = emptyList(),
+        optimalTransitions = mutableListOf(),
         isVisible = true,
         warning = null
 

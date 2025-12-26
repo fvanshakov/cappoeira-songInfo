@@ -2,7 +2,7 @@ spring:
   application:
     name: songInfo
   datasource:
-    url: jdbc:postgresql://songInfoPostgres:5432/${SONG_INFO_DB_NAME}
+    url: jdbc:postgresql://localhost:5432/${SONG_INFO_DB_NAME}
     username: ${SONG_INFO_DB_USER}
     password: ${SONG_INFO_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver

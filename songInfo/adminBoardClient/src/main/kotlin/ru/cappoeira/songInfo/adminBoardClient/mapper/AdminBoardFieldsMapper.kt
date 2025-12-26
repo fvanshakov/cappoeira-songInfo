@@ -25,8 +25,8 @@ object AdminBoardFieldsMapper {
         val rawTranscription = fields[TRANSCRIPTION] as? String
         val optimalTransitionsRaw = fields[OPTIMAL_FOLLOWINGS]
         val optimalTransitions = optimalTransitionsRaw?.let {
-            (it as? String)?.split('|')?.toList()
-        } ?: emptyList()
+            (it as? String)?.split('|')?.toMutableList()
+        } ?: mutableListOf()
         val transcriptionLines = mapLines(rawTranscription)
         val songLines = textLines.mapIndexed { index, textLine ->
             val isChoirPart = textLine.contains('*')
