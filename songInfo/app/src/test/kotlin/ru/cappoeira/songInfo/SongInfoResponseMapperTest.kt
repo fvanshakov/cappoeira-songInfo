@@ -33,10 +33,11 @@ class SongInfoResponseMapperTest {
                 tagsWithValues = emptyMap()
             ),
             optimalTransitions = emptyList(),
-            warning = null
+            warning = null,
+            isFavourite = false
         )
 
-        val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input)
+        val result = SongInfoResponseMapper.mapToSongInfoByIdResponse(input, emptySet())
 
         assertEquals(expected = expectedResult, actual =  result)
     }

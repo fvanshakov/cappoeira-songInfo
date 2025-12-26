@@ -10,7 +10,8 @@ data class SongInfoByIdResponse(
     val songLines: List<SongLine>,
     val songTags: SongTags,
     val optimalTransitions: List<Transition>,
-    val warning: String?
+    val warning: String?,
+    val isFavourite: Boolean?
 ): Serializable
 
 data class SongLine(

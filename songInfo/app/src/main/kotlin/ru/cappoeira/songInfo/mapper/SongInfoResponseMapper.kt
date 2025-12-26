@@ -64,7 +64,10 @@ object SongInfoResponseMapper {
         )
     }
 
-    fun mapToSongInfoByIdResponse(entity: SongInfoEntity): SongInfoByIdResponse {
+    fun mapToSongInfoByIdResponse(
+        entity: SongInfoEntity,
+        favouriteSongsIds: Set<String>?
+    ): SongInfoByIdResponse {
         return SongInfoByIdResponse(
             id = entity.id,
             songName = entity.name,
@@ -78,7 +81,8 @@ object SongInfoResponseMapper {
                     songId = encodeToBase64(songName)
                 )
             },
-            warning = entity.warning
+            warning = entity.warning,
+            isFavourite = favouriteSongsIds?.contains(entity.id)
         )
     }
 

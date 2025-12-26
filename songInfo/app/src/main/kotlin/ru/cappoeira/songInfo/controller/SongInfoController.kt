@@ -33,7 +33,8 @@ class SongInfoController(
         userId: String?
     ): SongInfoByIdResponse? {
         return songInfoService.getSongById(id)?.let {
-            SongInfoResponseMapper.mapToSongInfoByIdResponse(it)
+            val favouriteSongs = userId?.let(favoriteSongService::getFavoriteSongIds)
+            SongInfoResponseMapper.mapToSongInfoByIdResponse(it, favouriteSongs)
         }
     }
 
