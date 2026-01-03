@@ -12,7 +12,8 @@ data class AdminBoardSongInfoDto(
     val tags: AdminBoardTagsDao,
     val optimalTransitions: MutableList<String>,
     val isVisible: Boolean,
-    val warning: String?
+    val warning: String?,
+    val id: String,
 ) {
 
     enum class SongType { CORRIDO, LADAINHA }

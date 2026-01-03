@@ -23,10 +23,7 @@ object AdminBoardFieldsMapper {
         val rawTranslation = fields[TRANSLATION] as? String?
         val translationLines = mapLines(rawTranslation)
         val rawTranscription = fields[TRANSCRIPTION] as? String
-        val optimalTransitionsRaw = fields[OPTIMAL_FOLLOWINGS]
-        val optimalTransitions = optimalTransitionsRaw?.let {
-            (it as? String)?.split('|')?.toMutableList()
-        } ?: mutableListOf()
+        val optimalTransitions: MutableList<String> = (fields[OPTIMAL_FOLLOWINGS] as? List<String>)?.toMutableList() ?: mutableListOf()
         val transcriptionLines = mapLines(rawTranscription)
         val songLines = textLines.mapIndexed { index, textLine ->
             val isChoirPart = textLine.contains('*')
@@ -62,7 +59,7 @@ object AdminBoardFieldsMapper {
                 isPlural = values.size > 1
             )
         }.toMap()
-        return AdminBoardSongInfoDto(
+        val result = AdminBoardSongInfoDto(
             songName = songName,
             videoUrl = videoUrl,
             songType = AdminBoardSongInfoDto.SongType.CORRIDO,
@@ -72,8 +69,10 @@ object AdminBoardFieldsMapper {
             ),
             optimalTransitions = optimalTransitions,
             isVisible = fields[VISIBILITY] == true,
-            warning = fields[WARNING] as? String
+            warning = fields[WARNING] as? String,
+            id = ""
         )
+        return result
     }
 
     private const val NAME = "Название"
@@ -82,6 +81,7 @@ object AdminBoardFieldsMapper {
     private const val TRANSLATION = "Перевод"
     private const val TRANSCRIPTION = "Транскрипция"
     private const val WARNING = "Предупреждение"
+    private const val ID = "Идентификатор"
     private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
     private const val VISIBILITY = "Видимость в приложении"
     private val TAGS = listOf(

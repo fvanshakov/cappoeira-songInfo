@@ -29,7 +29,8 @@ class UpdateDbDelegateImplTest {
         ),
         optimalTransitions = mutableListOf(),
         isVisible = true,
-        warning = null
+        warning = null,
+        id = "1"
     )
     private val ladainhaSong = AdminBoardSongInfoDto(
         songName = "ladainha song",
@@ -41,7 +42,8 @@ class UpdateDbDelegateImplTest {
         ),
         optimalTransitions = mutableListOf(),
         isVisible = true,
-        warning = null
+        warning = null,
+        id = "2"
     )
 
     @BeforeEach
@@ -64,15 +66,16 @@ class UpdateDbDelegateImplTest {
         val mappedCorridoSong = SongInfoEntityMapper.mapDtoToEntity(
             dto = corridoSong,
             tags = emptyMap(),
-            definitions = emptyMap()
+            definitions = emptyMap(),
+            songIdsToSongNames = emptyMap()
         )
         val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(
             dto = ladainhaSong,
             tags = emptyMap(),
-            definitions = emptyMap()
+            definitions = emptyMap(),
+            songIdsToSongNames = emptyMap()
         )
 
-        verify(exactly = 1) { songInfoService.deleteAllSongs() }
         verify(exactly = 1) { adminBoardClient.retrieveDefinitions() }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.CORRIDO) }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.LADAINHA) }

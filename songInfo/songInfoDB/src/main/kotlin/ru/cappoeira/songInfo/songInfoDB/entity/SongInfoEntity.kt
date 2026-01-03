@@ -14,6 +14,17 @@ import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity.Companion.TRANSLAT
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagValueEntity.Companion.TAG_VALUE
 import ru.cappoeira.songInfo.songInfoDB.nGram.NgramLuceneAnalysisConfigurer.Companion.NGRAM_NAME
 
+@Embeddable
+data class OptimalTransition(
+    @Column(name = "song_id")
+    var songId: String,
+
+    @Column(name = "song_name", length = 1000)
+    var songName: String
+) {
+    constructor(): this(emptyString(), emptyString())
+}
+
 
 @Entity
 @Indexed
@@ -41,10 +52,11 @@ data class SongInfoEntity(
     var songLines: MutableList<SongLineEntity>,
 
     @ElementCollection
-    @CollectionTable(name = "optimal_transitions", joinColumns = [JoinColumn(name = "id")])
-    @Column(name = "transition", length = 1000)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    var optimalTransitions: MutableList<String>,
+    @CollectionTable(
+        name = "optimal_transitions",
+        joinColumns = [JoinColumn(name = "id")]
+    )
+    var optimalTransitions: MutableList<OptimalTransition>,
 
     @GenericField
     @Column(nullable = false, name = IS_VISIBLE)

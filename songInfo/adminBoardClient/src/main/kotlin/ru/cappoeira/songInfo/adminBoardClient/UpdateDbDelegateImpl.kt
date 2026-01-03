@@ -21,7 +21,6 @@ open class UpdateDbDelegateImpl(
 
     override fun update(): Response {
         return safeCall {
-            songInfoService.deleteAllSongs()
             val definitions = adminBoardClient.retrieveDefinitions()
                 .filter { it.clientId != null && it.definition != null }
                 .associate { it.clientId as String to it.definition as String }
@@ -45,6 +44,9 @@ open class UpdateDbDelegateImpl(
             SongType.LADAINHA -> "LADAINHA"
             SongType.CORRIDO -> "CORRIDO"
         }
+        val songIdsToSongNames = songsInfosWithType.map { song ->
+            song.id to song.songName
+        }.toMap()
         try {
             songInfoService.saveSongs(
                 songsInfosWithType.map {
@@ -55,7 +57,8 @@ open class UpdateDbDelegateImpl(
                     SongInfoEntityMapper.mapDtoToEntity(
                         dto = it,
                         tags = tags,
-                        definitions = definitions
+                        definitions = definitions,
+                        songIdsToSongNames = songIdsToSongNames
                     )
                 }
             )
