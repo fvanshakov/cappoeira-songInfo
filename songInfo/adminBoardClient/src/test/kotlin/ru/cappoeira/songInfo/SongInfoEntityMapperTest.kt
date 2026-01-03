@@ -19,10 +19,11 @@ class SongInfoEntityMapperTest {
         songLines = emptyList(),
         optimalTransitions = mutableListOf(),
         isVisible = true,
-        warning = null
+        warning = null,
+        id = "1"
     )
     private val expectedResult = SongInfoEntity().apply {
-        id = encodeToBase64("Первая песня")
+        id = "1"
         name = "Первая песня"
         normalizedName = "Первая песня"
         videoUrl = "some url"
@@ -35,7 +36,8 @@ class SongInfoEntityMapperTest {
         val actualResult = SongInfoEntityMapper.mapDtoToEntity(
             dto = dto,
             tags = emptyMap(),
-            definitions = emptyMap()
+            definitions = emptyMap(),
+            songIdsToSongNames = emptyMap()
         )
 
         assertEquals(expectedResult, actualResult)

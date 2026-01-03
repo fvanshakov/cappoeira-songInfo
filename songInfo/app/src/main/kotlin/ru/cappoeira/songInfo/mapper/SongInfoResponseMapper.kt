@@ -1,7 +1,6 @@
 package ru.cappoeira.songInfo.mapper
 
 import ru.cappoeira.songInfo.decodeFromBase64
-import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.response.*
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongLineEntity
@@ -41,6 +40,7 @@ object SongInfoResponseMapper {
         entities: List<SongInfoEntity?>,
         favouriteSongsIds: Set<String>?
     ): SongInfoAllSongsResponse {
+
         return SongInfoAllSongsResponse(
             count = entities.size,
             songs = entities.filterNotNull().map {
@@ -51,10 +51,10 @@ object SongInfoResponseMapper {
                     songType = it.songType,
                     songLines = it.songLines.map(::mapSongLine),
                     songTags = it.tagValues.let(::mapSongTag),
-                    optimalTransitions = it.optimalTransitions.map { songName ->
+                    optimalTransitions = it.optimalTransitions.map { transition ->
                         Transition(
-                            songName = songName,
-                            songId = encodeToBase64(songName)
+                            songId = transition.songId,
+                            songName = transition.songName
                         )
                     },
                     warning = it.warning,
@@ -75,10 +75,10 @@ object SongInfoResponseMapper {
             songType = entity.songType,
             songLines = entity.songLines.map(::mapSongLine),
             songTags = entity.tagValues.let(::mapSongTag),
-            optimalTransitions = entity.optimalTransitions.map { songName ->
+            optimalTransitions = entity.optimalTransitions.map { transition ->
                 Transition(
-                    songName = songName,
-                    songId = encodeToBase64(songName)
+                    songId = transition.songId,
+                    songName = transition.songName
                 )
             },
             warning = entity.warning,
@@ -153,10 +153,10 @@ object SongInfoResponseMapper {
                     songType = entity.songType,
                     songLines = songLines.map(::mapSongLine),
                     songTags = entity.tagValues.let(::mapSongTag),
-                    optimalTransitions = entity.optimalTransitions.map { songName ->
+                    optimalTransitions = entity.optimalTransitions.map { transition ->
                         Transition(
-                            songName = songName,
-                            songId = encodeToBase64(songName)
+                            songId = transition.songId,
+                            songName = transition.songName
                         )
                     },
                     warning = entity.warning,

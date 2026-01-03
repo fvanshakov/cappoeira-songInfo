@@ -1,8 +1,8 @@
 package ru.cappoeira.songInfo.adminBoardClient.mapper
 
 import ru.cappoeira.songInfo.adminBoardClient.dtos.AdminBoardSongInfoDto
-import ru.cappoeira.songInfo.encodeToBase64
 import ru.cappoeira.songInfo.normalizeString
+import ru.cappoeira.songInfo.songInfoDB.entity.OptimalTransition
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 import ru.cappoeira.songInfo.songInfoDB.entity.SongTagEntity
 
@@ -11,18 +11,27 @@ object SongInfoEntityMapper {
     fun mapDtoToEntity(
         dto: AdminBoardSongInfoDto,
         tags: Map<String, SongTagEntity>,
-        definitions: Map<String, String>
+        definitions: Map<String, String>,
+        songIdsToSongNames: Map<String, String>
     ): SongInfoEntity {
         val normalizedName = normalizeString(dto.songName)
+        val optimalTransitions = dto.optimalTransitions.mapNotNull { id ->
+            songIdsToSongNames[id]?.let { songName ->
+                OptimalTransition(
+                    songId = id,
+                    songName = songName
+                )
+            }
+        }.toMutableList()
         val songInfoEntity = SongInfoEntity(
-            id = encodeToBase64(dto.songName),
+            id = dto.id,
             name = dto.songName,
             videoUrl = dto.videoUrl,
             normalizedName = normalizedName,
             songType = dto.songType.toString(),
             songLines = mutableListOf(),
             tagValues = mutableListOf(),
-            optimalTransitions = dto.optimalTransitions,
+            optimalTransitions = optimalTransitions,
             isVisible = dto.isVisible,
             warning = dto.warning
         )

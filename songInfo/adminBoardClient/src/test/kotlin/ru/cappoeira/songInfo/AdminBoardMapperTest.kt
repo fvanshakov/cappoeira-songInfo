@@ -71,7 +71,8 @@ class AdminBoardMapperTest {
             ),
             optimalTransitions = mutableListOf(),
             isVisible = false,
-            warning = null
+            warning = null,
+            id = ""
         )
 
         assertEquals(expected = expectedResult, actual =  result)
@@ -135,7 +136,8 @@ class AdminBoardMapperTest {
             ),
             optimalTransitions = mutableListOf(),
             isVisible = false,
-            warning = null
+            warning = null,
+            id = ""
         )
 
         assertEquals(expected = expectedResult, actual =  result)
