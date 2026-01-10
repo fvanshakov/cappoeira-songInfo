@@ -138,6 +138,6 @@ class SongInfoController(
     }
 
     companion object {
-        private const val SIZE = 10
+        private const val SIZE = 20
     }
 }
