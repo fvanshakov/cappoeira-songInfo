@@ -11,10 +11,10 @@ data class SongTranscriptionsChunkEntity(
     @Id
     var id: String,
 
-    @Column(nullable = true, name = "transcription", length = 1000)
+    @Column(nullable = true, name = "transcription", length = 10000)
     var transcription: String,
 
-    @Column(nullable = true, name = "definition", length = 1000)
+    @Column(nullable = true, name = "definition", length = 10000)
     var definition: String?,
 
     @ManyToOne

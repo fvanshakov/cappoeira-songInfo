@@ -9,7 +9,7 @@ object AdminBoardFieldsMapper {
 
     private fun mapLines(text: String?): List<String> {
         return text
-            ?.replace("\n\n", "\n")
+            ?.replace("<br>", "\n")
             ?.split("\n")
             ?.filterNot { it.isEmpty() || it.isBlank() }
             ?: emptyList()
@@ -68,9 +68,9 @@ object AdminBoardFieldsMapper {
                 tags
             ),
             optimalTransitions = optimalTransitions,
-            isVisible = fields[VISIBILITY] == true,
+            isVisible = fields[VISIBILITY] == 1,
             warning = fields[WARNING] as? String,
-            id = ""
+            id = fields[NAME] as String
         )
         return result
     }
@@ -81,7 +81,7 @@ object AdminBoardFieldsMapper {
     private const val TRANSLATION = "Перевод"
     private const val TRANSCRIPTION = "Транскрипция"
     private const val WARNING = "Предупреждение"
-    private const val ID = "Идентификатор"
+    private const val ID = "Id"
     private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
     private const val VISIBILITY = "Видимость в приложении"
     private val TAGS = listOf(
