@@ -19,7 +19,7 @@ internal class AdminBoardClientImpl(
     private val logger = LoggerFactory.getLogger(AdminBoardClient::class.java)
 
     override fun retrieveSongTypeInfoFromAdminBoard(songType: SongType): List<AdminBoardSongInfoDto> {
-        var offset: String? = null
+        var offset: Int = 0
         val songInfos = mutableListOf<AdminBoardSongInfoDto>()
 
         val tableId = when(songType) {
@@ -29,7 +29,11 @@ internal class AdminBoardClientImpl(
 
         do {
             val uriBuilder = StringBuilder(AIRTABLE_URL).append(tableId)
-            offset?.let { uriBuilder.append(OFFSET_QUERY).append(offset) }
+            uriBuilder
+                .append(OFFSET_QUERY)
+                .append(offset)
+                .append(LIMIT_QUERY)
+                .append(20)
             val result = client.get()
                 .uri(uriBuilder.toString())
                 .header(AUTHORIZATION_HEADER, configService.token)
@@ -40,18 +44,23 @@ internal class AdminBoardClientImpl(
                 }
                 .block()
             result ?: break
-            offset = result.offset
+            result.mapRecords()
             songInfos.addAll(result.records)
-        } while (offset != null)
+            offset = songInfos.size
+        } while (offset % 20 == 0)
         return songInfos
     }
 
     override fun retrieveDefinitions(): List<AdminBoardDefinitionsDto> {
-        var offset: String? = null
+        var offset = 0
         val definitions = mutableListOf<AdminBoardDefinitionsDto>()
         do {
             val uriBuilder = StringBuilder(AIRTABLE_URL).append(DEFINITIONS)
-            offset?.let { uriBuilder.append(OFFSET_QUERY).append(offset) }
+            uriBuilder
+                .append(OFFSET_QUERY)
+                .append(offset)
+                .append(LIMIT_QUERY)
+                .append(20)
             val result = client.get()
                 .uri(uriBuilder.toString())
                 .header(AUTHORIZATION_HEADER, configService.token)
@@ -62,20 +71,21 @@ internal class AdminBoardClientImpl(
                 }
                 .block()
             result ?: break
-            offset = result.offset
-            definitions.addAll(result.records)
-        } while (offset != null)
+            definitions.addAll(result.list)
+            offset = definitions.size
+        } while (offset % 20 == 0)
         return definitions
     }
 
     companion object {
         const val OFFSET_QUERY = "?offset="
+        const val LIMIT_QUERY = "&limit="
 
-        private const val AUTHORIZATION_HEADER = "Authorization"
+        private const val AUTHORIZATION_HEADER = "xc-token"
 
-        const val CORRIDOS_TABLE_ID: String = "tblFMbr2a0A1l100R"
-        const val LADAINHA_TABLE_ID: String = "tblGrqKosuW7rE9HW"
-        const val DEFINITIONS: String = "tbl0P9JKi3jLt0yNY"
-        const val AIRTABLE_URL = "https://api.airtable.com/v0/appt0ENQQQIbPyOD2/"
+        const val CORRIDOS_TABLE_ID: String = "md4sc6j7tq7le1r"
+        const val LADAINHA_TABLE_ID: String = "mgjo8frspaimktv"
+        const val DEFINITIONS: String = "mnxqwg7kohwwg0s"
+        const val AIRTABLE_URL = "http://cappoeira.ru:8080/api/v1/db/data/v1/p5wgzcu5eawij7x/"
     }
 }

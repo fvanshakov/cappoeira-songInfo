@@ -50,17 +50,17 @@ class SongInfoService(
     ): List<SongInfoEntity> {
         return try {
             if (tags.isEmpty()) {
-                repo
+                val res = repo
                     .findBySongTypeAndIsVisible(songType, PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()))
-                    .content
+                res.content
             } else {
-                repo
+                val res = repo
                     .findBySongTypeAndAllTags(
                         songType = songType,
                         pageable = PageRequest.of(page, size, Sort.by(NORMALIZED_NAME).ascending()),
                         tagValues = tags.toSet(),
                     )
-                    .content
+                res.content
             }
         } catch (e: Exception) {
             emptyList()

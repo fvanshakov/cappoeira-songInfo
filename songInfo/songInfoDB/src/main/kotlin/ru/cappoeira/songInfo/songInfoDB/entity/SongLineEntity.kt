@@ -17,14 +17,14 @@ data class SongLineEntity(
     var index: Int,
 
     @FullTextField(analyzer = NGRAM_NAME)
-    @Column(nullable = false, name = TEXT, length = 1000)
+    @Column(nullable = false, name = TEXT, length = 10000)
     var text: String,
 
     @OneToMany(mappedBy = "songLine", cascade = [CascadeType.ALL])
     var translationChunks: MutableList<SongChunkEntity>,
 
     @FullTextField(analyzer = NGRAM_NAME)
-    @Column(nullable = false, name = TRANSLATION, length = 1000)
+    @Column(nullable = false, name = TRANSLATION, length = 10000)
     var translation: String,
 
     @OneToMany(mappedBy = "transcriptionLine", cascade = [CascadeType.ALL])

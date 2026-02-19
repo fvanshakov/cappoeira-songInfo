@@ -16,10 +16,10 @@ data class SongChunkEntity(
     @Id
     var id: String,
 
-    @Column(nullable = false, name = "text", length = 1000)
+    @Column(nullable = false, name = "text", length = 10000)
     var text: String,
 
-    @Column(nullable = true, name = "definition", length = 1000)
+    @Column(nullable = true, name = "definition", length = 10000)
     var definition: String?,
 
     @ManyToOne
