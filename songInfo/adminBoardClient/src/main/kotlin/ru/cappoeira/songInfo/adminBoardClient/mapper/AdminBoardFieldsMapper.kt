@@ -10,6 +10,7 @@ object AdminBoardFieldsMapper {
     private fun mapLines(text: String?): List<String> {
         return text
             ?.replace("<br>", "\n")
+            ?.replace("\\", "")
             ?.split("\n")
             ?.filterNot { it.isEmpty() || it.isBlank() }
             ?: emptyList()
@@ -23,7 +24,20 @@ object AdminBoardFieldsMapper {
         val rawTranslation = fields[TRANSLATION] as? String?
         val translationLines = mapLines(rawTranslation)
         val rawTranscription = fields[TRANSCRIPTION] as? String
-        val optimalTransitions: MutableList<String> = (fields[OPTIMAL_FOLLOWINGS] as? List<String>)?.toMutableList() ?: mutableListOf()
+        val optimalCorridosTransitions: MutableList<String>? = (fields[RELATIONS_CORRIDOS] as? List<Any>)?.mapNotNull { corrido ->
+            (corrido as? Map<String, Any>)?.let {
+                (it[CORRIDOS] as? Map<String, Any>)?.let {
+                    it[NAME] as? String
+                }
+            }
+        }?.toMutableList()
+        val optimalLadainhasTransitions: MutableList<String>? = (fields[RELATIONS_LADAINHAS] as? List<Any>)?.mapNotNull { corrido ->
+            (corrido as? Map<String, Any>)?.let {
+                (it[CORRIDOS] as? Map<String, Any>)?.let {
+                    it[NAME] as? String
+                }
+            }
+        }?.toMutableList()
         val transcriptionLines = mapLines(rawTranscription)
         val songLines = textLines.mapIndexed { index, textLine ->
             val isChoirPart = textLine.contains('*')
@@ -43,9 +57,9 @@ object AdminBoardFieldsMapper {
         val tagsWithValues = mutableMapOf<String, MutableList<String>>()
         TAGS.forEach { tagKey ->
             val singleValue = (fields[tagKey] as? String)?.let { mutableListOf(it) }
-            val multipleValues = (fields[tagKey] as? List<String>)?.toMutableList()
+            val multipleValues = (fields[tagKey] as? String)?.split(",")?.toMutableList()
             var existingValues: MutableList<String>? = tagsWithValues[tagKey]
-            val newValues: MutableList<String> = singleValue ?: multipleValues ?: mutableListOf()
+            val newValues: MutableList<String> = multipleValues ?: singleValue ?: mutableListOf()
             if (existingValues == null) {
                 existingValues = newValues
             } else {
@@ -67,7 +81,7 @@ object AdminBoardFieldsMapper {
             tags = AdminBoardTagsDao(
                 tags
             ),
-            optimalTransitions = optimalTransitions,
+            optimalTransitions = optimalCorridosTransitions ?: optimalLadainhasTransitions ?: mutableListOf(),
             isVisible = fields[VISIBILITY] == 1,
             warning = fields[WARNING] as? String,
             id = fields[NAME] as String
@@ -83,6 +97,9 @@ object AdminBoardFieldsMapper {
     private const val WARNING = "Предупреждение"
     private const val ID = "Id"
     private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
+    private const val RELATIONS_CORRIDOS = "nc_exgw___nc_m2m_Corridos_1_Corridos_1s1"
+    private const val RELATIONS_LADAINHAS = "nc_exgw___nc_m2m_Ladainhas_1_Corridos_1s"
+    private const val CORRIDOS = "Corridos"
     private const val VISIBILITY = "Видимость в приложении"
     private val TAGS = listOf(
         "Гармония",
