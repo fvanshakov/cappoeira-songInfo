@@ -1,5 +1,6 @@
 package ru.cappoeira.songInfo.songInfoDB.service
 
+import jakarta.transaction.Transactional
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
@@ -13,28 +14,31 @@ import ru.cappoeira.songInfo.songInfoDB.repository.SongTagsRepo
 import ru.cappoeira.songInfo.songInfoDB.repository.fullText.SongInfoFullTextRepo
 
 @Service
-class SongInfoService(
+open class SongInfoService(
     private val repo: SongInfoRepo,
     private val tagsRepo: SongTagsRepo,
     private val tagsValueRepo: SongTagValueRepository,
     private val fullTextRepo: SongInfoFullTextRepo
 ) {
 
-    fun saveSongs(
+    open fun saveSongs(
         songs: List<SongInfoEntity>
     ) {
         repo.saveAll(songs)
     }
 
-    fun saveTags(tags: List<SongTagEntity>) {
+    open fun saveTags(tags: List<SongTagEntity>) {
         tagsRepo.saveAll(tags)
     }
 
-    fun deleteAllSongs() {
-        repo.deleteAll(repo.findAll())
+    @Transactional
+    open fun deleteAllSongs() {
+        tagsValueRepo.deleteAllInBatch()
+        tagsRepo.deleteAllInBatch()
+        repo.deleteAllInBatch()
     }
 
-    fun getSongById(id: String): SongInfoEntity? {
+    open fun getSongById(id: String): SongInfoEntity? {
         return try {
             repo.getReferenceById(id)
         } catch (e: Exception) {
@@ -42,7 +46,7 @@ class SongInfoService(
         }
     }
 
-    fun getAllSongs(
+    open fun getAllSongs(
         page: Int,
         size: Int,
         songType: String,
@@ -67,7 +71,7 @@ class SongInfoService(
         }
     }
 
-    fun getSongsBySearchText(
+    open fun getSongsBySearchText(
         searchText: String,
         page: Int,
         tags: List<String>,
@@ -84,7 +88,7 @@ class SongInfoService(
         )
     }
 
-    fun getTags(filterType: String): List<SongTagEntity> {
+    open fun getTags(filterType: String): List<SongTagEntity> {
         return try {
             tagsValueRepo
                 .findAllWithTags(filterType)
