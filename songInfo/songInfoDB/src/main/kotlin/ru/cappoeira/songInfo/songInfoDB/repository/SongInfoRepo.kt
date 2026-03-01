@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import ru.cappoeira.songInfo.songInfoDB.entity.SongInfoEntity
 
-interface SongInfoRepo : JpaRepository<SongInfoEntity?, String> {
+interface SongInfoRepo : JpaRepository<SongInfoEntity, String> {
 
     fun findByNormalizedName(normalizedName: String): SongInfoEntity?
 

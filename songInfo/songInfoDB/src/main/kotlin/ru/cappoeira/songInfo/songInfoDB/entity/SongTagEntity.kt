@@ -19,7 +19,7 @@ data class SongTagEntity(
     @Column(nullable = false, name = TYPE)
     var type: String,
 
-    @OneToMany(mappedBy = "tag", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "tag", cascade = [CascadeType.ALL], orphanRemoval = true)
     var tagValues: MutableList<SongTagValueEntity>
 ) {
 

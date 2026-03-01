@@ -20,14 +20,22 @@ data class SongLineEntity(
     @Column(nullable = false, name = TEXT, length = 10000)
     var text: String,
 
-    @OneToMany(mappedBy = "songLine", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "songLine",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     var translationChunks: MutableList<SongChunkEntity>,
 
     @FullTextField(analyzer = NGRAM_NAME)
     @Column(nullable = false, name = TRANSLATION, length = 10000)
     var translation: String,
 
-    @OneToMany(mappedBy = "transcriptionLine", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "transcriptionLine",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     var transcriptionChunks: MutableList<SongTranscriptionsChunkEntity>,
 
     @Column(nullable = false, name = IS_CHOIR_PART)

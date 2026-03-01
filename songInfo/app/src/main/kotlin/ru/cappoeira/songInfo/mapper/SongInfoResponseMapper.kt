@@ -49,7 +49,7 @@ object SongInfoResponseMapper {
                     songName = it.name,
                     videoUrl = it.videoUrl,
                     songType = it.songType,
-                    songLines = it.songLines.map(::mapSongLine),
+                    songLines = it.songLines.map(::mapSongLine).sortedBy { it.index },
                     songTags = it.tagValues.let(::mapSongTag),
                     optimalTransitions = it.optimalTransitions.map { transition ->
                         Transition(
@@ -57,7 +57,13 @@ object SongInfoResponseMapper {
                             songName = transition.songName
                         )
                     },
-                    warning = it.warning,
+                    warning = it.warning?.let { warn ->
+                        if (warn.isBlank() || warn.isEmpty()) {
+                            null
+                        } else {
+                            warn
+                        }
+                    },
                     isFavourite = favouriteSongsIds?.contains(it.id)
                 )
             }
@@ -73,7 +79,7 @@ object SongInfoResponseMapper {
             songName = entity.name,
             videoUrl = entity.videoUrl,
             songType = entity.songType,
-            songLines = entity.songLines.map(::mapSongLine),
+            songLines = entity.songLines.map(::mapSongLine).sortedBy { it.index },
             songTags = entity.tagValues.let(::mapSongTag),
             optimalTransitions = entity.optimalTransitions.map { transition ->
                 Transition(
@@ -81,7 +87,13 @@ object SongInfoResponseMapper {
                     songName = transition.songName
                 )
             },
-            warning = entity.warning,
+            warning = entity.warning?.let { warn ->
+                if (warn.isBlank() || warn.isEmpty()) {
+                    null
+                } else {
+                    warn
+                }
+            },
             isFavourite = favouriteSongsIds?.contains(entity.id)
         )
     }
@@ -151,7 +163,7 @@ object SongInfoResponseMapper {
                     songName = entity.name,
                     videoUrl = entity.videoUrl,
                     songType = entity.songType,
-                    songLines = songLines.map(::mapSongLine),
+                    songLines = songLines.map(::mapSongLine).sortedBy { it.index },
                     songTags = entity.tagValues.let(::mapSongTag),
                     optimalTransitions = entity.optimalTransitions.map { transition ->
                         Transition(
@@ -159,7 +171,13 @@ object SongInfoResponseMapper {
                             songName = transition.songName
                         )
                     },
-                    warning = entity.warning,
+                    warning = entity.warning?.let { warn ->
+                        if (warn.isBlank() || warn.isEmpty()) {
+                            null
+                        } else {
+                            warn
+                        }
+                    },
                     isFavourite = favouriteSongsIds?.contains(entity.id)
                 )
             }

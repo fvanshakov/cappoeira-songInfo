@@ -48,7 +48,11 @@ data class SongInfoEntity(
     var songType: String,
 
     @IndexedEmbedded(includePaths = [TEXT, TRANSLATION], includeDepth = 1, structure = ObjectStructure.NESTED)
-    @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "song",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     var songLines: MutableList<SongLineEntity>,
 
     @ElementCollection
@@ -67,7 +71,11 @@ data class SongInfoEntity(
     var warning: String?,
 
     @IndexedEmbedded(includePaths = [TAG_VALUE], includeDepth = 1, structure = ObjectStructure.NESTED)
-    @OneToMany(mappedBy = "song", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "song",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
     var tagValues: MutableList<SongTagValueEntity>
 ) {
     constructor(): this(emptyString(), emptyString(),  emptyString(),  null, emptyString(), mutableListOf(), mutableListOf(), true, null, mutableListOf())
