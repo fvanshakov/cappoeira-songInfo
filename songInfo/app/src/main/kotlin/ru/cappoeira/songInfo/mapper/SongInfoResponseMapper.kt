@@ -100,18 +100,22 @@ object SongInfoResponseMapper {
 
     private fun mapSongLine(entity: SongLineEntity): SongLine {
         return with(entity) {
+            val translateChunks = translationChunks
+            translateChunks.sortBy { it.id }
+            val transciptChunks = transcriptionChunks
+            transciptChunks.sortBy { it.id }
             SongLine(
                 id = id,
                 index = index,
                 isChoirPart = isChoirPart,
                 text = text,
-                translation = translationChunks.map {
+                translation = translateChunks.map {
                     SongLinesChunks(
                         text = it.text,
                         definition = it.definition
                     )
                 },
-                transcription = transcriptionChunks.map {
+                transcription = transciptChunks.map {
                     SongLinesChunks(
                         text = it.transcription,
                         definition = it.definition

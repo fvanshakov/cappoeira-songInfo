@@ -21,6 +21,7 @@ open class UpdateDbDelegateImpl(
 
     override fun update(): Response {
         return safeCall {
+            songInfoService.deleteAllSongs()
             val definitions = adminBoardClient.retrieveDefinitions()
                 .filter { it.clientId != null && it.definition != null }
                 .associate { it.clientId as String to it.definition as String }
