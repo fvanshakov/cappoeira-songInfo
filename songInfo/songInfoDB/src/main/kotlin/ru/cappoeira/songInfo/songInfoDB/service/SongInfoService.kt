@@ -28,14 +28,19 @@ open class SongInfoService(
     }
 
     open fun saveTags(tags: List<SongTagEntity>) {
-        tagsRepo.saveAll(tags)
+        tagsValueRepo.saveAll(tags)
     }
 
     @Transactional
     open fun deleteAllSongs() {
-        tagsValueRepo.deleteAllInBatch()
         tagsRepo.deleteAllInBatch()
-        repo.deleteAllInBatch()
+        tagsRepo.flush()
+
+        repo.deleteAll()
+        repo.flush()
+
+        tagsValueRepo.deleteAllInBatch()
+        tagsValueRepo.flush()
     }
 
     open fun getSongById(id: String): SongInfoEntity? {
