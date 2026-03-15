@@ -21,7 +21,6 @@ open class UpdateDbDelegateImpl(
 
     override fun update(): Response {
         return safeCall {
-            songInfoService.deleteAllSongs()
             val definitions = adminBoardClient.retrieveDefinitions()
                 .filter { it.clientId != null && it.definition != null }
                 .associate { it.clientId as String to it.definition as String }
@@ -38,7 +37,7 @@ open class UpdateDbDelegateImpl(
                 SongType.LADAINHA -> AdminBoardSongInfoDto.SongType.LADAINHA
                 SongType.CORRIDO -> AdminBoardSongInfoDto.SongType.CORRIDO
             }
-            it.copy(songType = dtoSongType)
+            it.copy(songType = dtoSongType, id = it.id + dtoSongType.toString())
         }
         val isTagPluralMap = SongTagEntityMapper.mapTagPluralityMap(songsInfos)
         val type = when(songType) {
