@@ -84,7 +84,7 @@ object AdminBoardFieldsMapper {
             optimalTransitions = optimalCorridosTransitions ?: optimalLadainhasTransitions ?: mutableListOf(),
             isVisible = fields[VISIBILITY] == 1,
             warning = fields[WARNING] as? String,
-            id = fields[NAME] as String
+            id = (fields[ID].toString())
         )
         return result
     }

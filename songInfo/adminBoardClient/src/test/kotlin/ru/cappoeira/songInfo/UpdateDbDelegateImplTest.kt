@@ -67,14 +67,14 @@ class UpdateDbDelegateImplTest {
             dto = corridoSong,
             tags = emptyMap(),
             definitions = emptyMap(),
-            songIdsToSongNames = emptyMap()
-        )
+            songIdsToSongNames = emptyMap(),
+        ).copy(id = "1CORRIDO")
         val mappedLadainhaSong = SongInfoEntityMapper.mapDtoToEntity(
             dto = ladainhaSong,
             tags = emptyMap(),
             definitions = emptyMap(),
             songIdsToSongNames = emptyMap()
-        )
+        ).copy(id = "2LADAINHA")
 
         verify(exactly = 1) { adminBoardClient.retrieveDefinitions() }
         verify(exactly = 1) { adminBoardClient.retrieveSongTypeInfoFromAdminBoard(AdminBoardClient.SongType.CORRIDO) }
