@@ -96,7 +96,6 @@ object AdminBoardFieldsMapper {
     private const val TRANSCRIPTION = "Транскрипция"
     private const val WARNING = "Предупреждение"
     private const val ID = "Id"
-    private const val OPTIMAL_FOLLOWINGS = "Оптимальные переходы"
     private const val RELATIONS_CORRIDOS = "nc_exgw___nc_m2m_Corridos_1_Corridos_1s1"
     private const val RELATIONS_LADAINHAS = "nc_exgw___nc_m2m_Ladainhas_1_Corridos_1s"
     private const val CORRIDOS = "Corridos"
