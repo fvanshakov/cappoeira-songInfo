@@ -8,5 +8,8 @@ import org.springframework.web.reactive.function.client.WebClient
 open class AdminBoardWebClientConfig {
 
     @Bean
-    open fun adminBoardWebClient() = WebClient.builder().build()
+    open fun adminBoardWebClient() = WebClient.builder()
+        .codecs { configurer ->
+            configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024) // 10MB
+        }.build()
 }
