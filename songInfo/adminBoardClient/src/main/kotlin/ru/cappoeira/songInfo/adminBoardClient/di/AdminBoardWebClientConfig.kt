@@ -10,6 +10,6 @@ open class AdminBoardWebClientConfig {
     @Bean
     open fun adminBoardWebClient() = WebClient.builder()
         .codecs { configurer ->
-            configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024) // 10MB
+            configurer.defaultCodecs().maxInMemorySize(8 * 1024 * 1024) // 10MB
         }.build()
 }
