@@ -34,7 +34,7 @@ object AdminBoardFieldsMapper {
         val optimalLadainhasTransitions: MutableList<String>? = (fields[RELATIONS_LADAINHAS] as? List<Any>)?.mapNotNull { corrido ->
             (corrido as? Map<String, Any>)?.let {
                 (it[CORRIDOS] as? Map<String, Any>)?.let {
-                    (fields[ID].toString() + "LADAINHA")
+                    (it[ID].toString() + "CORRIDO")
                 }
             }
         }?.toMutableList()

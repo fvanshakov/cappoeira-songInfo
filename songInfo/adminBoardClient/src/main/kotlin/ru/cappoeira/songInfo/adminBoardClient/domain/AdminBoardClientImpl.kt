@@ -27,6 +27,7 @@ internal class AdminBoardClientImpl(
             SongType.LADAINHA -> LADAINHA_TABLE_ID
         }
 
+        var lastBatchSize = 20
         do {
             val uriBuilder = StringBuilder(AIRTABLE_URL).append(tableId)
             uriBuilder
@@ -34,20 +35,23 @@ internal class AdminBoardClientImpl(
                 .append(offset)
                 .append(LIMIT_QUERY)
                 .append(20)
-            val result = client.get()
-                .uri(uriBuilder.toString())
-                .header(AUTHORIZATION_HEADER, configService.token)
-                .retrieve()
-                .bodyToMono(AdminBoardSongsWebCallResultDto::class.java)
-                .doOnError { e ->
-                    logger.error(e.message)
-                }
-                .block()
+            val result = try {
+                client.get()
+                    .uri(uriBuilder.toString())
+                    .header(AUTHORIZATION_HEADER, configService.token)
+                    .retrieve()
+                    .bodyToMono(AdminBoardSongsWebCallResultDto::class.java)
+                    .block()
+            } catch (e: Exception) {
+                logger.error("Error fetching songs at offset $offset: ${e.message}")
+                null
+            }
             result ?: break
             result.mapRecords()
+            lastBatchSize = result.list.size
             songInfos.addAll(result.records)
             offset = songInfos.size
-        } while (offset % 20 == 0)
+        } while (lastBatchSize == 20)
         return songInfos
     }
 

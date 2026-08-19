@@ -24,36 +24,46 @@ open class UpdateDbDelegateImpl(
             val definitions = adminBoardClient.retrieveDefinitions()
                 .filter { it.clientId != null && it.definition != null }
                 .associate { it.clientId as String to it.definition as String }
-            SongType.entries.forEach { updateSongTypeInfo(it, definitions) }
+
+            // Fetch all songs of all types first to build a complete ID→name map
+            val songsPerType = SongType.entries.associateWith { songType ->
+                val raw = adminBoardClient.retrieveSongTypeInfoFromAdminBoard(songType)
+                val dtoSongType = when(songType) {
+                    SongType.LADAINHA -> AdminBoardSongInfoDto.SongType.LADAINHA
+                    SongType.CORRIDO -> AdminBoardSongInfoDto.SongType.CORRIDO
+                }
+                raw to raw.map { it.copy(songType = dtoSongType, id = it.id + dtoSongType.toString()) }
+            }
+
+            val songIdsToSongNames = songsPerType.values
+                .flatMap { (_, withType) -> withType }
+                .associate { it.id to it.songName }
+
+            songsPerType.forEach { (songType, pair) ->
+                val (songsInfos, songsInfosWithType) = pair
+                updateSongTypeInfo(songType, definitions, songsInfos, songsInfosWithType, songIdsToSongNames)
+            }
         }
     }
 
-    private fun updateSongTypeInfo(songType: SongType, definitions: Map<String, String>) {
-
-        val songsInfos = adminBoardClient.retrieveSongTypeInfoFromAdminBoard(songType)
-        logger.info("songs of type:$songType have been retrieved from airtable, namely $songsInfos")
-        val songsInfosWithType = songsInfos.map {
-            val dtoSongType = when(songType) {
-                SongType.LADAINHA -> AdminBoardSongInfoDto.SongType.LADAINHA
-                SongType.CORRIDO -> AdminBoardSongInfoDto.SongType.CORRIDO
-            }
-            it.copy(songType = dtoSongType, id = it.id + dtoSongType.toString())
-        }
+    private fun updateSongTypeInfo(
+        songType: SongType,
+        definitions: Map<String, String>,
+        songsInfos: List<AdminBoardSongInfoDto>,
+        songsInfosWithType: List<AdminBoardSongInfoDto>,
+        songIdsToSongNames: Map<String, String>
+    ) {
+        logger.info("songs of type:$songType have been retrieved from airtable (${songsInfos.size} songs)")
         val isTagPluralMap = SongTagEntityMapper.mapTagPluralityMap(songsInfos)
         val type = when(songType) {
             SongType.LADAINHA -> "LADAINHA"
             SongType.CORRIDO -> "CORRIDO"
         }
-        val songIdsToSongNames = songsInfosWithType.map { song ->
-            song.id to song.songName
-        }.toMap()
         try {
             songInfoService.saveSongs(
                 songsInfosWithType.map {
                     val tags = SongTagEntityMapper.mapDtoToEntity(it.tags, isTagPluralMap, type)
-
                     songInfoService.saveTags(tags.map { it.value })
-
                     SongInfoEntityMapper.mapDtoToEntity(
                         dto = it,
                         tags = tags,
